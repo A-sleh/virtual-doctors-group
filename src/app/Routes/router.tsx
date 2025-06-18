@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { paths } from '@/app/config/paths';
+import { paths } from '@/config/paths';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 
 // Authentication ( done )

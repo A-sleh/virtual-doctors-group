@@ -1,4 +1,4 @@
-import DashBoardLayout from '../../shared/components/layouts/dashboard-layout';
+import DashBoardLayout from '@/components/layouts/dashboard-layout'; 
 import { Outlet } from 'react-router';
 
 export default function DashBoard() {

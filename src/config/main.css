@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+
+@hteme {
+  --color-primary-500: rgb(21, 121, 229);
+}
+
+@utility btn-rounded {
+  @apply rounded-xl px-3 py-1.5;
+}
+
+@utility li-style {
+  @apply flex relative gap-2 items-center ml-3 w-full sm:w-fit md:w-full md:px-4 before:content-[""]
+    before:absolute before:left-[-12px] before:w-1 before:rounded-br-lg before:rounded-tr-lg before:h-full
+    hover:bg-[#157ae5be] hover:text-white hover:before:bg-[#157ae5be] transition-all duration-300 delay-200 before:delay-0;
+}
