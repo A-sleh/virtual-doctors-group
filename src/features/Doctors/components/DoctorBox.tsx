@@ -1,17 +1,16 @@
 import { consultaionContent } from '@/features/Consultation/components/DoctorConsultationCard';
 import { LiaCalendarDaySolid } from 'react-icons/lia';
 import { MdAccessTime } from 'react-icons/md';
+import DoctorVectorInfo, { doctorInfoProps } from './DoctorVectorInfo';
 
 type DoctorBoxProps = consultaionContent & {
   children: React.ReactNode;
   doctor: {
-    specility: string;
-    name: string;
     description: string;
     date: string;
     time?: string;
     status?: string;
-  };
+  } & doctorInfoProps;
 };
 
 const STATUSCOLORS = {
@@ -30,22 +29,7 @@ export default function DoctorBox({ doctor, children }: DoctorBoxProps) {
   return (
     <div className="rounded-box flex flex-col space-y-3 ">
       <section className="flex justify-between">
-        <div className="flex gap-2">
-          <img
-            src=""
-            alt="doctor image"
-            className="rounded-full w-14 h-14 bg-black"
-          />
-          <div className="flex flex-col gap-y-1">
-            <p className=" font-medium">
-              <span className="text-[#1579e5] ">Dr.</span>
-              {name}
-            </p>
-            <span className="text-gray-400 bg-[#8b8b8b2a] px-2 py-0 rounded-md w-fit">
-              {specility}
-            </span>
-          </div>
-        </div>
+        <DoctorVectorInfo name={name} specility={specility} />
         <div
           className={`flex ${
             thereIsStatuscolors ? 'flex-col items-end' : 'flex-row items-start'

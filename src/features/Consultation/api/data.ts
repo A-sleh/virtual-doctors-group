@@ -4,7 +4,7 @@ export const doctorData = [
     specility: 'dentist',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet placeat fugiat porro amet laborum consequuntur eius repellendus modi vitae autem?',
-    date: "2024-1-1",
+    date: '2024-1-1',
     status: 'opened',
   },
   {
@@ -12,7 +12,7 @@ export const doctorData = [
     specility: 'dentist',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet placeat fugiat porro amet laborum consequuntur eius repellendus modi vitae autem?',
-    date: "2024-1-1",
+    date: '2024-1-1',
     status: 'closed',
   },
   {
@@ -20,7 +20,7 @@ export const doctorData = [
     specility: 'dentist',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet placeat fugiat porro amet laborum consequuntur eius repellendus modi vitae autem?',
-    date: "2024-1-1",
+    date: '2024-1-1',
     status: 'pending',
   },
   {
@@ -28,7 +28,7 @@ export const doctorData = [
     specility: 'dentist',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet placeat fugiat porro amet laborum consequuntur eius repellendus modi vitae autem?',
-    date: "2024-1-1",
+    date: '2024-1-1',
     status: 'opened',
   },
   {
@@ -36,7 +36,7 @@ export const doctorData = [
     specility: 'dentist',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet placeat fugiat porro amet laborum consequuntur eius repellendus modi vitae autem?',
-    date: "2024-1-1",
+    date: '2024-1-1',
     status: 'closed',
   },
   {
@@ -44,7 +44,7 @@ export const doctorData = [
     specility: 'dentist',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet placeat fugiat porro amet laborum consequuntur eius repellendus modi vitae autem?',
-    date: "2024-1-1",
+    date: '2024-1-1',
     status: 'pending',
   },
 ];
