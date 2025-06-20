@@ -19,48 +19,48 @@ export const paths = {
     dashboard: {
       home: {
         path: 'dashboard',
-        getHref: () => `/app/dashboard`,
+        getHref: () => `/dashboard`,
       },
       patient: {
         path: 'dashboard/patient',
-        getHref: () => `/app/dashboard/patient`,
+        getHref: () => `/dashboard/patient`,
       },
       doctor: {
         path: 'dashboard/doctor',
-        getHref: () => `/app/dashboard/doctor`,
+        getHref: () => `/dashboard/doctor`,
       },
       support: {
         path: 'dashboard/support',
-        getHref: () => `/app/dashboard/support`,
+        getHref: () => `/dashboard/support`,
       },
     },
     doctor: {
       home: {
         path: 'doctor',
-        getHref: () => `/app/doctor`,
+        getHref: () => `/doctor`,
       },
       reservation: {
         path: 'doctor/:id/reservation',
-        getHref: (id: number) => `/app/doctor/${id}/reservation`,
+        getHref: (id: number) => `/doctor/${id}/reservation`,
       },
       profile: {
         path: 'doctor/:id/profile',
-        getHref: (id: number) => `/app/doctor/${id}/profile`,
+        getHref: (id: number) => `/doctor/${id}/profile`,
         info: {
           about: {
             path: 'about',
             getHref: (doctorId: number) =>
-              `/app/doctor/profile/${doctorId}/about`,
+              `/doctor/profile/${doctorId}/about`,
           },
           clinics: {
             path: 'clinic',
             getHref: (doctorId: number) =>
-              `/app/doctor/profile/${doctorId}/clinic`,
+              `/doctor/profile/${doctorId}/clinic`,
           },
           patientOpinion: {
             path: 'patientOpinion',
             getHref: (doctorId: number) =>
-              `/app/doctor/profile/${doctorId}/patientOpinion`,
+              `/doctor/profile/${doctorId}/patientOpinion`,
           },
         },
       },
@@ -68,36 +68,36 @@ export const paths = {
     patient: {
       home: {
         path: 'patient',
-        getHref: () => `/app/patient`,
+        getHref: () => `/patient`,
       },
       reservation: {
         path: 'patient/:id/reservation',
-        getHref: (id: number) => `/app/patient/${id}/reservation`,
+        getHref: (id: number) => `/patient/${id}/reservation`,
       },
     },
     article: {
       path: 'article',
-      getHref: () => `/app/article`,
+      getHref: () => `/article`,
     },
     searchingDoctor: {
       path: 'doctors',
-      getHref: () => `/app/doctors`,
+      getHref: () => `/doctors`,
     },
     support: {
       path: 'support/:id',
-      getHref: () => `/app/support/:id`,
+      getHref: () => `/support/:id`,
     },
     setting: {
       path: 'setting/:id',
-      getHref: (id: number) => `/app/setting/${id}`,
+      getHref: (id: number) => `/setting/${id}`,
       doctorSetting: {
         path: 'account',
-        getHref: (id: number) => `/app/setting/${id}/account`,
+        getHref: (id: number) => `/setting/${id}/account`,
       },
     },
     consultation: {
       path: 'consultation/:id',
-      getHref: (id: number) => `/app/consultation/${id}`,
+      getHref: (id: number) => `/consultation/${id}`,
     },
   },
 } as const;

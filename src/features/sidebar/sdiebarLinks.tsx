@@ -1,8 +1,19 @@
 import { paths } from '@/config/paths';
+import { IoIosHome } from 'react-icons/io';
+import { FaUserDoctor } from 'react-icons/fa6';
+import { LiaCalendarAltSolid } from 'react-icons/lia';
+import { PiArticleMedium } from 'react-icons/pi';
+import { PiChats } from 'react-icons/pi';
+import { GrSettingsOption } from 'react-icons/gr';
+import { MdSupportAgent } from 'react-icons/md';
+import { CgProfile } from 'react-icons/cg';
+import { MdOutlineSick } from 'react-icons/md';
+
+export const ICON_SIZE = 24;
 
 export const sidebarLinks = [
   {
-    icon: 'bi bi-house-door-fill',
+    icon: <IoIosHome size={ICON_SIZE} />,
     title: 'Home',
     permission: ['admin', 'patient', 'doctor'],
     path: {
@@ -12,7 +23,7 @@ export const sidebarLinks = [
     },
   },
   {
-    icon: 'bi bi-person-circle',
+    icon: <FaUserDoctor size={ICON_SIZE} />,
     title: 'Doctor',
     permission: ['admin', 'patient', 'doctor'],
     path: {
@@ -22,7 +33,7 @@ export const sidebarLinks = [
     },
   },
   {
-    icon: 'bi bi-calendar-week',
+    icon: <LiaCalendarAltSolid size={ICON_SIZE} />,
     title: 'Reservations',
     permission: ['doctor', 'patient'],
     path: {
@@ -31,7 +42,7 @@ export const sidebarLinks = [
     },
   },
   {
-    icon: 'bi bi-chat-left-dots',
+    icon: <PiChats size={ICON_SIZE} />,
     title: 'Consultaion',
     permission: ['doctor', 'patient'],
     path: {
@@ -40,7 +51,7 @@ export const sidebarLinks = [
     },
   },
   {
-    icon: 'bi bi-person-circle',
+    icon: <CgProfile size={ICON_SIZE} />,
     title: 'Profile',
     permission: ['doctor'],
     path: {
@@ -49,7 +60,7 @@ export const sidebarLinks = [
   },
 
   {
-    icon: 'bi bi-newspaper',
+    icon: <PiArticleMedium size={ICON_SIZE} />,
     title: 'Articles',
     permission: ['patient', 'doctor'],
     path: {
@@ -58,7 +69,7 @@ export const sidebarLinks = [
     },
   },
   {
-    icon: 'bi bi-person-circle',
+    icon: <MdOutlineSick size={ICON_SIZE} />,
     title: 'Patient',
     permission: ['admin'],
     path: {
@@ -69,7 +80,7 @@ export const sidebarLinks = [
 
 export const subSideBareLink = [
   {
-    icon: 'bi bi-sliders',
+    icon: <GrSettingsOption size={ICON_SIZE} />,
     title: 'Setting',
     permission: ['doctor', 'patient'],
     path: {
@@ -78,7 +89,7 @@ export const subSideBareLink = [
     },
   },
   {
-    icon: 'bi bi-info-circle',
+    icon: <MdSupportAgent size={ICON_SIZE} />,
     title: 'Support',
     permission: ['admin', 'patient', 'doctor'],
     path: {

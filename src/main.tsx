@@ -1,6 +1,5 @@
 import { createRoot } from 'react-dom/client';
 import '../node_modules/bootstrap-icons/font/bootstrap-icons.min.css'
-import "@/config/main.css"
 import App from '@/app';
 
 const root = document.getElementById('root');

@@ -58,7 +58,7 @@ const Support = lazy(() => import('@/features/Support/Support.view'));
 
 const routes: RouteObject[] = [
   {
-    path: '/app',
+    path: '/',
     element: <DashBoard />,
     children: [
       // Shared pages
