@@ -4,7 +4,7 @@ import Article, { articleProps } from './components/Article';
 export default function Articles() {
   return (
     <section className="space-y-3">
-      <div className="text-xl p-2 bg-white rounded-lg flex justify-between">
+      <div className="sub-header flex justify-between">
         <h2 className=" dark:bg-black dark:text-white font-bold">
           <span className="text-[#1579e5]">50</span> Articles
         </h2>

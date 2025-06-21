@@ -1,6 +1,6 @@
 import { RouterProvider } from 'react-router';
 import { router } from '@/app/Routes/router';
-import "@/config/main.css"
+import "@/assets/scss/main.css"
 
 export default function AppProvider() {
   return (

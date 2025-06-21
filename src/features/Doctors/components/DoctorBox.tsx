@@ -20,7 +20,7 @@ const STATUSCOLORS = {
 };
 
 export default function DoctorBox({ doctor, children }: DoctorBoxProps) {
-  const { name, specility, description, date, status, time } = doctor;
+  const { name, specility, description = null , date, status, time } = doctor;
   let thereIsStatuscolors = false;
   if (status != undefined) {
     thereIsStatuscolors = STATUSCOLORS[status];
@@ -28,12 +28,12 @@ export default function DoctorBox({ doctor, children }: DoctorBoxProps) {
 
   return (
     <div className="rounded-box flex flex-col space-y-3 ">
-      <section className="flex justify-between">
+      <section className={`flex justify-between gap-3 ${description == null ? 'flex-col' : 'flex-row'}`}>
         <DoctorVectorInfo name={name} specility={specility} />
         <div
           className={`flex ${
             thereIsStatuscolors ? 'flex-col items-end' : 'flex-row items-start'
-          } justify-end  gap-1`}
+          } justify-end  gap-1 `}
         >
           {thereIsStatuscolors ? (
             <p className={` px-1.5 py-0.5 rounded-md ${thereIsStatuscolors} `}>
@@ -51,7 +51,7 @@ export default function DoctorBox({ doctor, children }: DoctorBoxProps) {
           </h3>
         </div>
       </section>
-      <div className="font-serif">{description}</div>
+      <div className={`font-serif ${description == null ? 'hidden' : 'block'}`}>{description}</div>
       <div className="flex font-medium justify-between">{children}</div>
     </div>
   );

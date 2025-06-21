@@ -1,19 +1,22 @@
 import DoctorBox from '@/features/Doctors/components/DoctorBox';
 
-export type consultaionContent = {
+export type doctor = {
   specility: string;
   name: string;
+};
+
+export type consultaionContent = {
   description: string;
   date: string;
   status: string;
-};
+} & doctor;
 
 export default function DoctorConsultationCard({ doctor }: consultaionContent) {
   const { status } = doctor;
 
   return (
     <DoctorBox doctor={doctor}>
-      <div className='flex gap-2.5'>
+      <div className="flex gap-2.5">
         <button className="btn-rounded bg-[#1579e5] hover:bg-[#157ae59a] text-white transition-all duration-300 ">
           Open chat
         </button>

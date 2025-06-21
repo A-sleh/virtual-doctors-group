@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import 'tailwindcss';
 
 @layer components {
@@ -7,6 +11,9 @@
   .rounded-box {
     @apply p-3 rounded-xl bg-white dark:bg-black
   }
+  .sub-header {
+    @apply text-xl p-2 bg-white rounded-lg dark:bg-black dark:text-white font-bold
+  }
 }
 
 @utility li-style {
@@ -14,10 +21,10 @@
   before:absolute before:left-[-12px] before:w-1 before:rounded-br-lg before:rounded-tr-lg before:h-full 
   hover:bg-[#157ae5be] hover:text-white hover:before:bg-[#157ae5be] transition-all duration-300 delay-200 before:delay-0;
 }
+
 @hteme {
-  :root {
-    --color-primary: #1579e5;
-  }
+  
+  --color-primary: #157ae5be;
 
   --animate-wiggle: wiggle 1s ease-in-out infinite;
   
