@@ -29,7 +29,7 @@ export default function SideBar() {
         </section>
         {ROLE === 'patient' && (
           <Link
-            to={paths.app.setting.getHref(1)}
+            to={paths.app.setting.subscribAsDoctor.getHref(1)}
             className="btn-rounded  bg-primary flex items-center gap-2 text-white w-fit my-auto mx-auto sm:ml-3 md:ml-3 hover:bg-[#157ae59f] transition-all duration-200"
           >
             <IoMdLogIn size={ICON_SIZE} />
@@ -54,12 +54,11 @@ function List({ links }: links) {
         return (
           <NavLink
             to={link.path[ROLE] || ''}
-            end
             className={({ isActive }) =>
               (isActive
                 ? 'bg-[#1579e5] text-white before:bg-[#1579e5] '
                 : 'text-black before:bg-[#ffffff] dark:before:bg-[#000000] ') +
-              'li-style btn-rounded dark:text-white'
+              'li-style btn-rounded dark:text-white min-w-48'
             }
             key={link.title}
           >

@@ -18,8 +18,8 @@ export const paths = {
   app: {
     dashboard: {
       home: {
-        path: 'dashboard',
-        getHref: () => `/dashboard`,
+        path: '/home/dashboard',
+        getHref: () => `/home/dashboard`,
       },
       patient: {
         path: 'dashboard/patient',
@@ -36,8 +36,8 @@ export const paths = {
     },
     doctor: {
       home: {
-        path: 'doctor',
-        getHref: () => `/doctor`,
+        path: '/home/doctor',
+        getHref: () => `/home/doctor`,
       },
       reservation: {
         path: 'doctor/:id/reservation',
@@ -67,12 +67,12 @@ export const paths = {
     },
     patient: {
       home: {
-        path: 'patient',
-        getHref: () => `/patient`,
+        path: 'patient/home',
+        getHref: () => `/patient/home`,
       },
       reservation: {
-        path: 'patient/:id/reservation',
-        getHref: (id: number) => `/patient/${id}/reservation`,
+        path: 'patient/reservation/:id',
+        getHref: (id: number) => `/patient/reservation/${id}`,
       },
     },
     article: {
@@ -90,7 +90,11 @@ export const paths = {
     setting: {
       path: 'setting/:id',
       getHref: (id: number) => `/setting/${id}`,
-      doctorSetting: {
+      subscribAsDoctor: {
+        path: 'doctorInfo',
+        getHref: (id: number) => `/setting/${id}/doctorInfo`,
+      },
+      account: {
         path: 'account',
         getHref: (id: number) => `/setting/${id}/account`,
       },

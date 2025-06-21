@@ -47,14 +47,17 @@ const PatientHome = lazy(
 const PatientReservation = lazy(
   () => import('@/features/patient_Features/Reservation/Reservation.view'),
 );
+const DoctorSetting = lazy(
+  () => import('@/features/Setting/DoctorSetting.sub.view'),
+);
 // Shared page ( done )
 const Consultation = lazy(
   () => import('@/features/Consultation/Consultation.view'),
 );
 const Doctors = lazy(() => import('@/features/Doctors/Doctors.view'));
 const Articles = lazy(() => import('@/features/Articles/Articles.view'));
-const Setting = lazy(() => import('@/features/Setting/Setting.view'));
 const Support = lazy(() => import('@/features/Support/Support.view'));
+const Setting = lazy(() => import('@/features/Setting/Setting.view'));
 
 const routes: RouteObject[] = [
   {
@@ -79,8 +82,16 @@ const routes: RouteObject[] = [
         element: <Setting />,
         children: [
           {
-            path: paths.app.setting.doctorSetting.path,
+            index: true,
             element: <Account />,
+          },
+          {
+            path: paths.app.setting.account.path,
+            element: <Account />,
+          },
+          {
+            path: paths.app.setting.subscribAsDoctor.path,
+            element: <DoctorSetting />,
           },
         ],
       },
