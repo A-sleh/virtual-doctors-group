@@ -19,7 +19,7 @@ export default function NotifySetting() {
               checked={isChecked}
               onChange={(e) => setIsChecked(e.target.checked)}
             />
-            <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none  rounded-full peer dark:bg-gray-700 peer-checked:bg-[#1579e5] "></div>
+            <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none  rounded-full peer dark:bg-secondary peer-checked:bg-primary "></div>
             <div className="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full transition-transform peer-checked:translate-x-full"></div>
           </label>
         </div>

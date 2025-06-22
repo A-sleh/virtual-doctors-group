@@ -5,7 +5,7 @@ export default function DoctorSetting() {
     <section className="rounded-box space-y-2">
       <div>
         <h2 className="font-bold text-lg">Doctor Subscription form</h2>
-        <p className="font-normal text-gray-500 text-sm ">
+        <p className="font-normal text-secondary text-sm ">
           Make sure to add your personal identity nuimber and your phone number
           before submiting this form
         </p>
@@ -17,7 +17,7 @@ export default function DoctorSetting() {
           type="file"
           placeHolder="your image ..."
         />
-        <input type="submit" value="Apply" className='btn-rounded float-end bg-[#1579e5] text-white'/>
+        <input type="submit" value="Apply" className='btn-rounded bg-primary text-white'/>
       </form>
     </section>
   );

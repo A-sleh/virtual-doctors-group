@@ -23,27 +23,28 @@
 @utility li-style {
   @apply flex relative gap-2 items-center ml-3 w-full sm:w-fit md:w-full md:px-4 before:content-[""] py-1.5
   before:absolute before:left-[-12px] before:w-1 before:rounded-br-lg before:rounded-tr-lg before:h-full 
-  hover:bg-[#157ae5be] hover:text-white hover:before:bg-[#157ae5be] transition-all duration-300 delay-200 before:delay-0;
+  hover:bg-primary-hover hover:text-white hover:before:bg-primary-hover transition-all duration-300 delay-200 before:delay-0;
 }
 
-@hteme {
-
-  --color-primary: '#FFFF';
-
-  --animate-wiggle: wiggle 1s ease-in-out infinite;
-
-  @keyframes wiggle {
-    0%,
-    100% {
-      transform: rotate(-3deg);
-    }
-    50% {
-      transform: rotate(3deg);
-    }
-  }
-}
 
 @theme inline {
+
+/* My global variables  */
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+
+  --color-third: var(--third);
+  --color-secondary: var(--secondary);
+
+  --color-fourth: var(--fourth);
+  --color-fourth-hover: var(--fourth-hover);
+  
+  --color-fivth: var(--fivth);
+  --color-fivth-hover: var(--fivth-hover);
+
+  --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
+
 
   --radius-sm: calc(var(--radius) - 4px);
 
@@ -64,8 +65,6 @@
   --color-popover: var(--popover);
 
   --color-popover-foreground: var(--popover-foreground);
-
-  --color-primary: var(--primary);
 
   --color-primary-foreground: var(--primary-foreground);
 
@@ -118,6 +117,20 @@
 
 :root {
 
+  /* My global variables  */
+
+  --primary: #1579e5;
+  --primary-hover: #157ae59a;
+  --secondary: #595959 ;
+  --third: #E8F2FC;
+  --danger: #FF3D3D;
+  --danger-hover: #ff3d3d5e;
+  --fourth: #1FC75A;
+  --fourth-hover: #16bd003f;
+  --fivth: #FBA402;
+  --fivth-hover: #dede0063;
+
+
   --radius: 0.625rem;
 
   --background: oklch(1 0 0);
@@ -132,11 +145,8 @@
 
   --popover-foreground: oklch(0.147 0.004 49.25);
 
-  --primary: oklch(0.216 0.006 56.043);
 
   --primary-foreground: oklch(0.985 0.001 106.423);
-
-  --secondary: oklch(0.97 0.001 106.424);
 
   --secondary-foreground: oklch(0.216 0.006 56.043);
 
@@ -252,6 +262,11 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  div * {
+    scrollbar-width: none;
+  }
+
   body {
     @apply bg-background text-foreground;
   }

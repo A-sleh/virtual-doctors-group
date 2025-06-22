@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { doctorData } from './api/data';
 // React icons
 import { IoIosTimer } from 'react-icons/io';
@@ -18,19 +18,19 @@ export default function Consultation() {
           Icon={GoStop}
           status={'CLOSED'}
           numberOfConsultation={43}
-          bgColor="bg-red-500"
+          bgColor="bg-danger"
         />
         <FilterBox
           Icon={TfiCheckBox}
           status={'OPNED'}
           numberOfConsultation={103}
-          bgColor="bg-green-500"
+          bgColor="bg-fourth"
         />
         <FilterBox
           Icon={IoIosTimer}
           status={'PENDING'}
           numberOfConsultation={23}
-          bgColor="bg-yellow-300"
+          bgColor="bg-[#fffb00]"
         />
       </header>
       <section className="flex flex-col gap-2.5 w-full">

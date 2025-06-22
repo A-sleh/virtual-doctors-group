@@ -11,7 +11,7 @@ export default function Setting() {
           end
           className={({ isActive }) =>
             isActive
-              ? 'text-[#1579e5]'
+              ? 'text-primary'
               : 'text-black ' + 'transition-all duration-300'
           }
         >
@@ -22,7 +22,7 @@ export default function Setting() {
           end
           className={({ isActive }) =>
             isActive
-              ? 'text-[#1579e5]'
+              ? 'text-primary'
               : 'text-black ' + 'transition-all duration-300'
           }
         >

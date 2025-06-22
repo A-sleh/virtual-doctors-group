@@ -56,9 +56,9 @@ function List({ links }: links) {
             to={link.path[ROLE] || ''}
             className={({ isActive }) =>
               (isActive
-                ? 'bg-[#1579e5] text-white before:bg-[#1579e5] '
+                ? 'bg-primary text-white before:bg-primary '
                 : 'text-black before:bg-[#ffffff] dark:before:bg-[#000000] ') +
-              'li-style btn-rounded dark:text-white min-w-48'
+              'li-style btn-rounded dark:text-white md:min-w-48'
             }
             key={link.title}
           >
@@ -79,7 +79,7 @@ function Logo() {
       <i className="bi bi-x-lg sm:hidden font-bold text-lg cursor-pointer  hover:text-red-600 transition-all duration-200 "></i>
       <div className="flex gap-2 items-center justify-center m-5 mr-0 ">
         <i className="bi bi-hospital text-[30px]"></i>
-        <h3 className="font-bold text-[#1579e5]  text-xl sm:hidden md:flex">
+        <h3 className="font-bold text-primary  text-xl sm:hidden md:flex">
           <span className="text-black dark:text-white">C</span>ureSync
         </h3>
       </div>

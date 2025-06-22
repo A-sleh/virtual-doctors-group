@@ -12,19 +12,19 @@ export default function DoctorVectorInfo({
   children,
 }: doctorInfoProps) {
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-3">
       <img
         src={imgSrc}
         alt="doctor image"
         className="rounded-full w-14 h-14 bg-black"
       />
       <div className="flex flex-col gap-2">
-        <div className="flex flex-col gap-y-1">
+        <div className="flex flex-col space-y-1 ">
           <p className=" font-medium">
-            <span className="text-[#1579e5] ">Dr.</span>
+            <span className="text-primary ">Dr.</span>
             {name}
           </p>
-          <span className="text-gray-400 bg-[#8b8b8b2a] px-2 py-0 rounded-md w-fit">
+          <span className="text-secondary bg-third text-sm px-2 py-1  rounded-sm w-fit">
             {specility}
           </span>
         </div>

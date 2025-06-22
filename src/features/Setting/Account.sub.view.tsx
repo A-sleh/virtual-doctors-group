@@ -7,7 +7,7 @@ export default function Account() {
     <section className="rounded-box space-y-2">
       <div>
         <h2 className="font-bold text-lg">Your profile</h2>
-        <p className="font-normal text-gray-500 text-sm ">
+        <p className="font-normal text-secondary text-sm ">
           Update your profile setting here ...
         </p>
       </div>
@@ -34,7 +34,7 @@ export default function Account() {
         </div>
         <Selector lable="Gender" options={['famale','male']}/>
         <NotifySetting />
-        <input type="submit" value="Apply" className='btn-rounded bg-[#1579e5] text-white float-end'/>
+        <input type="submit" value="Apply" className='btn-rounded bg-primary text-white '/>
       </form>
     </section>
   );

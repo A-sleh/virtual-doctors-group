@@ -14,9 +14,9 @@ type DoctorBoxProps = consultaionContent & {
 };
 
 const STATUSCOLORS = {
-  opened: 'text-green-400 bg-[#29f50e45]',
-  closed: 'text-red-400 bg-[#f50e0e53]',
-  pending: 'text-yellow-400 bg-[#f1f50e6a]',
+  opened: 'text-fourth bg-fourth-hover',
+  closed: 'text-danger bg-danger-hover',
+  pending: 'text-fivth  bg-fivth-hover',
 };
 
 export default function DoctorBox({ doctor, children }: DoctorBoxProps) {
@@ -40,18 +40,18 @@ export default function DoctorBox({ doctor, children }: DoctorBoxProps) {
               {status}
             </p>
           ) : (
-            <h3 className="flex gap-2 items-center text-md text-gray-400">
+            <h3 className="flex gap-2 items-center text-md text-secondary">
               <MdAccessTime size={25} />
               {time}
             </h3>
           )}
-          <h3 className="flex gap-2 items-center text-md text-gray-400">
+          <h3 className="flex gap-2 items-center text-md text-secondary">
             <LiaCalendarDaySolid size={25} />
             {date}
           </h3>
         </div>
       </section>
-      <div className={`font-serif ${description == null ? 'hidden' : 'block'}`}>{description}</div>
+      <div className={`font-serif text-secondary ${description == null ? 'hidden' : 'block'}`}>{description}</div>
       <div className="flex font-medium justify-between">{children}</div>
     </div>
   );

@@ -14,10 +14,10 @@ export default function DoctorInfo({ doctor, rating }: DoctorInfoProps) {
       <DoctorVectorInfo name={doctor.name} specility={doctor.specility}>
         <h5 className="flex gap-1 items-center text-sm ">
           <LiaStarSolid size={20} color="yellow" />
-          <p className="font-light">{rating}</p>
+          <p className="font-ligh text-secondaryt">{rating}</p>
         </h5>
       </DoctorVectorInfo>
-      <BsArrowRight size={30} color="#1579e5" className="cursor-pointer self-end w-fit " />
+      <BsArrowRight size={30} className="cursor-pointer text-primary self-end w-fit " />
     </div>
   );
 }
