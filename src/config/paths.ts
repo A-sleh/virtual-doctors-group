@@ -50,17 +50,17 @@ export const paths = {
           about: {
             path: 'about',
             getHref: (doctorId: number) =>
-              `/doctor/profile/${doctorId}/about`,
+              `/doctor/${doctorId}/profile/about`,
           },
           clinics: {
             path: 'clinic',
             getHref: (doctorId: number) =>
-              `/doctor/profile/${doctorId}/clinic`,
+              `/doctor/${doctorId}/profile/clinic`,
           },
           patientOpinion: {
             path: 'patientOpinion',
             getHref: (doctorId: number) =>
-              `/doctor/profile/${doctorId}/patientOpinion`,
+              `/doctor/${doctorId}/profile/patientOpinion`,
           },
         },
       },

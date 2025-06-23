@@ -13,10 +13,10 @@
     @apply px-5 rounded-md py-1 h-fit bg-transparent cursor-pointer w-fit;
   }
   .rounded-box {
-    @apply p-3 rounded-xl bg-white dark:bg-black
+    @apply p-3 rounded-md bg-white dark:bg-black
   }
   .sub-header {
-    @apply text-xl p-2 bg-white rounded-lg dark:bg-black dark:text-white font-bold
+    @apply text-xl p-2 bg-white rounded-md dark:bg-black dark:text-white font-bold
   }
 }
 

@@ -1,5 +1,20 @@
-import React from 'react';
+import Article from '@/features/Articles/components/Article';
+import DiscriptionCard from './components/DiscriptionCard';
 
 export default function About() {
-  return <div>Doctor's About</div>;
+  return (
+    <section className="space-y-3">
+      <DiscriptionCard title='Abdulfatah asleh'/>
+      <div className="space-y-2">
+        <h2 className="sub-header text-xl px-8">
+          <span className="text-primary">50</span> Articles
+        </h2>
+        <Article
+          title="veniam et magnam blanditiis"
+          description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora magni recusandae omnis deleniti quae. Molestiae ipsam, impedit quisquam vitae commodi culpa maxime necessitatibus ipsum sunt rerum obcaecati delectus excepturi autem inventore ullam repellat asperiores qui error! Sed necessitatibus, veniam et magnam blanditiis deleniti soluta, aliquid expedita itaque incidunt distinctio vero.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora magni recusandae omnis deleniti quae. Molestiae ipsam, impedit quisquam vitae commodi culpa maxime necessitatibus ipsum sunt rerum obcaecati delectus excepturi autem inventore ullam repellat asperiores qui error! Sed necessitatibus, veniam et magnam blanditiis deleniti soluta, aliquid expedita itaque incidunt distinctio vero.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora magni recusandae omnis deleniti quae. Molestiae ipsam, impedit quisquam vitae commodi culpa maxime necessitatibus ipsum sunt rerum obcaecati delectus excepturi autem inventore ullam repellat asperiores qui error! Sed necessitatibus, veniam et magnam blanditiis deleniti soluta, aliquid expedita itaque incidunt distinctio vero.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora magni recusandae omnis deleniti quae. Molestiae ipsam, impedit quisquam vitae commodi culpa maxime necessitatibus ipsum sunt rerum obcaecati delectus excepturi autem inventore ullam repellat asperiores qui error! Sed necessitatibus, veniam et magnam blanditiis deleniti soluta, aliquid expedita itaque incidunt distinctio vero."
+          showOwner={false}
+        />
+      </div>
+    </section>
+  );
 }

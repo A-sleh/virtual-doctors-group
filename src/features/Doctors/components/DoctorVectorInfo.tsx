@@ -3,6 +3,8 @@ export type doctorInfoProps = {
   name: string;
   specility: string;
   children?: React.ReactNode;
+  imageSize?: string;
+  fontSize?: string;
 };
 
 export default function DoctorVectorInfo({
@@ -10,17 +12,19 @@ export default function DoctorVectorInfo({
   specility,
   imgSrc,
   children,
+  imageSize = 'w-14 h-14',
+  fontSize = ''
 }: doctorInfoProps) {
   return (
     <div className="flex gap-3">
       <img
         src={imgSrc}
         alt="doctor image"
-        className="rounded-full w-14 h-14 bg-black"
+        className={`rounded-full ${imageSize} bg-black`}
       />
       <div className="flex flex-col gap-2">
         <div className="flex flex-col space-y-1 ">
-          <p className=" font-medium">
+          <p className={`font-medium ${fontSize}`}>
             <span className="text-primary ">Dr.</span>
             {name}
           </p>
