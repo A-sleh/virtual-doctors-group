@@ -35,6 +35,7 @@
 
   --color-third: var(--third);
   --color-secondary: var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
 
   --color-fourth: var(--fourth);
   --color-fourth-hover: var(--fourth-hover);
@@ -122,6 +123,7 @@
   --primary: #1579e5;
   --primary-hover: #157ae59a;
   --secondary: #595959 ;
+  --secondary-hover: #59595917 ;
   --third: #E8F2FC;
   --danger: #FF3D3D;
   --danger-hover: #ff3d3d5e;
