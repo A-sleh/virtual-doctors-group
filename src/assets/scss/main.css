@@ -4,7 +4,7 @@
 
 @import 'tailwindcss';
 
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -13,10 +13,33 @@
     @apply px-5 rounded-md py-1 h-fit bg-transparent cursor-pointer w-fit;
   }
   .rounded-box {
-    @apply p-3 rounded-md bg-white dark:bg-black
+    @apply p-3 rounded-md bg-white dark:bg-black;
   }
   .sub-header {
-    @apply text-xl p-2 bg-white rounded-md dark:bg-black dark:text-white font-bold
+    @apply text-xl p-2 bg-white rounded-md dark:bg-black dark:text-white font-bold;
+  }
+  .login {
+    @apply grid grid-cols-3 h-screen bg-gray-50 overflow-hidden;
+  }
+
+  .box-style {
+    @apply px-3 py-2 w-full text-base border border-gray-200 rounded-lg;
+  }
+
+  .transition-duration {
+    @apply transition ease-out duration-200;
+  }
+
+  .input {
+    @apply bg-gray-50 w-full caret-primary;
+  }
+
+  .pictur {
+    @apply bg-primary py-10 px-7 flex flex-col items-center relative;
+  }
+
+  .button-login-register {
+    @apply rounded-full w-36 text-center py-1 p-2 uppercase border border-solid border-transparent bg-opacity-90;
   }
 }
 
@@ -26,10 +49,8 @@
   hover:bg-primary-hover hover:text-white hover:before:bg-primary-hover transition-all duration-300 delay-200 before:delay-0;
 }
 
-
 @theme inline {
-
-/* My global variables  */
+  /* My global variables  */
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
 
@@ -39,13 +60,12 @@
 
   --color-fourth: var(--fourth);
   --color-fourth-hover: var(--fourth-hover);
-  
+
   --color-fivth: var(--fivth);
   --color-fivth-hover: var(--fivth-hover);
 
   --color-danger: var(--danger);
   --color-danger-hover: var(--danger-hover);
-
 
   --radius-sm: calc(var(--radius) - 4px);
 
@@ -117,21 +137,19 @@
 }
 
 :root {
-
   /* My global variables  */
 
   --primary: #1579e5;
   --primary-hover: #157ae59a;
-  --secondary: #595959 ;
-  --secondary-hover: #59595917 ;
-  --third: #E8F2FC;
-  --danger: #FF3D3D;
+  --secondary: #595959;
+  --secondary-hover: #59595917;
+  --third: #e8f2fc;
+  --danger: #ff3d3d;
   --danger-hover: #ff3d3d5e;
-  --fourth: #1FC75A;
+  --fourth: #1fc75a;
   --fourth-hover: #16bd003f;
-  --fivth: #FBA402;
+  --fivth: #fba402;
   --fivth-hover: #dede0063;
-
 
   --radius: 0.625rem;
 
@@ -146,7 +164,6 @@
   --popover: oklch(1 0 0);
 
   --popover-foreground: oklch(0.147 0.004 49.25);
-
 
   --primary-foreground: oklch(0.985 0.001 106.423);
 
@@ -196,7 +213,6 @@
 }
 
 .dark {
-
   --background: oklch(0.147 0.004 49.25);
 
   --foreground: oklch(0.985 0.001 106.423);
