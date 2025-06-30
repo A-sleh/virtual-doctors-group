@@ -2,13 +2,7 @@ import AnimateFromToRight, { AnimateFromToRightInView } from '@/lib/Animation/An
 import { doctors } from '../api/data';
 import DoctorConsultResarveBox from './DoctorConsultResarveBox';
 
-export type doctorSearching = {
-  name: string;
-  specility: string;
-  location: string;
-  rating: number;
-  exp: string;
-};
+
 
 export default function SearchingDoctors() {
   return (
@@ -19,9 +13,9 @@ export default function SearchingDoctors() {
         </header>
       </AnimateFromToRight>
       <div className="flex flex-col gap-2 overflow-y-auto h-full pb-20 ">
-        {doctors.map((doctor: doctorSearching ,index: number) => {
+        {doctors.map((doctor,index: number) => {
           return (
-            <AnimateFromToRightInView duration={0.4}>
+            <AnimateFromToRightInView duration={index < 3 ? index / 2 : 0.4}>
               <DoctorConsultResarveBox doctor={doctor} />
             </AnimateFromToRightInView>
           );

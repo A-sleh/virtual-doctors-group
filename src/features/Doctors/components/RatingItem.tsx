@@ -1,8 +1,4 @@
-type ratingItemProps = {
-  Icon: React.ElementType;
-  text: string | number;
-  overWriteStyle?: string;
-};
+import { ratingItemProps } from '../types/doctor';
 
 export default function RatingItem({
   Icon,

@@ -1,4 +1,4 @@
-import DoctorBox from '@/features/Doctors/components/DoctorBox';
+import DoctorBox from '@/features/Consultation/components/DoctorBox';
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import { consultaionContentProps } from '../types/consultaion';
 

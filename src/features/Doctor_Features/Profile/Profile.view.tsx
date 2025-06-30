@@ -19,7 +19,7 @@ export default function Profile() {
           <DoctorVectorInfo
             name="Abdufatah"
             specility="software enginer"
-            imageSize="h-40 w-40"
+            imageSize="40"
             fontSize="text-3xl"
             withAnimation={true}
           >

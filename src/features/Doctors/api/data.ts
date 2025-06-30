@@ -1,4 +1,6 @@
-export const doctors = [
+import { doctorSearching } from "../types/doctor";
+
+export const doctors: doctorSearching[] = [
   {
     name: 'Dr.Abdulfatah',
     specility: 'dentist',

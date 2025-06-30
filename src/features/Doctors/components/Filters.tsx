@@ -1,7 +1,7 @@
+import { useState } from "react"
 import FilterInput from "@/components/ui/inputs/FilterInput"
 import Selector from "@/components/ui/inputs/Selector"
 import AnimateUpEffect from "@/lib/Animation/AnimateUpEffect"
-import { useState } from "react"
 
 export default function Filters() {
 

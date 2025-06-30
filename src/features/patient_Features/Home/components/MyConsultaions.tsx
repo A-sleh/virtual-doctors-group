@@ -1,6 +1,6 @@
 import { upConmingCons } from '../api/data';
 
-import DoctorBox from '@/features/Doctors/components/DoctorBox';
+import DoctorBox from '@/features/Consultation/components/DoctorBox';
 import Header from './Header';
 import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
 
