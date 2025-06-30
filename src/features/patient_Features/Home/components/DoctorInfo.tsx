@@ -4,7 +4,8 @@ import DoctorVectorInfo, {
   doctorInfoProps,
 } from '@/features/Doctors/components/DoctorVectorInfo';
 
-export type DoctorInfoProps = doctorInfoProps & {
+export type DoctorInfoProps = {
+  doctor: doctorInfoProps;
   rating?: string;
 };
 
@@ -17,7 +18,10 @@ export default function DoctorInfo({ doctor, rating }: DoctorInfoProps) {
           <p className="font-ligh text-secondaryt">{rating}</p>
         </h5>
       </DoctorVectorInfo>
-      <BsArrowRight size={30} className="cursor-pointer text-primary self-end w-fit " />
+      <BsArrowRight
+        size={30}
+        className="cursor-pointer text-primary self-end w-fit "
+      />
     </div>
   );
 }

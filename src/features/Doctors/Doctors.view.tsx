@@ -1,14 +1,17 @@
 import Search from '@/components/ui/inputs/Search';
 import Filters from './components/Filters';
 import SearchingDoctors from './components/SearchingDoctors';
+import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
 
 export default function Doctors() {
   return (
-    <section className="space-y-2">
-      <form className="sub-header ">
-        <Search placeHolder="Doctor name ..." />
-      </form>
-      <div className="flex flex-col lg:flex-row gap-2 h-[90vh] ">
+    <section className="space-y-2 overflow-hidden">
+      <AnimateDownEffect>
+        <form className="sub-header ">
+          <Search placeHolder="Doctor name ..." />
+        </form>
+      </AnimateDownEffect>
+      <div className="flex flex-col lg:flex-row gap-2 h-[90vh] overflow-hidden">
         <Filters />
         <SearchingDoctors />
       </div>

@@ -1,4 +1,6 @@
-export const articles = [
+import { articleProps } from "../types/article";
+
+export const articles: articleProps[] = [
   {
     doctor: {
       name: 'Dr.Abdulfatah',

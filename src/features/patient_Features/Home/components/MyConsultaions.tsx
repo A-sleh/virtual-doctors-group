@@ -2,6 +2,7 @@ import { upConmingCons } from '../api/data';
 
 import DoctorBox from '@/features/Doctors/components/DoctorBox';
 import Header from './Header';
+import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
 
 type myConsultaionProps = {
   limitNumber: number;
@@ -15,8 +16,12 @@ export default function MyConsultaions({
   return (
     <section className="flex flex-col gap-2">
       <Header title="Consultations" />
-      {consultaions.map((doctor) => {
-        return <DoctorBox doctor={doctor} />;
+      {consultaions.map((doctor,index: number) => {
+        return (
+          <AnimateFromToRight duration={( index + 1 ) / 2 } >
+            <DoctorBox doctor={doctor} />
+          </AnimateFromToRight>
+        );
       })}
     </section>
   );

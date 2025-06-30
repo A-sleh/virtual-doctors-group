@@ -1,9 +1,12 @@
+import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
+import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
+
 export default function Support() {
   return (
-    <section className="flex flex-col gap-3 bg-white dark:bg-black dark:text-white rounded-lg p-4">
-      <h1 className="text-primary font-bold text-4xl text-center mb-10">
+    <AnimateUpEffect className="flex flex-col gap-3 bg-white dark:bg-black dark:text-white rounded-lg p-4">
+      <AnimateFromToRight className="text-primary font-bold text-4xl text-center mb-10">
         HI, HOW CAN WE HELPE YOU?
-      </h1>
+      </AnimateFromToRight>
       <form className="space-y-2 ">
         <textarea
           placeholder="write your feedback here ..."
@@ -22,6 +25,6 @@ export default function Support() {
           />
         </div>
       </form>
-    </section>
+    </AnimateUpEffect>
   );
 }

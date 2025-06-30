@@ -8,10 +8,11 @@ import { GrSettingsOption } from 'react-icons/gr';
 import { MdSupportAgent } from 'react-icons/md';
 import { CgProfile } from 'react-icons/cg';
 import { MdOutlineSick } from 'react-icons/md';
+import { links } from './types/sidebar';
 
 export const ICON_SIZE = 24;
 
-export const sidebarLinks = [
+export const sidebarLinks: links = [
   {
     icon: <IoIosHome size={ICON_SIZE} />,
     title: 'Home',
@@ -78,7 +79,7 @@ export const sidebarLinks = [
   },
 ];
 
-export const subSideBareLink = [
+export const subSideBareLink: links = [
   {
     icon: <GrSettingsOption size={ICON_SIZE} />,
     title: 'Setting',

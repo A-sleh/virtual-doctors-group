@@ -1,4 +1,6 @@
-export const doctorData = [
+import { consultaionContent } from "../types/consultaion";
+
+export const doctorData: consultaionContent[] = [
   {
     name: 'Dr.Abdulfatah',
     specility: 'dentist',

@@ -1,11 +1,12 @@
 import { paths } from '@/config/paths';
+import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
 
 import { NavLink, Outlet } from 'react-router';
 
 export default function Setting() {
   return (
     <section className='space-y-2'>
-      <header className="sub-header space-x-4">
+      <AnimateDownEffect className="sub-header space-x-4">
         <NavLink
           to={paths.app.setting.account.getHref(1)}
           end
@@ -28,7 +29,7 @@ export default function Setting() {
         >
           Subscrib as a doctor
         </NavLink>
-      </header>
+      </AnimateDownEffect>
       <Outlet />
     </section>
   );

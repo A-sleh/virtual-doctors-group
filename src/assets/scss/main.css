@@ -18,7 +18,8 @@
   .sub-header {
     @apply text-xl p-2 bg-white rounded-md dark:bg-black dark:text-white font-bold;
   }
-  .login {
+
+  /* .login {
     @apply grid grid-cols-3 h-screen bg-gray-50 overflow-hidden;
   }
 
@@ -40,11 +41,11 @@
 
   .button-login-register {
     @apply rounded-full w-36 text-center py-1 p-2 uppercase border border-solid border-transparent bg-opacity-90;
-  }
+  } */
 }
 
 @utility li-style {
-  @apply flex relative gap-2 items-center ml-3 w-full sm:w-fit md:w-full md:px-4 before:content-[""] py-1.5
+  @apply relative flex gap-2 items-center ml-3 w-full sm:w-fit md:w-full md:px-4 before:content-[""] py-1.5
   before:absolute before:left-[-12px] before:w-1 before:rounded-br-lg before:rounded-tr-lg before:h-full 
   hover:bg-primary-hover hover:text-white hover:before:bg-primary-hover transition-all duration-300 delay-200 before:delay-0;
 }

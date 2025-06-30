@@ -1,17 +1,19 @@
 import Selector from '@/components/ui/inputs/Selector';
 import SettingInput from '@/components/ui/inputs/SettingInput';
 import NotifySetting from './components/NotifySetting';
+import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
+import AnimateButton from '@/lib/Animation/AnimateButton';
 
 export default function Account() {
   return (
-    <section className="rounded-box space-y-2">
+    <AnimateUpEffect className="rounded-box space-y-2">
       <div>
         <h2 className="font-bold text-lg">Your profile</h2>
         <p className="font-normal text-secondary text-sm ">
           Update your profile setting here ...
         </p>
       </div>
-      <form className='space-y-3'>
+      <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
         <div className="flex gap-2">
           <SettingInput lable="Name" type="text" placeHolder="Abdulfatah" />
           <SettingInput
@@ -32,10 +34,12 @@ export default function Account() {
             placeHolder="02210221"
           />
         </div>
-        <Selector lable="Gender" options={['famale','male']}/>
+        <Selector lable="Gender" options={['famale', 'male']} />
         <NotifySetting />
-        <input type="submit" value="Apply" className='btn-rounded bg-primary text-white '/>
+        <AnimateButton className="btn-rounded bg-primary text-white ">
+          Apply
+        </AnimateButton>
       </form>
-    </section>
+    </AnimateUpEffect>
   );
 }

@@ -1,10 +1,14 @@
+import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
+import AnimateScale from '@/lib/Animation/AnimateScale';
+
 export type doctorInfoProps = {
   imgSrc?: string;
-  name: string;
-  specility: string;
+  name: string | undefined;
+  specility: string | undefined;
   children?: React.ReactNode;
   imageSize?: string;
   fontSize?: string;
+  withAnimation?: boolean;
 };
 
 export default function DoctorVectorInfo({
@@ -13,16 +17,19 @@ export default function DoctorVectorInfo({
   imgSrc,
   children,
   imageSize = 'w-14 h-14',
-  fontSize = ''
+  fontSize = '',
+  withAnimation = false,
 }: doctorInfoProps) {
   return (
     <div className="flex gap-3">
+      <AnimateScale run={withAnimation}>
       <img
         src={imgSrc}
         alt="doctor image"
         className={`rounded-full ${imageSize} bg-black`}
       />
-      <div className="flex flex-col gap-2">
+      </AnimateScale>
+      <AnimateFromToRight run={withAnimation} className="flex flex-col gap-2">
         <div className="flex flex-col space-y-1 ">
           <p className={`font-medium ${fontSize}`}>
             <span className="text-primary ">Dr.</span>
@@ -33,7 +40,7 @@ export default function DoctorVectorInfo({
           </span>
         </div>
         {children}
-      </div>
+      </AnimateFromToRight>
     </div>
   );
 }

@@ -1,3 +1,5 @@
+import AnimateUpEffect from "@/lib/Animation/AnimateUpEffect";
+
 type workingTimeProps = {
   dayHours: string[];
   workingHours: string[];
@@ -8,7 +10,7 @@ export default function WorkingTime({
   workingHours,
 }: workingTimeProps) {
   return (
-    <div className="rounded-box space-y-2 flex-3 h-fit">
+    <AnimateUpEffect className="rounded-box space-y-2 flex-3 h-fit">
       <h1 className="text-xl font-medium">Working Time</h1>
       <div>
         <h5 className="text-secondary font-medium mb-1">Day hours</h5>
@@ -26,6 +28,6 @@ export default function WorkingTime({
           })}
         </div>
       </div>
-    </div>
+    </AnimateUpEffect>
   );
 }

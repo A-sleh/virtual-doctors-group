@@ -1,9 +1,10 @@
-import { motion, AnimatePresence } from 'motion/react';
-
+import { useState } from 'react';
 import { MdAccessTime } from 'react-icons/md';
 import { IoIosArrowDown } from 'react-icons/io';
 import { reservation } from '../Reservation.view';
-import { useState } from 'react';
+import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
+import AnimateButton from '@/lib/Animation/AnimateButton';
+import AnimateDropDownList from '@/lib/Animation/AnimateDropDownList';
 
 type reservatDayCardProps = {
   reservation: reservation;
@@ -22,11 +23,7 @@ export default function ReservatDayCard({
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -100 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration, type: 'spring' }}
-    >
+    <AnimateFromToRight duration={duration}>
       <div
         className="px-1.5 py-1 h-fit flex justify-between items-center bg-white rounded-sm cursor-pointer"
         onClick={handleOpenRes}
@@ -42,23 +39,21 @@ export default function ReservatDayCard({
           } transition-all duration-200`}
         />
       </div>
-      <motion.div
-        layout
-        exit={{ height: 0 }}
-        transition={{ type: 'spring', bounce: 0.5 ,duration: 0.4 }}
+
+      <AnimateDropDownList
         className={`rounded-bl-sm rounded-br-sm overflow-hidden bg-white mt-0.5 ${
           !openReservation && 'h-0'
         } `}
       >
         <h5 className="pt-2 pl-2 font-medium">{owner}</h5>
         <p className="text-wrap text-secondary text-sm p-2 ">{desctiption}</p>
-        <motion.button
-          whileTap={{ scale: 1.1 }}
+        <AnimateButton
+          scale={1.1}
           className="text-center font-normal w-full bg-danger text-white cursor-pointer"
         >
           Previewed
-        </motion.button>
-      </motion.div>
-    </motion.div>
+        </AnimateButton>
+      </AnimateDropDownList>
+    </AnimateFromToRight>
   );
 }

@@ -1,3 +1,6 @@
+import AnimateDownEffect from "@/lib/Animation/AnimateDownEffect";
+import AnimateUpEffect from "@/lib/Animation/AnimateUpEffect";
+
 type discriptionCardProps = {
   title: string;
   description?: string;
@@ -8,7 +11,7 @@ export default function DiscriptionCard({
   description,
 }: discriptionCardProps) {
   return (
-    <div className="rounded-box p-8 space-y-3 w-full flex-3">
+    <AnimateDownEffect className="rounded-box p-8 space-y-3 w-full flex-3">
       <h1 className="text-xl font-medium">{title}</h1>
       <p className="text-secondary font-serif pl-2">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio mag
@@ -19,6 +22,6 @@ export default function DiscriptionCard({
         accusantium voluptatum possimus doloribus velit eveniet molestias nam
         ipsum.
       </p>
-    </div>
+    </AnimateDownEffect>
   );
 }

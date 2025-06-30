@@ -1,12 +1,14 @@
 import FilterInput from "@/components/ui/inputs/FilterInput"
 import Selector from "@/components/ui/inputs/Selector"
+import AnimateUpEffect from "@/lib/Animation/AnimateUpEffect"
 import { useState } from "react"
 
 export default function Filters() {
 
     const [price,setPrice] = useState(10)
+    
     return (
-        <div className="hover:h-fit hover:overflow-visible rounded-box lg:w-1/3 space-y-5 py-3 lg:py-8 h-[8%] overflow-hidden lg:h-fit">
+        <AnimateUpEffect className="hover:h-fit hover:overflow-visible rounded-box lg:w-1/3 space-y-5 py-3 lg:py-8 h-[8%] overflow-hidden lg:h-fit">
             <h1 className="flex justify-between text-xl font-bold items-center">
                 Filters
                 <span className="font-normal text-sm text-primary">Clear All</span>
@@ -30,6 +32,6 @@ export default function Filters() {
                 <Selector options={['1','2','4']} units={[' +years',' +years',' +years']} overWriteStyle="border-none text-primary"/>
             </FilterInput>
 
-        </div>
+        </AnimateUpEffect>
     )
 }
