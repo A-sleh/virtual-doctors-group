@@ -1,7 +1,8 @@
 import DoctorBox from '@/features/Consultation/components/DoctorBox';
 import AnimateButton from '@/lib/Animation/AnimateButton';
+import { reservationProps } from '../types/reservations';
 
-export default function DoctorReservationCard({ doctor }) {
+export default function DoctorReservationCard({ doctor }:reservationProps) {
   return (
     <DoctorBox doctor={doctor}>
       <div className='flex gap-2.5'>

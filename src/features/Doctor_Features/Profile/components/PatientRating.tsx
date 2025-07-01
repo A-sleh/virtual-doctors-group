@@ -1,13 +1,8 @@
 import { MdOutlineStarPurple500 } from 'react-icons/md';
-
 import RatingItem from '@/features/Doctors/components/RatingItem';
-import { patientRating } from '../PatientOpinion.sub.view';
 import { PiHandHeartLight } from 'react-icons/pi';
 import { FaRegHandshake } from 'react-icons/fa';
-
-type patientRatingProps = {
-  patient: patientRating;
-};
+import { patientRatingProps } from '../types/profile';
 
 export default function PatientRating({ patient }: patientRatingProps) {
   const { name, delayRating, rating, description, serviceRating } = patient;
@@ -21,7 +16,7 @@ export default function PatientRating({ patient }: patientRatingProps) {
             {name}
             <RatingItem
               Icon={MdOutlineStarPurple500}
-              overWriteStyle='flex-row-reverse'
+              overWriteStyle="flex-row-reverse"
               text={rating.toString() + ' / 5'}
             />
           </h3>

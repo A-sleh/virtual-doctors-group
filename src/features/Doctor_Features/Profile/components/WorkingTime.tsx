@@ -1,9 +1,5 @@
-import AnimateUpEffect from "@/lib/Animation/AnimateUpEffect";
-
-type workingTimeProps = {
-  dayHours: string[];
-  workingHours: string[];
-};
+import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
+import { workingTimeProps } from '../types/profile';
 
 export default function WorkingTime({
   dayHours,
@@ -16,7 +12,14 @@ export default function WorkingTime({
         <h5 className="text-secondary font-medium mb-1">Day hours</h5>
         <div className="flex gap-2">
           {dayHours.map((day: string) => {
-            return <span className="px-4 py-0.5 h-fit font-medium bg-primary rounded-sm text-white" key={day}>{day}</span>;
+            return (
+              <span
+                className="px-4 py-0.5 h-fit font-medium bg-primary rounded-sm text-white"
+                key={day}
+              >
+                {day}
+              </span>
+            );
           })}
         </div>
       </div>
@@ -24,7 +27,14 @@ export default function WorkingTime({
         <h5 className="text-secondary font-medium mb-1">Working hous</h5>
         <div className="flex gap-2">
           {workingHours.map((hour: string) => {
-            return <span className="px-4 py-0.5 h-fit font-medium bg-primary rounded-sm text-white" key={hour}>{hour}</span>;
+            return (
+              <span
+                className="px-4 py-0.5 h-fit font-medium bg-primary rounded-sm text-white"
+                key={hour}
+              >
+                {hour}
+              </span>
+            );
           })}
         </div>
       </div>

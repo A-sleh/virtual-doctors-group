@@ -5,13 +5,12 @@ export default function AnimateFromToRight({
   children,
   duration,
   offsetValue = -100,
-  run = true ,
+  run = true,
   delay,
   ...props
 }: standarAnimationProps) {
-
   // if the animation are stoped
-  if (!run) return children;
+  if (!run) return <div {...props}> {children} </div>;
 
   return (
     <motion.div

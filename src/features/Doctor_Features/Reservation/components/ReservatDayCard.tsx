@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import { MdAccessTime } from 'react-icons/md';
 import { IoIosArrowDown } from 'react-icons/io';
-import { reservation } from '../Reservation.view';
 import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import AnimateDropDownList from '@/lib/Animation/AnimateDropDownList';
+import { reservatDayCardProps } from '../types/reservation';
 
-type reservatDayCardProps = {
-  reservation: reservation;
-  duration: number;
-};
+
 
 export default function ReservatDayCard({
   reservation,

@@ -7,9 +7,8 @@ export default function AnimateScale({
   run,
   ...props
 }: standarAnimationProps) {
-
   // if the animation are stoped
-  if(!run) return children 
+  if (!run) return <div {...props}> {children} </div>;
 
   return (
     <motion.button
@@ -23,7 +22,7 @@ export default function AnimateScale({
   );
 }
 
-export  function AnimateScaleInview({
+export function AnimateScaleInview({
   children,
   scale = 0.7,
   ...props

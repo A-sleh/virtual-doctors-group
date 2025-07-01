@@ -1,10 +1,5 @@
-import AnimateDownEffect from "@/lib/Animation/AnimateDownEffect";
-import AnimateUpEffect from "@/lib/Animation/AnimateUpEffect";
-
-type discriptionCardProps = {
-  title: string;
-  description?: string;
-};
+import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
+import { discriptionCardProps } from '../types/profile';
 
 export default function DiscriptionCard({
   title,
@@ -21,6 +16,7 @@ export default function DiscriptionCard({
         quibusdam hic eos doloribus. Harum, laudantium tempora ullam pariatur,
         accusantium voluptatum possimus doloribus velit eveniet molestias nam
         ipsum.
+        {description}
       </p>
     </AnimateDownEffect>
   );

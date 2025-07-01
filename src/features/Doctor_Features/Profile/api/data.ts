@@ -1,4 +1,6 @@
-export const patientOpinion = [
+import { patientRating } from "../types/profile";
+
+export const patientOpinion: patientRating[] = [
     {
         name: 'abdulfatah asleh' ,
         description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio mag

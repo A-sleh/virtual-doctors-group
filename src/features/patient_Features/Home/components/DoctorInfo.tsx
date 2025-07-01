@@ -1,13 +1,7 @@
 import { LiaStarSolid } from 'react-icons/lia';
 import { BsArrowRight } from 'react-icons/bs';
-import DoctorVectorInfo, {
-  doctorInfoProps,
-} from '@/features/Doctors/components/DoctorVectorInfo';
-
-export type DoctorInfoProps = {
-  doctor: doctorInfoProps;
-  rating?: string;
-};
+import { DoctorInfoProps } from '../types/home';
+import DoctorVectorInfo from '@/features/Doctors/components/DoctorVectorInfo';
 
 export default function DoctorInfo({ doctor, rating }: DoctorInfoProps) {
   return (

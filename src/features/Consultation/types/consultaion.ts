@@ -11,7 +11,7 @@ export type FilterBoxProps = {
 export type consultaionContent = {
   description: string;
   date: string;
-  status: 'opened' | 'closed' | 'pending';
+  status?: 'opened' | 'closed' | 'pending';
 } & doctor;
 
 export type consultaionContentProps = {
@@ -19,7 +19,7 @@ export type consultaionContentProps = {
 };
 
 export type DoctorBoxProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   doctor: {
     time?: string;
   } & consultaionContent;

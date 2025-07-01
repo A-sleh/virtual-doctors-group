@@ -1,15 +1,7 @@
+import { AnimateFromToRightInView } from '@/lib/Animation/AnimateFromLeftToRight';
 import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
 import { patientOpinion } from './api/data';
 import PatientRating from './components/PatientRating';
-import { AnimateFromToRightInView } from '@/lib/Animation/AnimateFromLeftToRight';
-
-export type patientRating = {
-  name: string;
-  description: string;
-  rating: number;
-  serviceRating: number;
-  delayRating: number;
-};
 
 export default function PatientOpinion() {
   return (
@@ -18,7 +10,7 @@ export default function PatientOpinion() {
         What my patients say
       </AnimateDownEffect>
       <div className="space-y-2">
-        {patientOpinion.map((patient: patientRating) => {
+        {patientOpinion.map((patient) => {
           return (
             <AnimateFromToRightInView>
               <PatientRating patient={patient} />

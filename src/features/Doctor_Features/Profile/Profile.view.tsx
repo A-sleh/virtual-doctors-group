@@ -1,15 +1,14 @@
 // Icon components
 import { FaLocationDot } from 'react-icons/fa6';
 import { MdOutlineWorkspacePremium } from 'react-icons/md';
-import { FaStar } from 'react-icons/fa';
-import { FaStarHalfStroke } from 'react-icons/fa6';
 
 import DoctorVectorInfo from '@/features/Doctors/components/DoctorVectorInfo';
 import RatingItem from '@/features/Doctors/components/RatingItem';
 
 import MainInformation from './components/MainInformation';
-import { NavLink, Outlet } from 'react-router';
-import { paths } from '@/config/paths';
+import ProfileLinks from './components/ProfileLinks';
+import { Outlet } from 'react-router';
+import DoctorStarsRating from './components/DoctorStarsRating';
 
 export default function Profile() {
   return (
@@ -19,7 +18,7 @@ export default function Profile() {
           <DoctorVectorInfo
             name="Abdufatah"
             specility="software enginer"
-            imageSize="40"
+            imageSize={"h-40 w-40"}
             fontSize="text-3xl"
             withAnimation={true}
           >
@@ -28,50 +27,11 @@ export default function Profile() {
               <RatingItem Icon={MdOutlineWorkspacePremium} text="10 +years" />
             </div>
           </DoctorVectorInfo>
-          <div className="flex gap-2 px-4">
-            {[1, 1, 1, 1].map((_) => {
-              return <FaStar size={25} className="text-yellow-300" />;
-            })}
-            <FaStarHalfStroke size={25} className="text-yellow-300" />
-          </div>
+          <DoctorStarsRating starsNumber={3.5} />
         </div>
         <MainInformation />
       </section>
-      <section className="rounded-box space-x-2">
-        <NavLink
-          to={paths.app.doctor.profile.info.about.getHref(10)}
-          className={({ isActive }) =>
-            (isActive
-              ? 'text-white bg-primary'
-              : 'bg-transparent text-primary') +
-            ' border border-primary btn-rounded font-medium rounded-tl-[0px] rounded-br-[0px] r bg-primary transition-all duration-200'
-          }
-        >
-          About
-        </NavLink>
-        <NavLink
-          to={paths.app.doctor.profile.info.clinics.getHref(10)}
-          className={({ isActive }) =>
-            (isActive
-              ? 'text-white bg-primary'
-              : 'bg-transparent text-primary') +
-            ' border border-primary btn-rounded font-medium rounded-tl-[0px] rounded-br-[0px] r bg-primary transition-all duration-200'
-          }
-        >
-          Clinics
-        </NavLink>
-        <NavLink
-          to={paths.app.doctor.profile.info.patientOpinion.getHref(10)}
-          className={({ isActive }) =>
-            (isActive
-              ? 'text-white bg-primary'
-              : 'bg-transparent text-primary') +
-            ' border border-primary btn-rounded font-medium rounded-tl-[0px] rounded-br-[0px] r bg-primary transition-all duration-200'
-          }
-        >
-          Patient opinions
-        </NavLink>
-      </section>
+      <ProfileLinks />
       <Outlet />
     </div>
   );

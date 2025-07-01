@@ -7,7 +7,7 @@ export default function DoctorVectorInfo({
   specility,
   imgSrc,
   children,
-  imageSize = '14',
+  imageSize = "h-14 w-14",
   fontSize = '',
   withAnimation = false,
 }: DoctorVectorInfoProps) {
@@ -17,11 +17,11 @@ export default function DoctorVectorInfo({
         <img
           src={imgSrc}
           alt="doctor image"
-          className={`rounded-full h-${imageSize} w-${imageSize} bg-black`}
+          className={`rounded-full ${imageSize} bg-black`}
         />
       </AnimateScale>
-      <AnimateFromToRight run={withAnimation} className="flex flex-col gap-2">
-        <div className="flex flex-col space-y-1 ">
+      <AnimateFromToRight className="flex flex-col gap-2" run={withAnimation} >
+        <div className="flex flex-col space-y-1">
           <p className={`font-medium ${fontSize}`}>
             <span className="text-primary ">Dr.</span>
             {name}
