@@ -7,9 +7,9 @@ import { AnimateUpInView } from '@/lib/Animation/AnimateUpEffect';
 
 export default function Consultation() {
   return (
-    <section className="space-y-3">
+    <section className="w-full rounded-md space-y-3  overflow-y-auto h-[100vh] pb-45">
       <ConsultaionHeader />
-      <section className="flex flex-col gap-2.5 w-full">
+      <section className="flex flex-col gap-2 overflow-y-auto h-full ">
         {doctorData.map((doctor) => {
           return (
             <AnimateUpInView>

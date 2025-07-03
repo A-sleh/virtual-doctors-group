@@ -1,4 +1,5 @@
 import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
+import { IoMdClose } from "react-icons/io";
 import { RiSettings5Fill } from 'react-icons/ri';
 import { discriptionCardProps } from '../types/profile';
 import AnimateButton from '@/lib/Animation/AnimateButton';
@@ -30,7 +31,7 @@ export default function DiscriptionCard({
                 onClick={() => handlUpdateClicked()}
               />
             ) : (
-              <RiSettings5Fill
+              <IoMdClose
                 size={25}
                 className="text-danger cursor-pointer"
                 onClick={() => setUpdateDescription(false)}
@@ -41,10 +42,16 @@ export default function DiscriptionCard({
       </h1>
       <form>
         <textarea
-          className={`text-secondary font-serif  w-full h-fit ${
+          className={`text-secondary font-serif  w-full h-full resize-none  ${
             updateDescription && 'bg-third'
           } p-3 outline-none`}
           ref={descriptionContainerRef}
+            onFocus={(e) =>
+    e.currentTarget.setSelectionRange(
+      e.currentTarget.value.length,
+      e.currentTarget.value.length
+    )
+  }
         >
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio mag
           error similique enim unde quisquam rem mollitia exercitationem, nulla

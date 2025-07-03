@@ -4,14 +4,19 @@ import AnimateScale from './AnimateScale';
 
 export default function AnimateButton({
   children,
-  scale = 0.8,
+  scale = 0.9,
   withInitialScale = false,
   ...props
 }: standarAnimationProps) {
   if (withInitialScale)
     return (
       <AnimateScale {...props}>
-        <motion.button whileTap={{ scale }}>{children}</motion.button>
+        <motion.button
+          whileTap={{ scale }}
+          exit={{ opacity: 0, y: 40 }}
+        >
+          {children}
+        </motion.button>
       </AnimateScale>
     );
   return (

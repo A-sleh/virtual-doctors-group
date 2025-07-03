@@ -58,6 +58,7 @@ const Doctors = lazy(() => import('@/features/Doctors/Doctors.view'));
 const Articles = lazy(() => import('@/features/Articles/Articles.view'));
 const Support = lazy(() => import('@/features/Support/Support.view'));
 const Setting = lazy(() => import('@/features/Setting/Setting.view'));
+const ConsultationChat = lazy(() => import('@/features/chat/ConsultationChat.view'));
 
 const routes: RouteObject[] = [
   {
@@ -68,6 +69,10 @@ const routes: RouteObject[] = [
       {
         path: paths.app.article.path,
         element: <Articles />,
+      },
+      {
+        path: paths.app.consultaionChat.path,
+        element: <ConsultationChat />,
       },
       {
         path: paths.app.consultation.path,

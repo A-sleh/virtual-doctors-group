@@ -3,7 +3,8 @@ import DiscriptionCard from './components/DiscriptionCard';
 import MapSnapShot from './components/MapSnapShot';
 import ReservationBox from './components/ReservationBox';
 import WorkingTime from './components/WorkingTime';
-
+import isPatient from '@/utils/userPermission';
+import { ROLE } from '@/config/app.config';
 export default function Clinics() {
   return (
     <div className="space-y-3">
@@ -16,8 +17,9 @@ export default function Clinics() {
           dayHours={['Sun', 'Mun', 'Tue', 'Thur']}
           workingHours={['From 10:00 to 12:00', 'From 13:00 to 16:00']}
         />
+
         <div className="flex-1/12 space-y-2">
-          <ReservationBox type="Consult now">
+          <ReservationBox type={isPatient(ROLE) ? "Consult now" : "Consulting"}>
             <div className="p-5 space-y-1">
               <h2 className="text-primary flex w-full justify-between items-center">
                 Consultaion cost{' '}
@@ -32,7 +34,8 @@ export default function Clinics() {
               </HasPermission>
             </div>
           </ReservationBox>
-          <ReservationBox type="Book an appointment now">
+
+          <ReservationBox type={isPatient(ROLE) ? "Book an appointment now" : "Booking"}>
             <div className="p-5 space-y-1">
               <h2 className="text-primary flex w-full justify-between items-center">
                 Preview cost{' '}

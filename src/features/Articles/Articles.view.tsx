@@ -5,13 +5,13 @@ import { articles } from './api/data';
 
 export default function Articles() {
   return (
-    <section className="space-y-3">
+    <section className="w-full rounded-md space-y-3  overflow-y-auto h-[100vh] pb-35">
       <AricleHeader />
-      <section className="flex flex-col gap-2.5 w-full">
+      <div className="flex flex-col gap-2 overflow-y-auto h-full ">
         {articles.map((article) => (
           <Article {...article} />
         ))}
-      </section>
+      </div>
     </section>
   );
 }

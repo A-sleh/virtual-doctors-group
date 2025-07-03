@@ -12,14 +12,14 @@ export default function MapSnapShot() {
         <HasPermission allowedTo={['doctor']}>
           <AnimateButton
             scale={0.9}
-            className="text-nowrap px-2 py-0.5 h-fit rounded-sm text-white cursor-pointer bg-danger "
+            className="text-nowrap px-2 py-0.5 h-fit rounded-sm text-white cursor-pointer bg-danger w-full"
           >
             Reset location
           </AnimateButton>
         </HasPermission>
         <AnimateButton
           scale={0.9}
-          className="text-nowrap px-2 py-0.5 h-fit rounded-sm text-white  cursor-pointer bg-primary "
+          className="text-nowrap px-2 py-0.5 h-fit rounded-sm text-white  cursor-pointer bg-primary w-full"
         >
           Show location on map
         </AnimateButton>

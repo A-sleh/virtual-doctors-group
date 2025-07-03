@@ -8,6 +8,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer base {
+  * {
+    scrollbar-width: none;
+  }
+}
+
 @layer components {
   .btn-rounded {
     @apply px-5 rounded-md py-1 h-fit bg-transparent cursor-pointer w-fit;

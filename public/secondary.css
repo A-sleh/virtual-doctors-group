@@ -31,3 +31,9 @@
 .box-style:hover label {
   color: #1479e5;
 }
+
+textarea {
+  field-sizing: content;
+}
+
+

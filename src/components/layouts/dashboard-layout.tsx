@@ -12,7 +12,7 @@ export default function DashBoardLayout({ children }: DashBoardLayoutProp) {
         <nav className="p-4 sticky top-0 bg-white dark:bg-black dark:text-white z-50">
           navebard
         </nav>
-        <main className="bg-third rounded-xl p-2 min-h-screen pb-1.5  dark:bg-third">
+        <main className="bg-third rounded-xl p-3 min-h-[93vh] pb-1.5  dark:bg-third overflow-hidden">
           {children}
         </main>
       </div>
