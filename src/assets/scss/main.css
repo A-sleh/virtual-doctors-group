@@ -13,13 +13,13 @@
     @apply px-5 rounded-md py-1 h-fit bg-transparent cursor-pointer w-fit;
   }
   .rounded-box {
-    @apply p-3 rounded-md bg-white dark:bg-black;
+    @apply p-3 rounded-sm bg-white dark:bg-black;
   }
   .sub-header {
     @apply text-xl p-2 bg-white rounded-md dark:bg-black dark:text-white font-bold;
   }
 
-  /* .login {
+  .login {
     @apply grid grid-cols-3 h-screen bg-gray-50 overflow-hidden;
   }
 
@@ -40,8 +40,8 @@
   }
 
   .button-login-register {
-    @apply rounded-full w-36 text-center py-1 p-2 uppercase border border-solid border-transparent bg-opacity-90;
-  } */
+    @apply rounded-full w-36 text-center py-1 p-2 uppercase border border-solid border-transparent ;
+  } 
 }
 
 @utility li-style {
@@ -141,15 +141,25 @@
   /* My global variables  */
 
   --primary: #1579e5;
+
   --primary-hover: #157ae59a;
+
   --secondary: #595959;
+
   --secondary-hover: #59595917;
+
   --third: #e8f2fc;
+
   --danger: #ff3d3d;
+
   --danger-hover: #ff3d3d5e;
+
   --fourth: #1fc75a;
+
   --fourth-hover: #16bd003f;
+
   --fivth: #fba402;
+  
   --fivth-hover: #dede0063;
 
   --radius: 0.625rem;

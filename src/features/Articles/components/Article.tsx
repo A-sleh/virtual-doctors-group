@@ -1,6 +1,11 @@
 import DoctorVectorInfo from '@/features/Doctors/components/DoctorVectorInfo';
 import { AnimateUpInView } from '@/lib/Animation/AnimateUpEffect';
 import { articleProps } from '../types/article';
+import AnimateScale from '@/lib/Animation/AnimateScale';
+import { RiSettings5Fill } from 'react-icons/ri';
+import { RiDeleteBin6Line } from 'react-icons/ri';
+import AnimateButton from '@/lib/Animation/AnimateButton';
+import HasPermission from '@/context/auth/HasPermission';
 
 export default function Article({
   doctor,
@@ -20,7 +25,25 @@ export default function Article({
           <DoctorVectorInfo name={doctor?.name} specility={doctor?.specility} />
         </div>
       )}
-      <h4 className="my-4 font-medium uppercase">{title}</h4>
+      <h4 className="my-4 font-medium uppercase flex items-baseline justify-between">
+        {title}
+        <HasPermission allowedTo={['doctor']}>
+          <div className="flex gap-2">
+            <AnimateButton withInitialScale={true}>
+              <RiSettings5Fill
+                size={25}
+                className="text-primary cursor-pointer"
+              />
+            </AnimateButton>
+            <AnimateButton withInitialScale={true}>
+              <RiDeleteBin6Line
+                size={25}
+                className="text-danger cursor-pointer"
+              />
+            </AnimateButton>
+          </div>
+        </HasPermission>
+      </h4>
       <div className="text-wrap text-gray-500">{description}</div>
     </AnimateUpInView>
   );

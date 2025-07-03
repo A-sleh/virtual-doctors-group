@@ -1,8 +1,8 @@
 
 
 export type doctor = {
-  specility: string;
-  name: string;
+  specility: string | undefined;
+  name: string | undefined;
 };
 
 export type doctorSearching = {

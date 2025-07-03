@@ -1,5 +1,7 @@
+import { ROLE } from '@/config/app.config';
 import { paths } from '@/config/paths';
 import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
+import isPatient from '@/utils/userPermission';
 import { NavLink } from 'react-router';
 
 export default function SettingHeader() {
@@ -25,7 +27,7 @@ export default function SettingHeader() {
             : 'text-black ' + 'transition-all duration-300'
         }
       >
-        Subscrib as a doctor
+        {isPatient(ROLE) ? "Subscrib as a doctor" : "My personal info"}
       </NavLink>
     </AnimateDownEffect>
   );

@@ -4,7 +4,7 @@ import { standarAnimationProps } from './types/animationTypes';
 export default function AnimateScale({
   children,
   scale = 0.7,
-  run,
+  run = true ,
   ...props
 }: standarAnimationProps) {
   // if the animation are stoped

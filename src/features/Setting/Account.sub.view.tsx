@@ -3,6 +3,7 @@ import SettingInput from '@/components/ui/inputs/SettingInput';
 import NotifySetting from './components/NotifySetting';
 import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
 import AnimateButton from '@/lib/Animation/AnimateButton';
+import HasPermission from '@/context/auth/HasPermission';
 
 export default function Account() {
   return (
@@ -35,7 +36,9 @@ export default function Account() {
           />
         </div>
         <Selector lable="Gender" options={['famale', 'male']} />
-        <NotifySetting />
+        <HasPermission allowedTo={['patient']}>
+          <NotifySetting />
+        </HasPermission>
         <AnimateButton className="btn-rounded bg-primary text-white ">
           Apply
         </AnimateButton>

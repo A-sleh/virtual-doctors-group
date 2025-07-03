@@ -9,7 +9,7 @@ import DoctorStatistics from './DoctorStatistics';
 export default function DoctorConsultResarveBox({
   doctor,
 }: doctorSearchingProps) {
-  const { name, specility, rating, exp : experianse, location } = doctor;
+  const { name, specility, rating, exp: experianse, location } = doctor;
 
   return (
     <div className="rounded-box space-y-3">
@@ -27,13 +27,13 @@ export default function DoctorConsultResarveBox({
         assumenda eius laudantium a fuga rerum unde veniam at eaque laborum.
       </div>
       <div className="flex justify-between flex-col gap-5 lg:flex-row">
-        <DoctorStatistics {...{rating, experianse, location}} />
+        <DoctorStatistics {...{ rating, experianse, location }} />
         <div className="flex gap-2 group self-end ">
-          <AnimateButton scale={0.7} className="btn-rounded pr-1 flex gap-x-3 items-center bg-white text-primary border-1 transition-all duration-100 border-primary group-hover:bg-primary group-hover:text-white">
+          <AnimateButton className="btn-rounded pr-1 flex gap-x-3 items-center bg-white text-primary border-1 transition-all duration-100 border-primary group-hover:bg-primary group-hover:text-white">
             Go to chat
             <MdKeyboardDoubleArrowRight className="group-hover:text-white text-primary" />
           </AnimateButton>
-          <AnimateButton scale={0.7} className="btn-rounded  bg-primary hover:bg-primary-hover text-white transition-all duration-100 ">
+          <AnimateButton className="btn-rounded  bg-primary  border-primary text-white ">
             Book appointment
           </AnimateButton>
         </div>

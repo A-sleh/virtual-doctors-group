@@ -1,6 +1,8 @@
 import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
 import AnimateScale from '@/lib/Animation/AnimateScale';
 import { DoctorVectorInfoProps } from '../types/doctor';
+import { Link } from 'react-router';
+import { paths } from '@/config/paths';
 
 export default function DoctorVectorInfo({
   name,
@@ -11,6 +13,7 @@ export default function DoctorVectorInfo({
   fontSize = '',
   withAnimation = false,
 }: DoctorVectorInfoProps) {
+
   return (
     <div className="flex gap-3">
       <AnimateScale run={withAnimation}>
@@ -22,10 +25,10 @@ export default function DoctorVectorInfo({
       </AnimateScale>
       <AnimateFromToRight className="flex flex-col gap-2" run={withAnimation} >
         <div className="flex flex-col space-y-1">
-          <p className={`font-medium ${fontSize}`}>
+          <Link to={paths.app.doctor.profile.getHref(10)} className={`font-medium ${fontSize}`} >
             <span className="text-primary ">Dr.</span>
             {name}
-          </p>
+          </Link>
           <span className="text-secondary bg-third text-sm px-2 py-1  rounded-sm w-fit">
             {specility}
           </span>

@@ -1,3 +1,4 @@
+import HasPermission from '@/context/auth/HasPermission';
 import DiscriptionCard from './components/DiscriptionCard';
 import MapSnapShot from './components/MapSnapShot';
 import ReservationBox from './components/ReservationBox';
@@ -21,12 +22,14 @@ export default function Clinics() {
               <h2 className="text-primary flex w-full justify-between items-center">
                 Consultaion cost{' '}
                 <span className="text-white px-3 py-0.5 h-fit bg-danger rounded-tr-sm rounded-bl-sm ">
-                  50%
+                  50 $
                 </span>
               </h2>
-              <p className="text-secondary font-serif">
-                If you have any considerations don't hassitate to consult me
-              </p>
+              <HasPermission allowedTo={['patient']}>
+                <p className="text-secondary font-serif">
+                  If you have any considerations don't hassitate to consult me
+                </p>
+              </HasPermission>
             </div>
           </ReservationBox>
           <ReservationBox type="Book an appointment now">
@@ -34,12 +37,14 @@ export default function Clinics() {
               <h2 className="text-primary flex w-full justify-between items-center">
                 Preview cost{' '}
                 <span className="text-white px-3 py-0.5 h-fit bg-danger rounded-tr-sm rounded-bl-sm ">
-                  100%
+                  100 $
                 </span>
               </h2>
-              <p className="text-secondary font-serif">
-                You can chopse best time for you or book appointment ASAP
-              </p>
+              <HasPermission allowedTo={['patient']}>
+                <p className="text-secondary font-serif">
+                  You can chopse best time for you or book appointment ASAP
+                </p>
+              </HasPermission>
             </div>
           </ReservationBox>
         </div>
