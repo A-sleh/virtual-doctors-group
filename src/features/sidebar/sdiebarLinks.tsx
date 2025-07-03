@@ -28,7 +28,7 @@ export const sidebarLinks: links = [
     title: 'Doctor',
     permission: ['admin', 'patient', 'doctor'],
     path: {
-      admin: paths.app.searchingDoctor.getHref(),
+      admin: paths.app.dashboard.doctor.getHref(),
       doctor: paths.app.searchingDoctor.getHref(),
       patient: paths.app.searchingDoctor.getHref(),
     },
@@ -94,7 +94,7 @@ export const subSideBareLink: links = [
     title: 'Support',
     permission: ['admin', 'patient', 'doctor'],
     path: {
-      admin: paths.app.support.getHref(),
+      admin: paths.app.dashboard.support.getHref(),
       doctor: paths.app.support.getHref(),
       patient: paths.app.support.getHref(),
     },
