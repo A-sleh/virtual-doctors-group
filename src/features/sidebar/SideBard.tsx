@@ -10,7 +10,7 @@ import AnimateParentUpEffect from '@/lib/Animation/AnimateParentUpEffect';
 
 export default function SideBar() {
   return (
-    <aside className="fixed w-full bg-white pr-5 sm:pr-2 md:pr-5 sm:w-fit sm:sticky top-0 h-[100vh] z-50 dark:bg-black">
+    <aside className="fixed w-full bg-white pr-5 sm:pr-2 md:pr-5 sm:w-fit sm:sticky top-0 h-[100vh] z-100 dark:bg-black">
       <Logo />
       <section className="flex flex-col gap-28">
         <AnimateParentUpEffect className="flex flex-col gap-7 ">

@@ -16,7 +16,7 @@
 
 @layer components {
   .btn-rounded {
-    @apply px-5 rounded-md py-1 h-fit bg-transparent cursor-pointer w-fit;
+    @apply px-5 rounded-md py-1 h-fit bg-transparent cursor-pointer w-fit  ;
   }
   .rounded-box {
     @apply p-3 rounded-sm bg-white dark:bg-black;
@@ -48,7 +48,15 @@
   .button-login-register {
     @apply rounded-full w-36 text-center py-1 p-2 uppercase border border-solid border-transparent ;
   } 
+  .over-lay {
+    @apply backdrop-blur-(--bg-blur) fixed top-0 left-0 w-full h-[100vh] z-100  transition-all ;
+  }
+  .modal {
+    @apply fixed top-[50%] left-[50%] translate-[-50%] p-2 bg-third rounded-md shadow-2xl min-h-fit sm:min-w-xl overflow-hidden;
+  }
 }
+
+
 
 @utility li-style {
   @apply relative flex gap-2 items-center ml-3 w-full sm:w-fit md:w-full md:px-4 before:content-[""] py-1.5
@@ -145,6 +153,8 @@
 
 :root {
   /* My global variables  */
+
+  --bg-blur: 1px ;
 
   --primary: #1579e5;
 
