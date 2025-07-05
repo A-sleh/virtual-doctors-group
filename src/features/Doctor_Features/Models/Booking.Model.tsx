@@ -1,27 +1,18 @@
-import AnimateParentScaleUp, {
-  AnimateChildScaleUpChild,
-} from '@/lib/Animation/AnimateParentScaleUpChild';
-import { times } from './api/data';
 import Model from '@/components/models/Model';
+import AnimateButton from '@/lib/Animation/AnimateButton';
+import AvailableTimes from './components/AvailableTimes';
 
 export default function Booking() {
   return (
-    <Model title="Timese">
-      <AnimateParentScaleUp className="flex gap-2 flex-wrap justify-center">
-        {times.map((time, index: number) => {
-          console.log(time)
-          return (
-            <AnimateChildScaleUpChild
-              duration={index / 2}
-              className={`px-4 py-2 rounded-lg text-secondary  text-nowrap  ${
-                time.status == 'close' ? ' bg-[#ffffff7c] pointer-events-none ' : ' bg-white cursor-pointer'
-              } `}
-            >
-              {time.time}
-            </AnimateChildScaleUpChild>
-          );
-        })}
-      </AnimateParentScaleUp>
+    <Model>
+      <Model.Open opens="booking">
+        <AnimateButton className="text-center rounded-sm text-white bg-primary my-2 cursor-pointer hover:bg-primary-hover transition-all duration-150">
+          New Reservation
+        </AnimateButton>
+      </Model.Open>
+      <Model.Window title="Timese" name="booking">
+        <AvailableTimes />
+      </Model.Window>
     </Model>
   );
 }

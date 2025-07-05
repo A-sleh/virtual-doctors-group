@@ -1,10 +1,10 @@
 // react icon components
-import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 
 import { doctorSearchingProps } from '../types/doctor';
 import DoctorVectorInfo from './DoctorVectorInfo';
-import AnimateButton from '@/lib/Animation/AnimateButton';
 import DoctorStatistics from './DoctorStatistics';
+import ConsultADoctor from '@/features/patient_Features/Models/ConsultADoctor.Model';
+import PatientBooking from '@/features/patient_Features/Models/PatientBooking.Model';
 
 export default function DoctorConsultResarveBox({
   doctor,
@@ -28,14 +28,9 @@ export default function DoctorConsultResarveBox({
       </div>
       <div className="flex justify-between flex-col gap-5 lg:flex-row">
         <DoctorStatistics {...{ rating, experianse, location }} />
-        <div className="flex gap-2 group self-end ">
-          <AnimateButton className="btn-rounded pr-1 flex gap-x-3 items-center bg-white text-primary border-1 transition-all duration-100 border-primary group-hover:bg-primary group-hover:text-white">
-            Go to chat
-            <MdKeyboardDoubleArrowRight className="group-hover:text-white text-primary" />
-          </AnimateButton>
-          <AnimateButton className="btn-rounded  bg-primary  border-primary text-white ">
-            Book appointment
-          </AnimateButton>
+        <div className="flex gap-2 self-end ">
+          <ConsultADoctor />
+          <PatientBooking />
         </div>
       </div>
     </div>

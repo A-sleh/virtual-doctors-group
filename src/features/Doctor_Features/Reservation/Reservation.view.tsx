@@ -4,6 +4,7 @@ import ReservatDayCard from './components/ReservatDayCard';
 import ReservationHeader from './components/ReservationHeader';
 import Calendar from './components/Calendar';
 import AnimateButton from '@/lib/Animation/AnimateButton';
+import Booking from '../Models/Booking.Model';
 
 
 export default function Reservation() {
@@ -15,9 +16,7 @@ export default function Reservation() {
           {data.map((reservation , index: number) => (
             <ReservatDayCard reservation={reservation} duration={index / 2} />
           ))}
-          <AnimateButton className="text-center rounded-sm text-white bg-primary my-2 cursor-pointer hover:bg-primary-hover transition-all duration-150">
-            New Reservation
-          </AnimateButton>
+          <Booking />
         </div>
       </div>
       <div className="flex-4 space-y-2">

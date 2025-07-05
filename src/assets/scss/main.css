@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @import 'tailwindcss';
-
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
@@ -16,7 +15,7 @@
 
 @layer components {
   .btn-rounded {
-    @apply px-5 rounded-md py-1 h-fit bg-transparent cursor-pointer w-fit  ;
+    @apply px-5 rounded-md py-1 h-fit bg-transparent cursor-pointer w-fit;
   }
   .rounded-box {
     @apply p-3 rounded-sm bg-white dark:bg-black;
@@ -30,7 +29,7 @@
   }
 
   .box-style {
-    @apply px-3 py-2 w-full text-base border border-gray-200 rounded-lg;
+    @apply px-2 py-1 w-full text-base border border-secondary-hover  rounded-lg;
   }
 
   .transition-duration {
@@ -38,25 +37,20 @@
   }
 
   .input {
-    @apply bg-gray-50 w-full caret-primary;
+    @apply w-full caret-primary outline-none text-[1.05rem]  ;
   }
 
   .pictur {
-    @apply bg-primary py-10 px-7 flex flex-col items-center relative;
+    @apply bg-primary py-5 flex flex-col  items-center relative justify-between;
   }
 
-  .button-login-register {
-    @apply rounded-full w-36 text-center py-1 p-2 uppercase border border-solid border-transparent ;
-  } 
   .over-lay {
-    @apply backdrop-blur-(--bg-blur) fixed top-0 left-0 w-full h-[100vh] z-100  transition-all ;
+    @apply bg-[#0000004d] fixed top-0 left-0 w-full h-[100vh] z-100 ;
   }
   .modal {
-    @apply fixed top-[50%] left-[50%] translate-[-50%] p-2 bg-third rounded-md shadow-2xl min-h-fit sm:min-w-xl overflow-hidden;
+    @apply fixed top-[50%] left-[50%] translate-[-50%] p-2 bg-third rounded-md  min-h-fit sm:min-w-xl overflow-hidden;
   }
 }
-
-
 
 @utility li-style {
   @apply relative flex gap-2 items-center ml-3 w-full sm:w-fit md:w-full md:px-4 before:content-[""] py-1.5
@@ -154,7 +148,7 @@
 :root {
   /* My global variables  */
 
-  --bg-blur: 1px ;
+  --bg-blur: 1px;
 
   --primary: #1579e5;
 
@@ -175,7 +169,7 @@
   --fourth-hover: #16bd003f;
 
   --fivth: #fba402;
-  
+
   --fivth-hover: #dede0063;
 
   --radius: 0.625rem;

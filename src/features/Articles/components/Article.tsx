@@ -1,11 +1,10 @@
 import DoctorVectorInfo from '@/features/Doctors/components/DoctorVectorInfo';
 import { AnimateUpInView } from '@/lib/Animation/AnimateUpEffect';
 import { articleProps } from '../types/article';
-import AnimateScale from '@/lib/Animation/AnimateScale';
-import { RiSettings5Fill } from 'react-icons/ri';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import HasPermission from '@/context/auth/HasPermission';
+import UpdateArticle from '@/features/Doctor_Features/Models/UpdateArticle.Model';
 
 export default function Article({
   doctor,
@@ -29,12 +28,7 @@ export default function Article({
         {title}
         <HasPermission allowedTo={['doctor']}>
           <div className="flex gap-2">
-            <AnimateButton withInitialScale={true}>
-              <RiSettings5Fill
-                size={25}
-                className="text-primary cursor-pointer"
-              />
-            </AnimateButton>
+            <UpdateArticle />
             <AnimateButton withInitialScale={true}>
               <RiDeleteBin6Line
                 size={25}

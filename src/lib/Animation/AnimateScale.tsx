@@ -14,7 +14,7 @@ export default function AnimateScale({
     <motion.button
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      transition={{ type: 'spring' }}
+      transition={{ type: 'tween' }}
       {...props}
     >
       {children}

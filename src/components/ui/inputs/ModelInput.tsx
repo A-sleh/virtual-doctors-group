@@ -1,3 +1,5 @@
+import AnimateFromToRight from "@/lib/Animation/AnimateFromLeftToRight";
+
 type modelProps = {
   type: string;
   lable: string;
@@ -10,7 +12,7 @@ export default function ModelInput({
   placeHolder = '',
 }: modelProps) {
   return (
-    <div className="flex flex-col w-full bg-white p-2 rounded-md ">
+    <AnimateFromToRight className="flex flex-col w-full bg-white p-2 rounded-md ">
       <label htmlFor="inputRef" className="text-primary text-lg mb-2">
         {lable}
       </label>
@@ -20,6 +22,6 @@ export default function ModelInput({
         placeholder={placeHolder}
         className="outline-none  text-secondary  cursor-pointer file:bg-primary file:px-2 file:py-1 file:rounded-sm file:text-white file:mr-5 hover:file:bg-primary-hover file:cursor-pointer"
       />
-    </div>
+    </AnimateFromToRight>
   );
 }
