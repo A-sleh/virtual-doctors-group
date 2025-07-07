@@ -13,4 +13,5 @@ export type links = link[];
 
 export type linksProps = {
   links: links;
+  sideBarStatus: boolean;
 };

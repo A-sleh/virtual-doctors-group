@@ -48,12 +48,12 @@
     @apply bg-[#0000004d] fixed top-0 left-0 w-full h-[100vh] z-100 ;
   }
   .modal {
-    @apply fixed top-[50%] left-[50%] translate-[-50%] p-2 bg-third rounded-md  min-h-fit sm:min-w-xl overflow-hidden;
+    @apply fixed top-[50%] left-[50%] translate-[-50%] p-2 bg-third rounded-md  min-h-fit w-[90%] sm:w-xl overflow-hidden;
   }
 }
 
 @utility li-style {
-  @apply relative flex gap-2 items-center ml-3 w-full sm:w-fit md:w-full md:px-4 before:content-[""] py-1.5
+  @apply relative flex gap-2 items-center ml-3  before:content-[""] py-1.5
   before:absolute before:left-[-12px] before:w-1 before:rounded-br-lg before:rounded-tr-lg before:h-full 
   hover:bg-primary-hover hover:text-white hover:before:bg-primary-hover transition-all duration-300 delay-200 before:delay-0;
 }

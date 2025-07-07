@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import { paths } from '@/config/paths';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
+import { MainErrorFallback } from '@/components/errors/main';
 
 // Authentication ( done )
 const Login = lazy(() => import('@/features/auth/Login.view'));
@@ -176,6 +177,10 @@ const routes: RouteObject[] = [
     path: paths.auth.register.path,
     element: <Register />,
   },
+  {
+    path: '*' ,
+    element: <MainErrorFallback />
+  }
 ];
 
 export const router = createBrowserRouter(routes);

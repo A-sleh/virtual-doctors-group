@@ -3,6 +3,7 @@ import AnimateScale from '@/lib/Animation/AnimateScale';
 import { DoctorVectorInfoProps } from '../types/doctor';
 import { Link } from 'react-router';
 import { paths } from '@/config/paths';
+import fofImg from "@/assets/images/pexels-jrfotosgrand-fotografia-12660379.jpg"
 
 export default function DoctorVectorInfo({
   name,
@@ -18,9 +19,9 @@ export default function DoctorVectorInfo({
     <div className="flex gap-3">
       <AnimateScale run={withAnimation}>
         <img
-          src={imgSrc}
+          src={imgSrc || fofImg}
           alt="doctor image"
-          className={`rounded-full ${imageSize} bg-black`}
+          className={`rounded-full ${imageSize}`}
         />
       </AnimateScale>
       <AnimateFromToRight className="flex flex-col gap-2" run={withAnimation} >
