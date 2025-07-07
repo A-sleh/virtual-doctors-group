@@ -7,7 +7,7 @@ import AnimateParentLeftEffect, {
 
 export default function LoginFrom() {
   return (
-    <form className="pt-10 pb-5 px-7 md:pr-15  z-50 flex flex-col justify-between space-y-4">
+    <form className="pt-10 pb-5 w-[90vw] sm:w-full px-2 sm:px-7 md:pr-15  z-50 flex flex-col justify-between space-y-4">
       <AnimateParentLeftEffect className="space-y-2">
         <FormTitle
           title="Welcom Back!"

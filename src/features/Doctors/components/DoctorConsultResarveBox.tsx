@@ -13,13 +13,11 @@ export default function DoctorConsultResarveBox({
 
   return (
     <div className="rounded-box space-y-3">
-      <div className="flex justify-between">
+      <div className="sm:flex justify-between space-y-2">
         <DoctorVectorInfo name={name} specility={specility} />
-        <div className="flex  gap-1 text-center">
-          <h3 className="font-medium px-2 h-fit bg-danger text-white rounded-tl-sm rounded-br-sm">
-            consultaion cost (<span className="font-bold">100$</span>)
-          </h3>
-        </div>
+        <h3 className="font-medium px-2 h-fit bg-danger text-white rounded-tl-sm rounded-br-sm text-nowrap w-fit ml-auto">
+          consultaion cost (<span className="font-bold">100$</span>)
+        </h3>
       </div>
       <div className="text-secondary font-serif">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam nisi,

@@ -5,7 +5,7 @@ import FilterBox from './FilterBox';
 
 export default function ConsultaionHeader() {
   return (
-    <header className="grid sm:grid-cols-2 md:grid-cols-3 bg-white p-2 rounded-xl gap-2 dark:bg-black overflow-hidden">
+    <header className="grid grid-cols-3 bg-white p-2 rounded-xl gap-2 dark:bg-black overflow-hidden">
       <FilterBox
         Icon={GoStop}
         status={'CLOSED'}

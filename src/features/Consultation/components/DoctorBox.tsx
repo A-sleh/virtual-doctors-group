@@ -9,7 +9,7 @@ export default function DoctorBox({ doctor, children }: DoctorBoxProps ) {
 
   return (
     <div className="rounded-box flex flex-col space-y-3 ">
-      <section className={`flex justify-between gap-3 ${description == null ? 'flex-col' : 'flex-row'}`}>
+      <section className={`sm:flex justify-between gap-3 ${status && 'flex'} ${description == null ? 'flex-col' : 'flex-row'}`}>
         <DoctorVectorInfo name={name} specility={specility} />
         <ConsultStatus {...{date, status, time}} />
       </section>

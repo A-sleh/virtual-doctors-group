@@ -32,7 +32,7 @@ export default function AvialableDays() {
           onClick={() => moveTimeSlotBy(-20)}
           className="text-primary cursor-pointer"
         />
-        <div className="overflow-x-auto flex gap-2 w-[50vw]">
+        <div className="overflow-x-auto flex gap-2 w-[80vw] sm:w-[40vw]">
           {days.map((day, index: number) => {
             const namedDay = new Date(day).toLocaleDateString('en-us', {
               weekday: 'short',

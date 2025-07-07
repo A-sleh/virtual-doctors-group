@@ -9,7 +9,7 @@ export default function NewArticle() {
       <Model.Open opens="new-article">
         <AnimateButton
           scale={0.9}
-          className="flex items-center justify-center gap-4 px-2 cursor-pointer text-lg bg-primary rounded-sm text-white font-normal outline-none h-fit "
+          className="flex items-center flex-1 justify-between gap-4 px-2 cursor-pointer text-lg bg-primary rounded-sm text-white font-normal outline-none h-fit "
         >
           <span>New article</span>
           <VscDiffAdded size={23} className="mt-0.5" />

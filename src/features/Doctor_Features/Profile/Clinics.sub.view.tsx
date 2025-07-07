@@ -5,6 +5,7 @@ import ReservationBox from './components/ReservationBox';
 import WorkingTime from './components/WorkingTime';
 import isPatient from '@/utils/userPermission';
 import { ROLE } from '@/config/app.config';
+
 export default function Clinics() {
   return (
     <div className="space-y-3">

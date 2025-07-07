@@ -9,7 +9,7 @@ export default function PatientOpinion() {
       <AnimateDownEffect className="sub-header">
         What my patients say
       </AnimateDownEffect>
-      <div className="space-y-2">
+      <div className="space-y-2 overflow-auto h-[60vh]">
         {patientOpinion.map((patient) => {
           return (
             <AnimateFromToRightInView>

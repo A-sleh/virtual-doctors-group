@@ -9,7 +9,7 @@ import SelectorWithIcon from '@/components/ui/inputs/SelectorWithIcon';
 export default function ReservationHeader() {
   return (
     <AnimateDownEffect duration={0.3} offsetValue={-100}
-      className="sub-header py-1 text-lg items-center flex justify-between"
+      className="sub-header py-1 text-lg items-center sm:flex justify-between"
     >
       March 2025
       <div className="flex gap-4 cursor-pointer">

@@ -18,7 +18,7 @@ export default function ConsultADoctor() {
       <Model.Window name="consult-doctor" title="Consult a doctor">
         <AnimateFromToRight className="space-y-2">
           <DoctorInfoHeader>
-            <span className="font-light px-2 h-fit bg-danger text-white rounded-tl-sm rounded-br-sm">
+            <span className="font-light px-2 h-fit bg-danger text-white rounded-tl-sm rounded-br-sm text-nowrap">
               100 $
             </span>
           </DoctorInfoHeader>

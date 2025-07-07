@@ -5,7 +5,7 @@ import { articles } from './api/data';
 
 export default function Articles() {
   return (
-    <section className="w-full rounded-md space-y-3  overflow-y-auto h-[100vh] pb-35">
+    <section className="w-full rounded-md space-y-3  overflow-y-auto h-[100vh] ">
       <AricleHeader />
       <div className="flex flex-col gap-2 overflow-y-auto h-full ">
         {articles.map((article) => (

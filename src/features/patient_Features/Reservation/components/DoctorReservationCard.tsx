@@ -13,7 +13,7 @@ export default function DoctorReservationCard({ doctor }:reservationProps) {
           Cancel
         </AnimateButton>
       </div>
-      <h4 className='rounded-tl-md rounded-br-md text-lg bg-primary px-4 py-0.5 text-white  h-fit'>24:10:40</h4>
+      <h4 className='rounded-tl-md rounded-br-md text-[1rem] bg-primary px-4 py-0.5 text-white h-fit'>24:10:40</h4>
     </DoctorBox>
   );
 }

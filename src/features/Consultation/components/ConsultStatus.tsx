@@ -23,7 +23,7 @@ export default function ConsultStatus({
     <div
       className={`flex ${
         thereIsStatuscolors ? 'flex-col items-end' : 'flex-row items-start'
-      } justify-end  gap-1 `}
+      } justify-end gap-1 `}
     >
       {thereIsStatuscolors ? (
         <p className={` px-1.5 py-0.5 rounded-md ${thereIsStatuscolors} `}>

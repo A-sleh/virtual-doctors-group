@@ -13,6 +13,7 @@ import AnimateParentUpEffect from '@/lib/Animation/AnimateParentUpEffect';
 
 export default function SideBar() {
   const { isOpen } = useContext(NavBarContext);
+  const subscripAsDoctorStyle = isOpen ? "md:flex sm:hidden " : "hidden"
   const sideBarStyle = isOpen
     ? 'fixed w-full pr-5 sm:pr-2 sm:w-fit sm:sticky md:pr-5 '
     : 'w-0  sm:w-fit sm:sticky sm:pr-3 ';
@@ -31,10 +32,10 @@ export default function SideBar() {
         <HasPermission allowedTo={['patient']}>
           <Link
             to={paths.app.setting.subscribAsDoctor.getHref(1)}
-            className="btn-rounded  bg-primary flex items-center gap-2 text-white w-fit my-auto mx-auto sm:ml-3 md:ml-3 hover:bg-[#157ae59f] transition-all duration-200"
+            className="btn-rounded px-4  bg-primary flex items-center gap-2 text-white w-fit my-auto mx-auto sm:ml-3 md:ml-3 hover:bg-[#157ae59f] transition-all duration-200"
           >
             <IoMdLogIn size={ICON_SIZE} />
-            <h4 className="text-md font-medium  md:flex sm:hidden ">
+            <h4 className={`text-md font-medium ${subscripAsDoctorStyle} `}>
               Subscribe as doctor
             </h4>
           </Link>

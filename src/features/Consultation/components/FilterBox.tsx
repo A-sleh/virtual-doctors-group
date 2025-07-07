@@ -17,7 +17,7 @@ export default function FilterBox({
         <p>{Number(numberOfConsultation)}</p>
         <h3>{status}</h3>
       </div>
-      <Icon size={40} />
+      <Icon size={40} className="hidden sm:flex" />
     </AnimateFromToRight>
   );
 }

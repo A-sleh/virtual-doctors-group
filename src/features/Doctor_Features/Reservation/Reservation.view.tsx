@@ -9,7 +9,7 @@ import Booking from '../Models/Booking.Model';
 
 export default function Reservation() {
   return (
-    <section className="flex gap-2 text-nowrap">
+    <section className="flex flex-col-reverse lg:flex-row gap-2 text-nowrap">
       <div className="flex-1 space-y-2">
         <div className="sub-header">Today reservation</div>
         <div className="flex w-full flex-col gap-1">

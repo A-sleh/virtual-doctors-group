@@ -15,7 +15,7 @@ export default function Account() {
         </p>
       </div>
       <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
-        <div className="flex gap-2">
+        <div className="sm:flex gap-2">
           <SettingInput lable="Name" type="text" placeHolder="Abdulfatah" />
           <SettingInput
             lable="Phone number"
@@ -23,7 +23,7 @@ export default function Account() {
             placeHolder="0956411461"
           />
         </div>
-        <div className="flex gap-2">
+        <div className="sm:flex gap-2">
           <SettingInput
             lable="birthdate"
             type="date"
