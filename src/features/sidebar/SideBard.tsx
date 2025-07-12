@@ -13,7 +13,7 @@ import AnimateParentUpEffect from '@/lib/Animation/AnimateParentUpEffect';
 
 export default function SideBar() {
   const { isOpen } = useContext(NavBarContext);
-  const subscripAsDoctorStyle = isOpen ? "md:flex sm:hidden " : "hidden"
+  const subscripAsDoctorStyle = isOpen ? 'md:flex sm:hidden ' : 'hidden';
   const sideBarStyle = isOpen
     ? 'fixed w-full pr-5 sm:pr-2 sm:w-fit sm:sticky md:pr-5 '
     : 'w-0  sm:w-fit sm:sticky sm:pr-3 ';

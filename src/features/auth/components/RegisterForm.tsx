@@ -7,7 +7,10 @@ import AnimateParentLeftEffect, {
 
 export default function RegisterForm() {
   return (
-    <form className="pt-10 pb-5 w-[90vw] md:w-[60vw] lg:w-full px-2 lg:px-7 md:pr-15 z-50 flex flex-col justify-between space-y-4">
+    <form
+      onSubmit={(e) => e.preventDefault()}
+      className="pt-10 pb-5 w-[90vw] md:w-[60vw] lg:w-full px-2 lg:px-7 md:pr-15 z-50 flex flex-col justify-between space-y-4"
+    >
       <AnimateParentLeftEffect className="space-y-2">
         <FormTitle title="Create Your Account" text="Tell us about yourself" />
         <div className="space-y-2">

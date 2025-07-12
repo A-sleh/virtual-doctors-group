@@ -4,10 +4,15 @@ import Btn from './Btn';
 import AnimateParentLeftEffect, {
   AnimateChildLeftEffect,
 } from '@/lib/Animation/AnimateParentLeftEffect';
+import { paths } from '../../../config/paths';
+import { Link } from 'react-router';
 
 export default function LoginFrom() {
   return (
-    <form className="pt-10 pb-5 w-[90vw] sm:w-full px-2 sm:px-7 md:pr-15  z-50 flex flex-col justify-between space-y-4">
+    <form
+      onSubmit={(e) => e.preventDefault()}
+      className="pt-10 pb-5 w-[90vw] sm:w-full px-2 sm:px-7 md:pr-15  z-50 flex flex-col justify-between space-y-4"
+    >
       <AnimateParentLeftEffect className="space-y-2">
         <FormTitle
           title="Welcom Back!"
@@ -40,7 +45,7 @@ export default function LoginFrom() {
             </label>
           </span>
           <span className="text-primary">
-            <a href="http://localhost:5173/auth/login"> Forgot password?</a>
+            <Link href={paths.auth.login.getHref()}> Forgot password?</Link>
           </span>
         </div>
       </AnimateParentLeftEffect>

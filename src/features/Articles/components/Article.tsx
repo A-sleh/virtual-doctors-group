@@ -17,7 +17,7 @@ export default function Article({
   showOwner = true,
 }: articleProps) {
   return (
-    <AnimateUpInView offsetValue={60} className="rounded-box relative">
+    <AnimateUpInView offsetValue={60} className="rounded-box relative ">
       <img
         src={articleImage || imgTemp}
         className="w-full h-70 rounded-lg bg-amber-300 mb-4 mr-4 float-start md:float-left md:w-[50vw] lg:w-1/3 "
