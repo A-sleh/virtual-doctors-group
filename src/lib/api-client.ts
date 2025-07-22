@@ -1,6 +1,7 @@
 import Axios, { InternalAxiosRequestConfig } from 'axios';
 import { API_URL } from '@/config/app.config';
 import { paths } from '@/config/paths';
+import { toast } from 'sonner';
 
 function authRequestInterceptor(config: InternalAxiosRequestConfig) {
   if (config.headers) {
@@ -22,13 +23,9 @@ api.interceptors.response.use(
   },
   (error) => {
     const message = error.response?.data?.message || error.message;
-    // needed to display the error
-    // useNotifications.getState().addNotification({
-    //   type: 'error',
-    //   title: 'Error',
-    //   message,
-    // });
-
+    
+    toast.error(message)
+  
     if (error.response?.status === 401) {
       const searchParams = new URLSearchParams();
       const redirectTo =
