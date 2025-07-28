@@ -43,13 +43,15 @@ function Model({ children }: modelProps) {
 function Open({ children, opens: openWindowName }: openProps) {
   const { open } = useContext(ModelContext);
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   return cloneElement(children, { onClick: () => open(openWindowName) });
 }
 
 function Window({ children, name, title }: windowProps) {
   const { openName, close } = useContext(ModelContext);
 
-  if (name !== openName ) return null;
+  if (name !== openName) return null;
 
   return createPortal(
     <div className="over-lay">

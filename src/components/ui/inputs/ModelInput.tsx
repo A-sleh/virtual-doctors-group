@@ -10,6 +10,7 @@ export default function ModelInput({
   type,
   lable,
   placeHolder = '',
+  ...props
 }: modelProps) {
   return (
     <AnimateFromToRight className="flex flex-col w-full bg-white p-2 rounded-md ">
@@ -17,6 +18,7 @@ export default function ModelInput({
         {lable}
       </label>
       <input
+        {...props}
         type={type}
         id="inputRef"
         placeholder={placeHolder}

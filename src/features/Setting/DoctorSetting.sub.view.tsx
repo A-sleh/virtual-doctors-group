@@ -1,10 +1,19 @@
-import SettingInput from '@/components/ui/inputs/SettingInput';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { doctorSettingInputs } from './api/updata-doctor-setting.ts';
 import { ROLE } from '@/config/app.config';
+
+import SettingInput from '@/components/ui/inputs/SettingInput';
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
 import isPatient from '@/utils/userPermission';
 
 export default function DoctorSetting() {
+  const { register, handleSubmit } = useForm<doctorSettingInputs>();
+
+  const onSubmit: SubmitHandler<doctorSettingInputs> = (data) => {
+    console.log(data);
+  };
+
   return (
     <AnimateUpEffect className="rounded-box space-y-2">
       <div>
@@ -17,9 +26,15 @@ export default function DoctorSetting() {
             : 'You can change your information after that admin accept your new information'}
         </p>
       </div>
-      <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
-        <SettingInput lable="syndicate id" type="text" placeHolder="10123123" />
+      <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
         <SettingInput
+          {...register('syndicateId')}
+          lable="syndicate id"
+          type="text"
+          placeHolder="10123123"
+        />
+        <SettingInput
+          {...register('personalImage')}
           lable="personal identity iamge"
           type="file"
           placeHolder="your image ..."

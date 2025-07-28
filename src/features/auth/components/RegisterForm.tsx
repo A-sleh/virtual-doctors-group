@@ -5,16 +5,15 @@ import AnimateParentLeftEffect, {
   AnimateChildLeftEffect,
 } from '@/lib/Animation/AnimateParentLeftEffect';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { RegisterInput } from '@/lib/auth';
-
+import { RegisterInput } from '../api/useRegister';
 
 export default function RegisterForm() {
-    const { register, handleSubmit } = useForm<RegisterInput>();
-  
-    const onSubmit: SubmitHandler<RegisterInput> = (data) => {
-      console.log(data);
-    };
-  
+  const { register, handleSubmit } = useForm<RegisterInput>();
+
+  const onSubmit: SubmitHandler<RegisterInput> = (data) => {
+    console.log(data);
+  };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -64,7 +63,7 @@ export default function RegisterForm() {
             <MainInput type="file" lable="Profile image :" />
             <div className="mb-4 box-style">
               <label className="block text-secondary ">Gender: </label>
-              <select className="input" {...register('gender')} >
+              <select className="input" {...register('gender')}>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>

@@ -49,13 +49,11 @@ export const paths = {
         info: {
           about: {
             path: 'about',
-            getHref: (doctorId: number) =>
-              `/doctor/${doctorId}/profile/about`,
+            getHref: (doctorId: number) => `/doctor/${doctorId}/profile/about`,
           },
           clinics: {
             path: 'clinic',
-            getHref: (doctorId: number) =>
-              `/doctor/${doctorId}/profile/clinic`,
+            getHref: (doctorId: number) => `/doctor/${doctorId}/profile/clinic`,
           },
           patientOpinion: {
             path: 'patientOpinion',
@@ -105,7 +103,8 @@ export const paths = {
     },
     consultaionChat: {
       path: 'consultation/:id/chat/:chatId',
-      getHref: (id: number,chatId: number) => `/consultation/${id}/chat/${chatId}`,
-    }
+      getHref: (id: number, chatId: number) =>
+        `/consultation/${id}/chat/${chatId}`,
+    },
   },
 } as const;

@@ -11,10 +11,7 @@ export default function AnimateButton({
   if (withInitialScale)
     return (
       <AnimateScale {...props}>
-        <motion.button
-          whileTap={{ scale }}
-          exit={{ opacity: 0, y: 40 }}
-        >
+        <motion.button whileTap={{ scale }} exit={{ opacity: 0, y: 40 }}>
           {children}
         </motion.button>
       </AnimateScale>

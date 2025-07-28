@@ -1,5 +1,5 @@
 import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
-import { IoMdClose } from "react-icons/io";
+import { IoMdClose } from 'react-icons/io';
 import { RiSettings5Fill } from 'react-icons/ri';
 import { discriptionCardProps } from '../types/profile';
 import AnimateButton from '@/lib/Animation/AnimateButton';
@@ -42,24 +42,18 @@ export default function DiscriptionCard({
       </h1>
       <form>
         <textarea
-          className={`text-secondary font-serif  w-full h-full resize-none  ${
+          className={`text-secondary font-serif w-full h-full resize-none  ${
             updateDescription && 'bg-third'
           } p-3 outline-none`}
           ref={descriptionContainerRef}
-            onFocus={(e) =>
-    e.currentTarget.setSelectionRange(
-      e.currentTarget.value.length,
-      e.currentTarget.value.length
-    )
-  }
+          onFocus={(e) =>
+            e.currentTarget.setSelectionRange(
+              e.currentTarget.value.length,
+              e.currentTarget.value.length,
+            )
+          }
         >
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio mag
-          error similique enim unde quisquam rem mollitia exercitationem, nulla
-          doloremque accusantium voluptate! Aliquam unde consequatur iusto autem
-          explicabo, illum sint voluptate, libero eaque laboriosam labore,
-          tempore quibusdam hic eos doloribus. Harum, laudantium tempora ullam
-          pariatur, accusantium voluptatum possimus doloribus velit eveniet
-          molestias nam ipsum.
+          {description}
         </textarea>
         {updateDescription && (
           <AnimateButton className="btn-rounded bg-primary text-white mt-3 px-8 font-nourmal">

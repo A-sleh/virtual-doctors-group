@@ -11,10 +11,12 @@ export default function Selector({
   options,
   units = [],
   overWriteStyle = '' ,
+  ...props
 }: selectorProps) {
   return (
     <div className="flex flex-col-reverse w-full ">
       <select
+        {...props}
         id="inputRef"
         className={`peer p-2 pt-3 border capitalize border-gray-400 outline-none rounded-sm focus:border-primary ${overWriteStyle}`}
       >

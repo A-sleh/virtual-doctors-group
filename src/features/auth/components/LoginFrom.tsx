@@ -9,15 +9,14 @@ import { Link } from 'react-router';
 
 // logic library
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { toast } from 'sonner';
-import { LoginInput } from '@/lib/auth';
+import { LoginInput, useLogin } from '../api/useLogin';
 
 export default function LoginFrom() {
   const { register, handleSubmit } = useForm<LoginInput>();
+  const { mutate } = useLogin();
 
   const onSubmit: SubmitHandler<LoginInput> = (data) => {
-    console.log(data);
-    toast.success('hello')
+    mutate(data);
   };
 
   return (
@@ -48,11 +47,7 @@ export default function LoginFrom() {
         </AnimateChildLeftEffect>
         <div className="flex justify-between text-sm ">
           <span>
-            <input
-              className="cursor-pointer"
-              type="checkbox"
-              id="remember"
-            />
+            <input className="cursor-pointer" type="checkbox" id="remember" />
             <label htmlFor="remember" className="ml-1 cursor-pointer">
               Remember me
             </label>

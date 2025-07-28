@@ -2,11 +2,10 @@ import AnimateParentScaleUp, {
   AnimateChildScaleUpChild,
 } from '@/lib/Animation/AnimateParentScaleUpChild';
 
-
 export default function Calendar() {
   return (
     <AnimateParentScaleUp className="flex flex-wrap sm:grid sm:grid-cols-7 gap-1">
-      {[1, 2, 3, 4, 5, 6, 8,1,1,1,1,1,].map((el, index) => (
+      {[1, 2, 3, 4, 5, 6, 8, 1, 1, 1, 1, 1].map((_, index) => (
         <AnimateChildScaleUpChild
           duration={index / 2}
           className="flex flex-col cursor-pointer bg-white sm:w-full rounded-md overflow-hidden text-white border border-danger"

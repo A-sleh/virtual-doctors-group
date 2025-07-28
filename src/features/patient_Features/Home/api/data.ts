@@ -1,4 +1,7 @@
-import { consultaionContent } from '@/features/Consultation/types/consultaion';
+import {
+  consultaionContent,
+  upConmingResType,
+} from '@/features/Consultation/types/consultaion';
 
 export const upConmingCons: consultaionContent[] = [
   {
@@ -27,7 +30,7 @@ export const upConmingCons: consultaionContent[] = [
   },
 ];
 
-export const upConmingRes: consultaionContent[] = [
+export const upConmingRes: upConmingResType[] = [
   {
     name: 'Dr.Abdulfatah',
     specility: 'dentist',

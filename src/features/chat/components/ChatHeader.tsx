@@ -1,6 +1,6 @@
 import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
 import { IoArrowBackCircleOutline } from 'react-icons/io5';
-import { replace, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 export default function ChatHeader() {
   const goto = useNavigate();
@@ -19,7 +19,7 @@ export default function ChatHeader() {
       <IoArrowBackCircleOutline
         size={38}
         className="text-primary cursor-pointer"
-        onClick={() => goto( -1 )}
+        onClick={() => goto(-1)}
       />
     </AnimateDownEffect>
   );

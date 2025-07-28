@@ -5,9 +5,13 @@ import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
 export default function About() {
   return (
     <section className="space-y-3">
-      <DiscriptionCard title="Abdulfatah asleh" />
+      <DiscriptionCard
+        title="Abdulfatah asleh"
+        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda et cum illo enim ea placeat cumque beatae sed similique animi, ipsam dolore dolores, quae, aspernatur incidunt a aliquam quisquam eaque.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda et cum illo enim ea placeat cumque beatae sed similique animi, ipsam dolore dolores, quae, aspernatur incidunt a aliquam quisquam eaque."
+      />
+
       <div className="space-y-2">
-        <AnimateFromToRight >
+        <AnimateFromToRight>
           <h2 className="sub-header text-xl px-8">
             <span className="text-primary">50</span> Articles
           </h2>
