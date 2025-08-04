@@ -1,18 +1,17 @@
-import { useContext } from 'react';
 import { Link } from 'react-router';
 
 import { ICON_SIZE, sidebarLinks, subSideBareLink } from './sdiebarLinks';
 import { IoMdLogIn } from 'react-icons/io';
 import { paths } from '@/config/paths';
 
-import { NavBarContext } from '@/components/layouts/NavBar';
+import { useNavbar } from '@/components/layouts/NavBar';
 import HasPermission from '@/context/auth/HasPermission';
 import Logo from './components/Logo';
 import List from './components/List';
 import AnimateParentUpEffect from '@/lib/Animation/AnimateParentUpEffect';
 
 export default function SideBar() {
-  const { isOpen } = useContext(NavBarContext);
+  const { isOpen } = useNavbar();
   const subscripAsDoctorStyle = isOpen ? 'md:flex sm:hidden ' : 'hidden';
   const sideBarStyle = isOpen
     ? 'fixed w-full pr-5 sm:pr-2 sm:w-fit sm:sticky md:pr-5 '

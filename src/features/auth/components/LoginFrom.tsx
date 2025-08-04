@@ -1,22 +1,42 @@
-import MainInput from '@/components/ui/inputs/MainInput';
-import FormTitle from './FomTitle';
-import Btn from './Btn';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { Link } from 'react-router';
+import { useState } from 'react';
+
 import AnimateParentLeftEffect, {
   AnimateChildLeftEffect,
 } from '@/lib/Animation/AnimateParentLeftEffect';
-import { paths } from '../../../config/paths';
-import { Link } from 'react-router';
 
-// logic library
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { LoginInput, useLogin } from '../api/useLogin';
+import MainInput from '@/components/ui/inputs/MainInput';
+import ZodErrors from '@/components/custom/ZodErrors';
+
+import { paths } from '@/config/paths';
+
+import FormTitle from './FomTitle';
+import Btn from './Btn';
+import {
+  loginFormIsNotValid,
+  LoginInput,
+  LoginInputErrorMessage,
+  useLogin,
+} from '../api/useLogin';
 
 export default function LoginFrom() {
-  const { register, handleSubmit } = useForm<LoginInput>();
-  const { mutate } = useLogin();
+  const { register, handleSubmit, setValue } = useForm<LoginInput>();
+  // for testing
+  setValue('email', 'abdo@gmail.com');
+  setValue('password', '123456789');
+
+  const [filedInvalidMessage, setFiledInvalidMessage] =
+    useState<LoginInputErrorMessage>();
+  const { login, loginPending, isSuccess } = useLogin();
 
   const onSubmit: SubmitHandler<LoginInput> = (data) => {
-    mutate(data);
+    let errorMessage;
+    if ((errorMessage = loginFormIsNotValid(data))) {
+      setFiledInvalidMessage(errorMessage as LoginInputErrorMessage);
+      return;
+    }
+    login(data);
   };
 
   return (
@@ -36,6 +56,7 @@ export default function LoginFrom() {
             placeHolder="Your email ..."
             {...register('email')}
           />
+          <ZodErrors error={filedInvalidMessage?.email} />
         </AnimateChildLeftEffect>
         <AnimateChildLeftEffect duration={0.6}>
           <MainInput
@@ -44,6 +65,7 @@ export default function LoginFrom() {
             placeHolder="Your password ..."
             {...register('password')}
           />
+          <ZodErrors error={filedInvalidMessage?.password} />
         </AnimateChildLeftEffect>
         <div className="flex justify-between text-sm ">
           <span>
@@ -57,7 +79,12 @@ export default function LoginFrom() {
           </span>
         </div>
       </AnimateParentLeftEffect>
-      <Btn name={'Login'} color="text-white" backgroundColor="bg-primary" />
+      <Btn
+        name={'Login'}
+        color="text-white"
+        backgroundColor="bg-primary"
+        stopEvent={loginPending || isSuccess}
+      />
     </form>
   );
 }

@@ -1,10 +1,11 @@
-import { ROLE } from '@/config/app.config';
 import { paths } from '@/config/paths';
+import { useAuth } from '@/context/auth/AuthProvider';
 import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
-import isPatient from '@/utils/userPermission';
+import { isPatient } from '@/utils/userPermission';
 import { NavLink } from 'react-router';
 
 export default function SettingHeader() {
+  const { ROLE } = useAuth();
   return (
     <AnimateDownEffect className="sub-header space-x-4">
       <NavLink
@@ -27,7 +28,7 @@ export default function SettingHeader() {
             : 'text-black ' + 'transition-all duration-300'
         }
       >
-        {isPatient(ROLE) ? "Subscrib as a doctor" : "My personal info"}
+        {isPatient(ROLE) ? 'Subscrib as a doctor' : 'My personal info'}
       </NavLink>
     </AnimateDownEffect>
   );

@@ -106,5 +106,11 @@ export const paths = {
       getHref: (id: number, chatId: number) =>
         `/consultation/${id}/chat/${chatId}`,
     },
+    admin: {
+      home: {
+        path: '/home/dashboard',
+        getHref: () => `/home/dashboard`,
+      },
+    },
   },
 } as const;

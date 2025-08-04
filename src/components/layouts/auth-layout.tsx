@@ -1,4 +1,4 @@
-import img from '@/assets/images/Types-of-Hospitals-2.jpg'
+import img from '@/assets/images/Types-of-Hospitals-2.webp';
 
 type AuthLayoutProps = {
   children: React.ReactNode;

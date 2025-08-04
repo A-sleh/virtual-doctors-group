@@ -6,6 +6,7 @@ import AuthLayout from '@/components/layouts/auth-layout';
 import LoginFrom from './components/LoginFrom';
 
 export default function Login() {
+  
   return (
     <AuthLayout>
       <LoginFrom />

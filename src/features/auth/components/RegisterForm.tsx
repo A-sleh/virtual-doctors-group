@@ -5,13 +5,52 @@ import AnimateParentLeftEffect, {
   AnimateChildLeftEffect,
 } from '@/lib/Animation/AnimateParentLeftEffect';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { RegisterInput } from '../api/useRegister';
+import {
+  registerFormIsNotValid,
+  RegisterInput,
+  RegisterInputErrorMessage,
+  useRegister,
+} from '../api/useRegister';
+import { useState } from 'react';
+import ZodErrors from '@/components/custom/ZodErrors';
+import { removeKeys } from '@/utils/removeKeysFromObj';
+import { useLogin } from '../api/useLogin';
 
 export default function RegisterForm() {
-  const { register, handleSubmit } = useForm<RegisterInput>();
+  const { register, handleSubmit } = useForm<RegisterInput>({
+    defaultValues: {
+      birthDate: new Date(2020, 1, 1),
+    },
+  });
+  const [filedInvalidMessage, setFiledInvalidMessage] = useState<
+    RegisterInputErrorMessage | undefined
+  >(undefined);
+
+  const { signUp, isSuccess, registerPending } = useRegister();
+  const { login } = useLogin();
 
   const onSubmit: SubmitHandler<RegisterInput> = (data) => {
-    console.log(data);
+    let errorMessage;
+    if ((errorMessage = registerFormIsNotValid(data))) {
+      setFiledInvalidMessage(errorMessage as RegisterInputErrorMessage);
+      return;
+    }
+    signUp(
+      {
+        email: data.email,
+        password: data.password,
+        person: removeKeys<Omit<RegisterInput, 'password' | 'email'>>(data, [
+          'email',
+          'password',
+        ]),
+      },
+      {
+        // After success the registering we will login as soon
+        onSettled: () => {
+          login({ email: data.email, password: data.password });
+        },
+      },
+    );
   };
 
   return (
@@ -26,41 +65,63 @@ export default function RegisterForm() {
             duration={0.2}
             className="flex flex-col md:flex-row gap-2 w-full "
           >
-            <MainInput
-              type="text"
-              lable="Full name :"
-              placeHolder="Your name ..."
-              {...register('name')}
-            />
-            <MainInput
-              type="text"
-              lable="Person id :"
-              placeHolder="Your person id ..."
-              {...register('personId')}
-            />
+            <div>
+              <MainInput
+                type="text"
+                lable="First name :"
+                placeHolder="Your first name ..."
+                {...register('firstName')}
+              />
+              <ZodErrors error={filedInvalidMessage?.firstName} />
+            </div>
+            <div>
+              <MainInput
+                type="text"
+                lable="Last name :"
+                placeHolder="Your last name ..."
+                {...register('lastName')}
+              />
+              <ZodErrors error={filedInvalidMessage?.lastName} />
+            </div>
           </AnimateChildLeftEffect>
           <AnimateChildLeftEffect
             duration={0.6}
             className="flex gap-2 flex-col md:flex-row "
           >
-            <MainInput
-              type="text"
-              lable="Contact number :"
-              placeHolder="Your phone number ..."
-              {...register('contactNumber')}
-            />
-            <MainInput
-              type="date"
-              lable="Birth day :"
-              placeHolder="Your birth day ..."
-              {...register('birthDate')}
-            />
+            <div>
+              <MainInput
+                type="text"
+                lable="Contact number :"
+                placeHolder="Your phone number ..."
+                {...register('phone')}
+              />
+              <ZodErrors error={filedInvalidMessage?.phone} />
+            </div>
+            <div>
+              <MainInput
+                type="date"
+                lable="Birth day :"
+                placeHolder="Your birth day ..."
+                {...register('birthDate')}
+              />
+              {/* <DatePicker {...register('birthDate')}  dateFormat="dd/MM/yyyy" /> */}
+              <ZodErrors error={filedInvalidMessage?.birthDate} />
+            </div>
           </AnimateChildLeftEffect>
           <AnimateChildLeftEffect
             duration={1}
             className="flex gap-2 flex-col md:flex-row "
           >
-            <MainInput type="file" lable="Profile image :" />
+            {/* <MainInput type="file" lable="Profile image :" /> */}
+            <div>
+              <MainInput
+                type="text"
+                lable="Person id :"
+                placeHolder="Your person id ..."
+                {...register('personalId')}
+              />
+              <ZodErrors error={filedInvalidMessage?.personalId} />
+            </div>
             <div className="mb-4 box-style">
               <label className="block text-secondary ">Gender: </label>
               <select className="input" {...register('gender')}>
@@ -68,6 +129,7 @@ export default function RegisterForm() {
                 <option value="female">Female</option>
               </select>
             </div>
+            <ZodErrors error={filedInvalidMessage?.gender} />
           </AnimateChildLeftEffect>
         </div>
         <AnimateChildLeftEffect duration={1.2}>
@@ -77,6 +139,7 @@ export default function RegisterForm() {
             placeHolder="Your email ..."
             {...register('email')}
           />
+          <ZodErrors error={filedInvalidMessage?.email} />
         </AnimateChildLeftEffect>
         <AnimateChildLeftEffect duration={1.4}>
           <MainInput
@@ -85,9 +148,15 @@ export default function RegisterForm() {
             placeHolder="Your password ..."
             {...register('password')}
           />
+          <ZodErrors error={filedInvalidMessage?.password} />
         </AnimateChildLeftEffect>
       </AnimateParentLeftEffect>
-      <Btn name={'Register'} color="text-white" backgroundColor="bg-primary" />
+      <Btn
+        name={'Register'}
+        color="text-white"
+        backgroundColor="bg-primary"
+        stopEvent={isSuccess || registerPending}
+      />
     </form>
   );
 }

@@ -2,15 +2,16 @@ import DoctorBox from '@/features/Consultation/components/DoctorBox';
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import { consultaionContentProps } from '../types/consultaion';
 import RenderButtons from './ConsultationButtons';
-import { ROLE } from '@/config/app.config';
+
 import { Link } from 'react-router';
 import { paths } from '@/config/paths';
+import { useAuth } from '@/context/auth/AuthProvider';
 
 export default function DoctorConsultationCard({
   doctor,
 }: consultaionContentProps) {
   const { status } = doctor;
-
+  const { ROLE } = useAuth();
   function renderOpenChatButton(status: string): boolean {
     return status !== 'pending' || (status == 'pending' && ROLE == 'patient');
   }

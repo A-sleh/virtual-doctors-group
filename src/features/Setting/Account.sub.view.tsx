@@ -7,12 +7,11 @@ import NotifySetting from './components/NotifySetting';
 import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import HasPermission from '@/context/auth/HasPermission';
+import { api } from '@/lib/api-client.ts';
 
 export default function Account() {
   const { register, handleSubmit } = useForm<accountInputs>();
-  const onSubmit: SubmitHandler<accountInputs> = (data) => {
-    console.log(data);
-  };
+  const onSubmit: SubmitHandler<accountInputs> = (data) => {};
   return (
     <AnimateUpEffect className="rounded-box space-y-2">
       <div>

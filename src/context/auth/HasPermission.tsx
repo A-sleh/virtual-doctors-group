@@ -1,10 +1,8 @@
-import { ROLE } from '@/config/app.config';
-
-type users = 'admin' | 'doctor' | 'patient'
+import { useAuth } from './AuthProvider';
 
 type HasPermissionProps = {
   children: React.ReactNode;
-  allowedTo: users[];
+  allowedTo: string[];
   condition?: boolean;
 };
 
@@ -13,6 +11,7 @@ export default function HasPermission({
   allowedTo,
   condition = true,
 }: HasPermissionProps) {
+  const { ROLE } = useAuth();
   // dont render the element if the condition doesn't equal to true
   if (!allowedTo.includes(ROLE) || !condition) return null;
   return children;

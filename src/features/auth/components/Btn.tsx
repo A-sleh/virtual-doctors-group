@@ -4,16 +4,17 @@ export default function Btn({
   name,
   color,
   backgroundColor,
-  ...props
+  stopEvent,
 }: {
   name: string;
   color: string;
   backgroundColor: string;
+  stopEvent: boolean;
 }) {
   return (
     <AnimateButton
       className={`${color} ${backgroundColor} rounded-xl  cursor-pointer py-0.5 w-full font-normal`}
-      {...props}
+      disabled={stopEvent}
     >
       {name}
     </AnimateButton>

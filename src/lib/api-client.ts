@@ -7,7 +7,6 @@ function authRequestInterceptor(config: InternalAxiosRequestConfig) {
   if (config.headers) {
     config.headers.Accept = 'application/json';
   }
-
   // config.withCredentials = true;
   return config;
 }
@@ -16,6 +15,16 @@ export const api = Axios.create({
   baseURL: API_URL,
 });
 
+export const setHeaderToken = (token: string) => {
+  console.dir(token);
+  api.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+export const removeHeaderToken = () => {
+  //client.defaults.headers.common.Authorization = null;
+  delete api.defaults.headers.common.Authorization;
+};
+
 api.interceptors.request.use(authRequestInterceptor);
 api.interceptors.response.use(
   (response) => {
@@ -23,9 +32,9 @@ api.interceptors.response.use(
   },
   (error) => {
     const message = error.response?.data?.message || error.message;
-    
-    toast.error(message)
-  
+
+    toast.error(message);
+
     if (error.response?.status === 401) {
       const searchParams = new URLSearchParams();
       const redirectTo =

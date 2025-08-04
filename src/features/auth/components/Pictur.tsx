@@ -1,6 +1,8 @@
-import img from '@/assets/images/vecteezy_man-technologist-2d-cartoon-illustraton-on-white-background_30689624.jpg';
+import img from '@/assets/images/vecteezy_man-technologist-2d-cartoon-illustraton-on-white-background_30689624.webp';
 import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
-import AnimateParentLeftEffect, { AnimateChildLeftEffect } from '@/lib/Animation/AnimateParentLeftEffect';
+import AnimateParentLeftEffect, {
+  AnimateChildLeftEffect,
+} from '@/lib/Animation/AnimateParentLeftEffect';
 import AnimateScale from '@/lib/Animation/AnimateScale';
 
 export default function Pictur({
@@ -16,14 +18,20 @@ export default function Pictur({
         <AnimateScale>
           <img className="rounded-full w-60 lg:w-80 " src={img} />
         </AnimateScale>
-        <AnimateChildLeftEffect duration={0.3} className="text-white font-medium text-lg lg:text-xl mt-5 ">
+        <AnimateChildLeftEffect
+          duration={0.3}
+          className="text-white font-medium text-lg lg:text-xl mt-5 "
+        >
           The place where you will find
         </AnimateChildLeftEffect>
-        <AnimateChildLeftEffect duration={0.8} className="text-white text-sm lg:text-md mt-1 text-center w-60 lg:w-80 lg:px-10 ">
+        <AnimateChildLeftEffect
+          duration={0.8}
+          className="text-white text-sm lg:text-md mt-1 text-center w-60 lg:w-80 lg:px-10 "
+        >
           All the medical services you need just {type} and enjoy
         </AnimateChildLeftEffect>
       </AnimateParentLeftEffect>
-      <AnimateFromToRight offsetValue={100} >{children}</AnimateFromToRight>
+      <AnimateFromToRight offsetValue={100}>{children}</AnimateFromToRight>
     </div>
   );
 }

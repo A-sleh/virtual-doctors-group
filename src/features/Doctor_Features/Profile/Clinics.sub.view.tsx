@@ -3,10 +3,11 @@ import DiscriptionCard from './components/DiscriptionCard';
 import MapSnapShot from './components/MapSnapShot';
 import ReservationBox from './components/ReservationBox';
 import WorkingTime from './components/WorkingTime';
-import isPatient from '@/utils/userPermission';
-import { ROLE } from '@/config/app.config';
+import { isPatient } from '@/utils/userPermission';
+import { useAuth } from '@/context/auth/AuthProvider';
 
 export default function Clinics() {
+  const { ROLE } = useAuth();
   return (
     <div className="space-y-3">
       <div className="flex gap-3">
@@ -20,7 +21,7 @@ export default function Clinics() {
         />
 
         <div className="flex-1/12 space-y-2">
-          <ReservationBox type={isPatient(ROLE) ? "Consult now" : "Consulting"}>
+          <ReservationBox type={isPatient(ROLE) ? 'Consult now' : 'Consulting'}>
             <div className="p-5 space-y-1">
               <h2 className="text-primary flex w-full justify-between items-center">
                 Consultaion cost{' '}
@@ -36,7 +37,9 @@ export default function Clinics() {
             </div>
           </ReservationBox>
 
-          <ReservationBox type={isPatient(ROLE) ? "Book an appointment now" : "Booking"}>
+          <ReservationBox
+            type={isPatient(ROLE) ? 'Book an appointment now' : 'Booking'}
+          >
             <div className="p-5 space-y-1">
               <h2 className="text-primary flex w-full justify-between items-center">
                 Preview cost{' '}

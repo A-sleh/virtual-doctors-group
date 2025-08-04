@@ -1,37 +1,64 @@
-import { api } from '@/lib/api-client';
-import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router';
-import { toast } from 'sonner';
 import { z } from 'zod';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { ROLES } from '@/context/auth/AuthProvider';
+import { formIsNotValid } from '@/utils/validateInput';
+import { intialUrlBasedOnRole } from '@/utils/userPermission';
+
+import { api } from '@/lib/api-client';
+import { QYERY_KEYS } from '@/lib/query-key';
+
+import { IUserResponse } from './useUser';
+
+enum loginControler {
+  BASE = 'Auth',
+}
 
 export const loginInputSchema = z.object({
-  email: z.string().min(1, 'Required').email('Invalid email'),
+  email: z
+    .string()
+    .min(1, 'Please enter your email')
+    .email('This email is invalid try again'),
   password: z.string().min(5, 'Required'),
 });
 
 export type LoginInput = z.infer<typeof loginInputSchema>;
+export type LoginInputErrorMessage = {
+  [x in keyof LoginInput]?: string[] | undefined;
+};
 
-interface IUserResponse {
-  token: string;
+export function loginFormIsNotValid(data: LoginInput) {
+  return formIsNotValid(loginInputSchema, data);
 }
 
-async function login(loginData: LoginInput): Promise<IUserResponse> {
-  const response = await api.post<LoginInput, IUserResponse>('Auth', loginData);
+async function loginApi(loginData: LoginInput): Promise<IUserResponse> {
+  const response = await api.post<LoginInput, IUserResponse>(
+    loginControler.BASE,
+    loginData,
+  );
   return response;
 }
 
 export function useLogin() {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const mutaionRes = useMutation<IUserResponse, unknown, LoginInput, unknown>({
-    mutationFn: login,
-    onSuccess: (data) => {
-      console.log(data);
-      navigate('/patient/home');
+  const {
+    mutate: login,
+    isPending: loginPending,
+    isSuccess,
+  } = useMutation<IUserResponse, unknown, LoginInput, unknown>({
+    mutationFn: loginApi,
+    onSuccess: (userInfo) => {
+      queryClient.setQueryData([QYERY_KEYS.user], userInfo);
+      toast.success('Log in successfully');
+      navigate(intialUrlBasedOnRole(ROLES[userInfo.user.role]));
     },
     onError: () => {
       toast.error('There is no like this email or password is wrong...');
     },
   });
 
-  return mutaionRes;
+  return { login, loginPending, isSuccess };
 }

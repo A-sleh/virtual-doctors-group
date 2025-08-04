@@ -1,13 +1,14 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { doctorSettingInputs } from './api/updata-doctor-setting.ts';
-import { ROLE } from '@/config/app.config';
 
 import SettingInput from '@/components/ui/inputs/SettingInput';
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
-import isPatient from '@/utils/userPermission';
+import { isPatient } from '@/utils/userPermission';
+import { useAuth } from '@/context/auth/AuthProvider.tsx';
 
 export default function DoctorSetting() {
+  const { ROLE } = useAuth();
   const { register, handleSubmit } = useForm<doctorSettingInputs>();
 
   const onSubmit: SubmitHandler<doctorSettingInputs> = (data) => {
