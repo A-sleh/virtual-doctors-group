@@ -19,7 +19,7 @@ export default function List({ links, sideBarStatus }: linksProps) {
     <ul className="flex flex-col gap-4">
       {sectionLinks.map((link, index: number) => {
         return (
-          <AnimateChildUpEffect duration={index / 2}>
+          <AnimateChildUpEffect duration={index / 2} key={link.title}>
             <NavLink
               to={link.path[ROLE] || location.pathname}
               className={({ isActive }) =>

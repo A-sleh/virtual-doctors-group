@@ -1,7 +1,7 @@
 import { paths } from '@/config/paths';
 import { useAuth } from '@/context/auth/AuthProvider';
 import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
-import { isPatient } from '@/utils/userPermission';
+import { isPatient } from '@/lib/auth';
 import { NavLink } from 'react-router';
 
 export default function SettingHeader() {

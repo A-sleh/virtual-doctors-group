@@ -3,7 +3,7 @@ import DiscriptionCard from './components/DiscriptionCard';
 import MapSnapShot from './components/MapSnapShot';
 import ReservationBox from './components/ReservationBox';
 import WorkingTime from './components/WorkingTime';
-import { isPatient } from '@/utils/userPermission';
+import { isPatient } from '@/lib/auth';
 import { useAuth } from '@/context/auth/AuthProvider';
 
 export default function Clinics() {

@@ -2,7 +2,7 @@ import { lazy } from 'react';
 import { paths } from '@/config/paths';
 import { RouteObject, Navigate } from 'react-router-dom';
 import { MainErrorFallback } from '@/components/errors/main';
-import { isDoctor, isPatient } from '@/utils/userPermission';
+import { isDoctor, isPatient } from '@/lib/auth';
 import { useAuth } from '@/context/auth/AuthProvider';
 import { useUser } from '@/features/auth/api/useUser';
 

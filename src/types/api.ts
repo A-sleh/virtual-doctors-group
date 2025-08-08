@@ -11,4 +11,7 @@ export type Meta = {
   total: number;
   totalPages: number;
 };
-    
+
+export type withChildProps = {
+  children: React.ReactNode;
+};

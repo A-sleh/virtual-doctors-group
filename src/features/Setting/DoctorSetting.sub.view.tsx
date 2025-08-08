@@ -4,7 +4,7 @@ import { doctorSettingInputs } from './api/updata-doctor-setting.ts';
 import SettingInput from '@/components/ui/inputs/SettingInput';
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
-import { isPatient } from '@/utils/userPermission';
+import { isPatient } from '@/lib/auth.tsx';
 import { useAuth } from '@/context/auth/AuthProvider.tsx';
 
 export default function DoctorSetting() {

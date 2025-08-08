@@ -13,8 +13,8 @@ import {
 } from '../api/useRegister';
 import { useState } from 'react';
 import ZodErrors from '@/components/custom/ZodErrors';
-import { removeKeys } from '@/utils/removeKeysFromObj';
 import { useLogin } from '../api/useLogin';
+import { removeKeys } from '@/utils';
 
 export default function RegisterForm() {
   const { register, handleSubmit } = useForm<RegisterInput>({

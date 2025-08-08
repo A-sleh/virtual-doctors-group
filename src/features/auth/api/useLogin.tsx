@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { ROLES } from '@/context/auth/AuthProvider';
-import { formIsNotValid } from '@/utils/validateInput';
-import { intialUrlBasedOnRole } from '@/utils/userPermission';
+import { formIsNotValid } from '@/utils';
+import { intialUrlBasedOnRole } from '@/lib/auth';
 
 import { api } from '@/lib/api-client';
 import { QYERY_KEYS } from '@/lib/query-key';

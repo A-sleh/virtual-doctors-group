@@ -1,13 +1,13 @@
 import { z } from 'zod';
 import { IUserResponse } from './useUser';
-import { formIsNotValid } from '@/utils/validateInput';
+import { formIsNotValid } from '@/utils';
 import { api } from '@/lib/api-client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import { QYERY_KEYS } from '@/lib/query-key';
 import { toast } from 'sonner';
-import { intialUrlBasedOnRole } from '@/utils/userPermission';
+import { intialUrlBasedOnRole } from '@/lib/auth';
 import { ROLES } from '@/context/auth/AuthProvider';
 
 enum RegisterControler {

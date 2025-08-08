@@ -15,6 +15,7 @@ function BreadCrumb() {
         return (
           <SplitText
             text={tag}
+            key={index}
             duration={0.3}
             className="text-primary font-bold text-xl "
           />

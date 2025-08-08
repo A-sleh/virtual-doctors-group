@@ -1,8 +1,11 @@
 import Model from '@/components/models/Model';
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import AvailableTimes from './components/AvailableTimes';
+import { useCreateReservation } from '@/features/patient_Features/Reservation/api/create-reservation';
 
 export default function Booking() {
+  const { createReservation } = useCreateReservation();
+
   return (
     <Model>
       <Model.Open opens="booking">
@@ -12,6 +15,13 @@ export default function Booking() {
       </Model.Open>
       <Model.Window title="Timese" name="booking">
         <AvailableTimes />
+
+        <AnimateButton
+          withInitialScale={true}
+          className="px-4 py-1 bg-primary text-white rounded-md float-end cursor-pointer"
+        >
+          Apply
+        </AnimateButton>
       </Model.Window>
     </Model>
   );

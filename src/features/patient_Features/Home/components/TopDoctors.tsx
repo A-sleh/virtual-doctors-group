@@ -17,7 +17,7 @@ export default function TopDoctors({ limitNumber = 2 }: limitProps) {
       <AnimateParentLeftEffect className="grid md:grid-cols-2  gap-2">
         {doctors.map((doctor, index: number) => {
           return (
-            <AnimateChildLeftEffect duration={index / 2}>
+            <AnimateChildLeftEffect duration={index / 2} key={doctor.name}>
               <DoctorInfo doctor={doctor} rating={doctor.rating} />
             </AnimateChildLeftEffect>
           );

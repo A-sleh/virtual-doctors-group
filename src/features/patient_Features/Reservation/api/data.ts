@@ -2,6 +2,7 @@ import { reservationContent } from '../types/reservations';
 
 export const doctorData: reservationContent[] = [
   {
+    doctorId: 0,
     name: 'Dr.Abdulfatah',
     specility: 'dentist',
     description:
@@ -10,6 +11,7 @@ export const doctorData: reservationContent[] = [
     time: '10:30 AM',
   },
   {
+    doctorId: 0,
     name: 'Dr.Abdulfatah',
     specility: 'dentist',
     description:
@@ -18,6 +20,7 @@ export const doctorData: reservationContent[] = [
     time: '10:30 AM',
   },
   {
+    doctorId: 0,
     name: 'Dr.Abdulfatah',
     specility: 'dentist',
     description:
@@ -26,6 +29,7 @@ export const doctorData: reservationContent[] = [
     time: '10:30 AM',
   },
   {
+    doctorId: 0,
     name: 'Dr.Abdulfatah',
     specility: 'dentist',
     description:
@@ -34,6 +38,7 @@ export const doctorData: reservationContent[] = [
     time: '10:30 AM',
   },
   {
+    doctorId: 0,
     name: 'Dr.Abdulfatah',
     specility: 'dentist',
     description:
@@ -42,6 +47,7 @@ export const doctorData: reservationContent[] = [
     time: '10:30 AM',
   },
   {
+    doctorId: 0,
     name: 'Dr.Abdulfatah',
     specility: 'dentist',
     description:

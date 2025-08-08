@@ -1,4 +1,4 @@
-import { formIsNotValid } from '@/utils/validateInput';
+import { formIsNotValid } from '@/utils';
 import z from 'zod';
 
 export const consultaionInputSchema = z.object({

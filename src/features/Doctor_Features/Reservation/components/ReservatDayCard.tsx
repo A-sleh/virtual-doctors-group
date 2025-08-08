@@ -5,25 +5,22 @@ import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import AnimateDropDownList from '@/lib/Animation/AnimateDropDownList';
 import { reservatDayCardProps } from '../types/reservation';
-
-
+import ConfirmModel from '@/components/models/ConfirmModel';
+import { useDeleteReservation } from '@/features/patient_Features/Reservation/api/delete-reservation';
 
 export default function ReservatDayCard({
   reservation,
   duration,
 }: reservatDayCardProps) {
   const [openReservation, setOpenReservation] = useState(false);
+  const { deleteReservation } = useDeleteReservation();
   const { time, desctiption, owner } = reservation;
-
-  function handleOpenRes() {
-    setOpenReservation((last) => !last);
-  }
 
   return (
     <AnimateFromToRight duration={duration}>
       <div
         className="px-1.5 py-1 h-fit flex justify-between items-center bg-white rounded-sm cursor-pointer"
-        onClick={handleOpenRes}
+        onClick={() => setOpenReservation((last) => !last)}
       >
         <div className="flex gap-1">
           <MdAccessTime size={25} />
@@ -44,12 +41,18 @@ export default function ReservatDayCard({
       >
         <h5 className="pt-2 pl-2 font-medium">{owner}</h5>
         <p className="text-wrap text-secondary text-sm p-2 ">{desctiption}</p>
-        <AnimateButton
-          scale={1.1}
-          className="text-center font-normal w-full bg-danger text-white cursor-pointer"
+        <ConfirmModel
+          openKey="preview-reservation"
+          onConfirmClick={() => deleteReservation(1)}
+          description="Are you sure to previewed this reservation, if not click on cancel button"
         >
-          Previewed
-        </AnimateButton>
+          <AnimateButton
+            scale={1.1}
+            className="text-center font-normal w-full bg-danger text-white cursor-pointer"
+          >
+            Previewed
+          </AnimateButton>
+        </ConfirmModel>
       </AnimateDropDownList>
     </AnimateFromToRight>
   );

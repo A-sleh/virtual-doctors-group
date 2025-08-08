@@ -5,6 +5,7 @@ import DoctorVectorInfo from './DoctorVectorInfo';
 import DoctorStatistics from './DoctorStatistics';
 import ConsultADoctor from '@/features/patient_Features/Models/ConsultADoctor.Model';
 import PatientBooking from '@/features/patient_Features/Models/PatientBooking.Model';
+import { PickTimeSlotProvider } from '@/context/reservation/PickTimeSlotProvieder';
 
 export default function DoctorConsultResarveBox({
   doctor,
@@ -28,7 +29,9 @@ export default function DoctorConsultResarveBox({
         <DoctorStatistics {...{ rating, experianse, location }} />
         <div className="flex gap-2 self-end ">
           <ConsultADoctor />
-          <PatientBooking />
+          <PickTimeSlotProvider intialDay={new Date()} intialTime={''}>
+            <PatientBooking openKey={'Book appointment'} />
+          </PickTimeSlotProvider>
         </div>
       </div>
     </div>

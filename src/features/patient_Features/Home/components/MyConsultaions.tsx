@@ -11,10 +11,10 @@ export default function MyConsultaions({ limitNumber = 2 }: limitProps) {
 
   return (
     <section className="flex flex-col gap-2">
-      <Header title="Consultations" link={paths.app.consultation.getHref(1)}/>
+      <Header title="Consultations" link={paths.app.consultation.getHref(1)} />
       {consultaions.map((doctor, index: number) => {
         return (
-          <AnimateFromToRight duration={(index + 1) / 2}>
+          <AnimateFromToRight duration={(index + 1) / 2} key={doctor.name}>
             <DoctorBox doctor={doctor} />
           </AnimateFromToRight>
         );

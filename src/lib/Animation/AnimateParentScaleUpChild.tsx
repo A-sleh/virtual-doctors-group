@@ -10,10 +10,9 @@ const item = {
   visible: (index: number) => ({
     opacity: 1,
     scale: 1,
-    y: 0,
-    transition: { delay: index * 0.3 },
+    transition: { delay: index * 0.1 },
   }),
-  hidden: { opacity: 0, y: -100, scale: 0 },
+  hidden: { opacity: 0, scale: 0 },
 };
 
 export default function AnimateParentScaleUp({
