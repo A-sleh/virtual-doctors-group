@@ -10,7 +10,7 @@ export default function ChatHeader() {
       <div className="flex gap-2 items-center">
         <div className="relative">
           <img className="rounded-full w-10 h-10 bg-danger" />
-          <span className="w-2 h-2 rounded-full bg-fourth absolute top-1 right-0"></span>
+          <span className="w-2 h-2 rounded-full bg-fourth absolute top-1 right-0 "></span>
         </div>
         <h1>
           <span className="text-primary">Dr.</span>Abudlfatah asleh
