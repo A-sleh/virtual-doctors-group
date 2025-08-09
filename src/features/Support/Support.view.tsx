@@ -2,13 +2,28 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
 import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
-import { supportInput } from './api/create-support-message.ts';
+import {
+  supportFormIsNotValid,
+  supportInput,
+  supportInputErrorMessages,
+  useNewSupportMessage,
+} from './api/create-support-message.ts';
+import { useState } from 'react';
+import ZodErrors from '@/components/custom/ZodErrors.tsx';
 
 export default function Support() {
+  const { isPending, sendSupportMessage } = useNewSupportMessage();
   const { register, handleSubmit } = useForm<supportInput>();
+  const [filedInvalidMessage, setFiledInvalidMessage] =
+    useState<supportInputErrorMessages>();
 
   const onSubmit: SubmitHandler<supportInput> = (data) => {
-    console.log(data);
+    let errorMessage;
+    if ((errorMessage = supportFormIsNotValid(data))) {
+      setFiledInvalidMessage(errorMessage as supportInputErrorMessages);
+      return;
+    }
+    sendSupportMessage(data);
   };
 
   return (
@@ -22,6 +37,7 @@ export default function Support() {
           placeholder="write your feedback here ..."
           className="w-full p-2 bg-[#EEEEEE] rounded-lg text- min-h-[50vh] outline-none"
         ></textarea>
+        <ZodErrors error={filedInvalidMessage?.message} />
         <div className="flex gap-2 justify-end">
           <input
             type="reset"
