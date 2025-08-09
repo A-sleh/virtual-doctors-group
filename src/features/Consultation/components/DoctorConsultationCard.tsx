@@ -27,7 +27,7 @@ export default function DoctorConsultationCard({
             <Link to={paths.app.consultaionChat.getHref(1, 1)}>Open chat</Link>
           </AnimateButton>
         )}
-        <RenderButtons status={status || ''} />
+        <RenderButtons status={status || ''} consultId={1} />
       </div>
     </DoctorBox>
   );

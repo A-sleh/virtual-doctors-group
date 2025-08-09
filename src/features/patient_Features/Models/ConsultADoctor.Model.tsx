@@ -16,20 +16,33 @@ import {
   consultaionFormIsNotValid,
   consultaionInput,
   consultaionInputErrorMessage,
+  useCreateNewConsultaion,
 } from '@/features/Consultation/api/create-consultaion';
+import { useAuth } from '@/context/auth/AuthProvider';
 
-export default function ConsultADoctor() {
+export default function ConsultADoctor({ doctorId }: { doctorId: number }) {
+  const [nextStep, setNextStep] = useState<boolean>(false);
   const { register, handleSubmit } = useForm<consultaionInput>();
+
+  const { createNewConsultaion, isPending } = useCreateNewConsultaion();
+  const { userId } = useAuth();
   const [filedInvalidMessage, setFiledInvalidMessage] =
     useState<consultaionInputErrorMessage>();
 
-  const onSubmit: SubmitHandler<consultaionInput> = (data) => {
+  const onSubmit: SubmitHandler<consultaionInput> = (
+    data: consultaionInput,
+  ) => {
     let errorsMessages;
     if ((errorsMessages = consultaionFormIsNotValid(data))) {
       setFiledInvalidMessage(errorsMessages as consultaionInputErrorMessage);
+      if (!nextStep && filedInvalidMessage?.message == undefined) {
+        setNextStep(true);
+        setFiledInvalidMessage({});
+      }
       return;
     }
-    alert('done');
+
+    createNewConsultaion({ doctorId, text: data.message, userId });
   };
 
   return (
@@ -48,27 +61,30 @@ export default function ConsultADoctor() {
             </span>
           </DoctorInfoHeader>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-            <div className="rounded-box">
-              <h4 className="sub-header text-lg flex justify-between items-center gap-3 text-secondary font-medium mb-2">
-                Consultation content
-              </h4>
-              <MainInput
-                type="text"
-                lable="Description of consultaion"
-                placeHolder="Enter your message ..."
-                {...register('message')}
+            {!nextStep ? (
+              <div className="rounded-box">
+                <h4 className="sub-header text-lg flex justify-between items-center gap-3 text-secondary font-medium mb-2">
+                  Consultation content
+                </h4>
+                <MainInput
+                  type="text"
+                  lable="Description of consultaion"
+                  placeHolder="Enter your message ..."
+                  {...register('message')}
+                />
+                <ZodErrors error={filedInvalidMessage?.message} />
+              </div>
+            ) : (
+              <PaymentForm
+                register={register}
+                filedInvalidMessage={filedInvalidMessage}
               />
-              <ZodErrors error={filedInvalidMessage?.message} />
-            </div>
-            <PaymentForm
-              register={register}
-              filedInvalidMessage={filedInvalidMessage}
-            />
+            )}
             <AnimateButton
               withInitialScale={true}
               className="px-4 py-1 bg-primary text-white rounded-md float-end cursor-pointer"
             >
-              Send
+              {!nextStep ? 'Next' : 'send'}
             </AnimateButton>
           </form>
         </AnimateFromToRight>

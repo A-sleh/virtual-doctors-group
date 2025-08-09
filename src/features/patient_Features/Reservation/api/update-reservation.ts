@@ -1,9 +1,9 @@
 import z from 'zod';
 import { api } from '@/lib/api-client';
 import { useMutation } from '@tanstack/react-query';
-import { toast } from 'sonner';
 import { formIsNotValid } from '@/utils';
 import { resvervationInput } from './create-reservation';
+import { errorToast, successToast } from '@/components/custom/toast';
 
 enum reservationControler {
   BASE = '/Reservation',
@@ -37,10 +37,10 @@ function useUpdateReservation() {
   >({
     mutationFn: updateReservationApi,
     onSuccess: () => {
-      toast.success('Reservation was re-schedule successfuly');
+      successToast('Reservation was re-schedule successfuly');
     },
     onError: (err: Error) => {
-      toast.error(`Error while re-schedule the reservation,${err.message}`);
+      errorToast(`Error while re-schedule the reservation,${err.message}`);
     },
   });
 

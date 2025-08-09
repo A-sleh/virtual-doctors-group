@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { toast } from 'sonner';
 import { useNavigate } from 'react-router';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -11,6 +10,7 @@ import { api } from '@/lib/api-client';
 import { QYERY_KEYS } from '@/lib/query-key';
 
 import { IUserResponse } from './useUser';
+import { errorToast, successToast } from '@/components/custom/toast';
 
 enum loginControler {
   BASE = 'Auth',
@@ -52,11 +52,11 @@ export function useLogin() {
     mutationFn: loginApi,
     onSuccess: (userInfo) => {
       queryClient.setQueryData([QYERY_KEYS.user], userInfo);
-      toast.success('Log in successfully');
+      successToast('Log in successfully');
       navigate(intialUrlBasedOnRole(ROLES[userInfo.user.role]));
     },
     onError: () => {
-      toast.error('There is no like this email or password is wrong...');
+      errorToast('There is no like this email or password is wrong...');
     },
   });
 

@@ -15,7 +15,7 @@ export default function ConsultaionHeader() {
       />
       <FilterBox
         Icon={TfiCheckBox}
-        status={'OPNED'}
+        status={'OPENED'}
         duration={1}
         numberOfConsultation={103}
         bgColor="bg-fourth"

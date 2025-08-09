@@ -2,13 +2,13 @@ import DoctorBox from '@/features/Consultation/components/DoctorBox';
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import { reservationProps } from '../types/reservations';
 import { useDeleteReservation } from '../api/delete-reservation';
-import { toast } from 'sonner';
 import { calcTheNumberOfDaysFromCurrentDateTo } from '@/utils';
 import ConfirmModel from '@/components/models/ConfirmModel';
 import PatientBooking from '../../Models/PatientBooking.Model';
 import { PickTimeSlotProvider } from '@/context/reservation/PickTimeSlotProvieder';
 import { resvervationInput } from '../api/create-reservation';
 import { useAuth } from '@/context/auth/AuthProvider';
+import { errorToast } from '@/components/custom/toast';
 
 export default function DoctorReservationCard({ doctor }: reservationProps) {
   const { userId } = useAuth();
@@ -22,7 +22,7 @@ export default function DoctorReservationCard({ doctor }: reservationProps) {
 
   function onCancelClicked(reservationId: number) {
     if (calcTheNumberOfDaysFromCurrentDateTo(doctor.date) < 1) {
-      toast.error("You can't cancel the reservation before 24 hours");
+      errorToast("You can't cancel the reservation before 24 hours");
     } else {
       deleteReservation(reservationId);
     }

@@ -1,6 +1,6 @@
+import { errorToast, successToast } from '@/components/custom/toast';
 import { api } from '@/lib/api-client';
 import { useMutation } from '@tanstack/react-query';
-import { toast } from 'sonner';
 
 enum deleteReservationControler {
   BASE = '/Reservation',
@@ -17,10 +17,10 @@ function useDeleteReservation() {
   const { mutate: deleteReservation, isPending } = useMutation({
     mutationFn: deleteReservationAPI,
     onSuccess: () => {
-      toast.success('Reservation was deleted');
+      successToast('Reservation was deleted');
     },
     onError: () => {
-      toast.error('Reservation was not deleted, please try again');
+      errorToast('Reservation was not deleted, please try again');
     },
   });
 

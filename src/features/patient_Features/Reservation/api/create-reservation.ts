@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
-import { toast } from 'sonner';
 import { api } from '@/lib/api-client';
 import z from 'zod';
+import { errorToast, successToast } from '@/components/custom/toast';
 
 enum reservationControler {
   BASE = '/Reservation/Revision',
@@ -36,10 +36,10 @@ function useCreateReservation() {
   >({
     mutationFn: createReservationApi,
     onSuccess: () => {
-      toast.success('Reservation was created successfuly');
+      successToast('Reservation was created successfuly');
     },
     onError: (err: Error) => {
-      toast.error(`Error while create a new reservation,${err.message}`);
+      errorToast(`Error while create a new reservation,${err.message}`);
     },
   });
 

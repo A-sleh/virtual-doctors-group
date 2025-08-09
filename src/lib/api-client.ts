@@ -1,7 +1,7 @@
 import Axios, { InternalAxiosRequestConfig } from 'axios';
 import { API_URL } from '@/config/app.config';
 import { paths } from '@/config/paths';
-import { toast } from 'sonner';
+import { errorToast } from '@/components/custom/toast';
 
 function authRequestInterceptor(config: InternalAxiosRequestConfig) {
   if (config.headers) {
@@ -33,7 +33,7 @@ api.interceptors.response.use(
   (error) => {
     const message = error.response?.data?.message || error.message;
 
-    toast.error(message);
+    errorToast(message);
 
     if (error.response?.status === 401) {
       const searchParams = new URLSearchParams();

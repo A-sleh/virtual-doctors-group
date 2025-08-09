@@ -6,9 +6,9 @@ import { api } from '@/lib/api-client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import { QYERY_KEYS } from '@/lib/query-key';
-import { toast } from 'sonner';
 import { intialUrlBasedOnRole } from '@/lib/auth';
 import { ROLES } from '@/context/auth/AuthProvider';
+import { errorToast, successToast } from '@/components/custom/toast';
 
 enum RegisterControler {
   BASE = 'Auth/Register',
@@ -64,11 +64,11 @@ export function useRegister() {
     mutationFn: registerApi,
     onSuccess: (userInfo) => {
       queryClient.setQueryData([QYERY_KEYS.user], userInfo);
-      toast.success('Registering successfully');
+      successToast('Registering successfully');
       navigate(intialUrlBasedOnRole(ROLES[userInfo.user.role]));
     },
     onError: () => {
-      toast.error('The email is already exist...');
+      errorToast('The email is already exist...');
     },
   });
 
