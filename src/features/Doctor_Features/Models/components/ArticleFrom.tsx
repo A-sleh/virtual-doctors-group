@@ -10,8 +10,14 @@ import AnimateButton from '@/lib/Animation/AnimateButton.tsx';
 import { useState } from 'react';
 import ZodErrors from '@/components/custom/ZodErrors';
 
-export default function ArticleFrom() {
-  const { register, handleSubmit } = useForm<articleInput>();
+export default function ArticleFrom({
+  initalArticleInfo,
+}: {
+  initalArticleInfo: articleInput;
+}) {
+  const { register, handleSubmit } = useForm<articleInput>({
+    defaultValues: initalArticleInfo,
+  });
   const [filedInvalidMessage, setFiledInvalidMessage] =
     useState<articleInputErrorMessage>();
 

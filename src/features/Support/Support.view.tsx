@@ -24,7 +24,7 @@ export default function Support() {
         ></textarea>
         <div className="flex gap-2 justify-end">
           <input
-            type="submit"
+            type="reset"
             value="Reset"
             className="btn-rounded bg-white text-primary border-1 transition-all duration-300 border-primary hover:bg-primary hover:text-white"
           />

@@ -2,8 +2,13 @@ import Model from '@/components/models/Model';
 import ArticleFrom from './components/ArticleFrom';
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import { RiSettings5Fill } from 'react-icons/ri';
+import { articleInput } from '@/features/Articles/api/create-article';
 
-export default function UpdateArticle() {
+export default function UpdateArticle({
+  initalArticleInfo,
+}: {
+  initalArticleInfo: articleInput;
+}) {
   return (
     <Model>
       <Model.Open opens="update-article">
@@ -12,7 +17,7 @@ export default function UpdateArticle() {
         </AnimateButton>
       </Model.Open>
       <Model.Window title="Update article details" name="update-article">
-        <ArticleFrom />
+        <ArticleFrom initalArticleInfo={initalArticleInfo} />
       </Model.Window>
     </Model>
   );

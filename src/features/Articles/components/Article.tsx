@@ -7,7 +7,9 @@ import HasPermission from '@/context/auth/HasPermission';
 import UpdateArticle from '@/features/Doctor_Features/Models/UpdateArticle.Model';
 
 // temp
-import imgTemp from '@/assets/images/Hospital-HITN.webp'
+import imgTemp from '@/assets/images/Hospital-HITN.webp';
+import ConfirmModel from '@/components/models/ConfirmModel';
+import { useDeleteArticle } from '../api/delete-article';
 
 export default function Article({
   doctor,
@@ -16,6 +18,8 @@ export default function Article({
   articleImage,
   showOwner = true,
 }: articleProps) {
+  const { deleteArticle, isPending } = useDeleteArticle();
+
   return (
     <AnimateUpInView offsetValue={60} className="rounded-box relative ">
       <img
@@ -31,13 +35,21 @@ export default function Article({
         {title}
         <HasPermission allowedTo={['doctor']}>
           <div className="flex gap-2">
-            <UpdateArticle />
-            <AnimateButton withInitialScale={true}>
-              <RiDeleteBin6Line
-                size={25}
-                className="text-danger cursor-pointer"
-              />
-            </AnimateButton>
+            <UpdateArticle
+              initalArticleInfo={{ title, description, articleImage }}
+            />
+            <ConfirmModel
+              onConfirmClick={() => deleteArticle(1)}
+              description="Are you sure you want to delete your article, If not you cant click on cancle button below"
+              openKey="delete-article"
+            >
+              <AnimateButton withInitialScale={true}>
+                <RiDeleteBin6Line
+                  size={25}
+                  className="text-danger cursor-pointer"
+                />
+              </AnimateButton>
+            </ConfirmModel>
           </div>
         </HasPermission>
       </h4>
