@@ -7,6 +7,7 @@ export const QYERY_KEYS = {
   doctor: {},
   patient: {
     Reservations: 'patient/reservation',
+    userProfile: 'user/profile',
   },
   admin: {},
 };

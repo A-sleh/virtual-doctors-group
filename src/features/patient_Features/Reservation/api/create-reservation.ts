@@ -14,7 +14,6 @@ export const resvervationInputSchema = z.object({
   text: z
     .string()
     .min(1, 'Please enter a short message to tell a doctor about your status'),
-  type: z.number(),
 });
 
 export type resvervationInput = z.infer<typeof resvervationInputSchema>;

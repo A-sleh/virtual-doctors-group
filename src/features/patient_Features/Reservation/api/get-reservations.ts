@@ -6,8 +6,29 @@ enum reservationControler {
   BASE = '/Reservation/User',
 }
 
-async function getReservations(patientId: number) {
-  const response = await api.get(`${reservationControler.BASE}/${patientId}`);
+export type IReservationResponse = {
+  virtualClinic: {
+    id: number;
+    name: string;
+    doctorId: number;
+    doctor: {
+      speciality: string;
+      firstName: string;
+      lastName: string;
+    };
+  };
+  userId: number;
+  id: number;
+  text: string;
+  scheduledAt: string;
+};
+
+async function getReservations(
+  patientId: number,
+): Promise<IReservationResponse[] | []> {
+  const response = await api.get<unknown, IReservationResponse[]>(
+    `${reservationControler.BASE}/${patientId}`,
+  );
   return response;
 }
 

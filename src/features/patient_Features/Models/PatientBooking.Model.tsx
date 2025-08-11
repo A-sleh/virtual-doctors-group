@@ -44,6 +44,7 @@ export default function PatientBooking({
       setFiledInvalidMessage(errorMessage as timeSlotInputErrorMessage);
       return;
     }
+
     if (requestMethod == 'PUT') {
       updateReservation({ ...reservationDetails, scheduledAt: getFullDate() });
     } else {

@@ -73,6 +73,32 @@ function formatDateMonthYearDay(date: Date) {
   });
 }
 
+function getTimeFromDate(date: Date): string {
+  const hoursDigit =
+    date.getHours() == 0
+      ? 1
+      : Math.floor(Math.log10(Number(date.getHours()))) + 1;
+  const minutsDigit =
+    date.getMinutes() == 0
+      ? 1
+      : Math.floor(Math.log10(Number(date.getMinutes()))) + 1;
+
+  return `${hoursDigit == 1 ? '0' + date.getHours() : date.getHours()} : ${
+    minutsDigit == 1 ? '0' + date.getMinutes() : date.getMinutes()
+  }`;
+}
+
+function secondsToDhms(totalSeconds: number) {
+  const days = Number(Math.floor(totalSeconds / (3600 * 24)));
+  totalSeconds %= 3600 * 24; // Remaining seconds after extracting days
+  const hours = Number(Math.floor(totalSeconds / 3600));
+  totalSeconds %= 3600; // Remaining seconds after extracting hours
+  const minutes = Number(Math.floor(totalSeconds / 60));
+  const seconds = totalSeconds % 60; // Remaining seconds
+
+  return { days, hours, minutes, seconds };
+}
+
 export {
   removeKeys,
   generateRangedNumber,
@@ -82,4 +108,6 @@ export {
   formatDateDayMonthDay,
   formatDateMonthYearDay,
   mapedDays,
+  getTimeFromDate,
+  secondsToDhms,
 };

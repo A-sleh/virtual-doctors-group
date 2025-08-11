@@ -3,6 +3,7 @@ import { QYERY_KEYS } from '@/lib/query-key';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { userLocalStorage } from '../localstorage/user.localstore';
+import { accountInputs } from '@/features/Setting/api/updata-account';
 
 export type IUserResponse = {
   token: {
@@ -19,6 +20,7 @@ export type IUserResponse = {
     phone: string;
   };
 };
+type IUserProfileResponse = accountInputs;
 
 export type User = Pick<IUserResponse, 'user'> | null;
 
@@ -28,6 +30,19 @@ async function getUser(user: User | undefined): Promise<IUserResponse | null> {
     `user/${user.user.userId}`,
   );
   return response;
+}
+
+async function getUserProfile(): Promise<IUserProfileResponse> {
+  const response = await api.get<unknown, IUserProfileResponse>(`User/Profile`);
+  return response;
+}
+
+export function useUserProfile() {
+  const { data: userProfile, isPaused } = useQuery({
+    queryKey: [QYERY_KEYS.patient.userProfile],
+    queryFn: async () => getUserProfile(),
+  });
+  return { userProfile, isPaused };
 }
 
 export function useUser() {

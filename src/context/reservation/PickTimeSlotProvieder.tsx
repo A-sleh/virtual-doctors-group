@@ -26,7 +26,7 @@ function PickTimeSlotProvider({
   );
 
   function getFullDate(): Date {
-    return new Date(`${selectedDay} ${selectedTime}`);
+    return new Date(`${selectedDay} ${selectedTime.split(' ').join('')}`);
   }
 
   return (

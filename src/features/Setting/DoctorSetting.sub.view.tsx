@@ -34,12 +34,6 @@ export default function DoctorSetting() {
           type="text"
           placeHolder="10123123"
         />
-        <SettingInput
-          {...register('personalImage')}
-          lable="personal identity iamge"
-          type="file"
-          placeHolder="your image ..."
-        />
         <AnimateButton className="btn-rounded bg-primary text-white ">
           {isPatient(ROLE) ? 'Apply' : 'Send'}
         </AnimateButton>
