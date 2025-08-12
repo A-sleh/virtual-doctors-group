@@ -12,6 +12,7 @@ export type IUserResponse = {
   };
   user: {
     userId: number;
+    doctorId: number;
     email: string;
     role: string;
     personId: number;

@@ -29,7 +29,9 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     if (userInfo) {
       setUserAuth({
         ROLE: ROLES[userInfo.user.role],
-        userId: userInfo.user.userId,
+        userId: userInfo.user?.doctorId
+          ? userInfo.user?.doctorId
+          : userInfo.user.userId,
       });
       setHeaderToken(userInfo?.token.accessToken);
     } else {

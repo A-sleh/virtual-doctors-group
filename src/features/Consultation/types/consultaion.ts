@@ -11,7 +11,7 @@ export type FilterBoxProps = {
 export type consultaionContent = {
   date: string;
   description: string;
-  status?: 'opened' | 'closed' | 'pending';
+  status?: 'Opened' | 'Closed' | 'Pending';
   time?: string;
 } & doctor;
 
@@ -21,7 +21,7 @@ export type upConmingResType = {
   date: string;
   time: string;
   description?: string;
-  status?: 'opened' | 'closed' | 'pending';
+  status?: 'Opened' | 'Closed' | 'Pending';
 };
 
 export type consultaionContentProps = {
@@ -34,7 +34,7 @@ export type DoctorBoxProps = {
 };
 
 export type consultStatusProps = {
-  status: 'opened' | 'closed' | 'pending' | undefined;
+  status: 'Opened' | 'Closed' | 'Pending' | undefined;
   date: string;
   time?: string;
 };

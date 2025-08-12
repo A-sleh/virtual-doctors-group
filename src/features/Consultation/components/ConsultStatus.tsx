@@ -3,9 +3,9 @@ import { consultStatusProps } from '../types/consultaion';
 import { LiaCalendarDaySolid } from 'react-icons/lia';
 
 const STATUSCOLORS = {
-  opened: 'text-fourth bg-fourth-hover',
-  closed: 'text-danger bg-danger-hover',
-  pending: 'text-fivth  bg-fivth-hover',
+  Opened: 'text-fourth bg-fourth-hover',
+  Closed: 'text-danger bg-danger-hover',
+  Pending: 'text-fivth  bg-fivth-hover',
 };
 
 export default function ConsultStatus({

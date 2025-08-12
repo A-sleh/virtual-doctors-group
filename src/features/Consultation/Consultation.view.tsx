@@ -1,30 +1,47 @@
-import { doctorData } from './api/data';
-
 import DoctorConsultationCard from './components/DoctorConsultationCard';
 import ConsultaionHeader from './components/ConsultaionHeader';
 
 import { AnimateUpInView } from '@/lib/Animation/AnimateUpEffect';
 import { useSearchParams } from 'react-router';
+import { useGetConsultaions } from './api/get-consultaion';
+import { useAuth } from '@/context/auth/AuthProvider';
+import DoctorBoxSkeleton from '@/components/skeleton/DoctorBoxSkeleton';
+import ConsultaionHeaderSkeleton from '@/components/skeleton/ConsultaionHeaderSkeleton';
 
 export default function Consultation() {
   const [queryParams] = useSearchParams();
   const selectedState = queryParams.get('filter') || 'all';
+
+  const { userId, ROLE } = useAuth();
+  const { consultaions, isLoading } = useGetConsultaions(
+    userId,
+    ROLE == 'patient' ? 'User' : 'Doctor',
+  );
+
   return (
     <section className="w-full rounded-md space-y-3  overflow-y-auto h-[100vh] pb-45">
-      <ConsultaionHeader />
+      {isLoading ? (
+        <ConsultaionHeaderSkeleton />
+      ) : (
+        <ConsultaionHeader consultaions={consultaions || []} />
+      )}
       <section className="flex flex-col gap-2 overflow-y-auto h-full ">
-        {doctorData.map((doctor) => {
-          if (
-            selectedState != 'all' &&
-            selectedState != doctor.status?.toLowerCase()
-          )
-            return;
-          return (
-            <AnimateUpInView>
-              <DoctorConsultationCard doctor={doctor} />
-            </AnimateUpInView>
-          );
-        })}
+        {isLoading ? (
+          <DoctorBoxSkeleton repeat={3} />
+        ) : (
+          consultaions?.map((consultaion) => {
+            if (
+              selectedState != 'all' &&
+              selectedState != consultaion.status?.toLowerCase()
+            )
+              return;
+            return (
+              <AnimateUpInView>
+                <DoctorConsultationCard consultaion={consultaion} />
+              </AnimateUpInView>
+            );
+          })
+        )}
       </section>
     </section>
   );

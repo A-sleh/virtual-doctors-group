@@ -17,7 +17,7 @@ export default function RenderButtons({
   if (isPending || isDeleting) return <h1>Lodding ...</h1>;
 
   switch (status) {
-    case 'pending':
+    case 'Pending':
       return (
         <>
           <HasPermission allowedTo={['patient']}>
@@ -70,7 +70,7 @@ export default function RenderButtons({
         </>
       );
 
-    case 'opened':
+    case 'Opened':
       return (
         <HasPermission allowedTo={['doctor']}>
           <ConfirmModel
@@ -89,7 +89,8 @@ export default function RenderButtons({
           </ConfirmModel>
         </HasPermission>
       );
-    case 'closed':
+
+    case 'Closed':
       return (
         <HasPermission allowedTo={['doctor']}>
           <ConfirmModel

@@ -28,7 +28,7 @@ export default function DoctorConsultResarveBox({
       <div className="flex justify-between flex-col gap-5 lg:flex-row">
         <DoctorStatistics {...{ rating, experianse, location }} />
         <div className="flex gap-2 self-end ">
-          <ConsultADoctor doctorId={1} />
+          <ConsultADoctor doctorId={2} />
           <PickTimeSlotProvider intialDay={new Date()} intialTime={''}>
             <PatientBooking openKey={'Book appointment'} />
           </PickTimeSlotProvider>

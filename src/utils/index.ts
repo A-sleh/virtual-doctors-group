@@ -1,3 +1,4 @@
+import { IGetConsultaionsResponse } from '@/features/Consultation/api/get-consultaion';
 import { AnyZodObject } from 'zod';
 
 const mapedDays = ['Sun', 'Mon', 'Tues', 'Wed', 'Thrus', 'Fri', 'Sat'];
@@ -99,6 +100,28 @@ function secondsToDhms(totalSeconds: number) {
   return { days, hours, minutes, seconds };
 }
 
+function calcTheNumbersOfConsultaions(
+  consultaions: IGetConsultaionsResponse[],
+): { opened: number; closed: number; pending: number } {
+  const obj = new Map<string, number>([
+    ['Closed', 0],
+    ['Opened', 0],
+    ['Pending', 0],
+  ]);
+
+  consultaions.forEach((consultaion) =>
+    obj.set(
+      consultaion?.status || 'null',
+      (obj.get(consultaion.status || 'null') || 0) + 1,
+    ),
+  );
+  return {
+    opened: obj.get('Opened') || 0,
+    closed: obj.get('Closed') || 0,
+    pending: obj.get('Pending') || 0,
+  };
+}
+
 export {
   removeKeys,
   generateRangedNumber,
@@ -110,4 +133,5 @@ export {
   mapedDays,
   getTimeFromDate,
   secondsToDhms,
+  calcTheNumbersOfConsultaions,
 };
