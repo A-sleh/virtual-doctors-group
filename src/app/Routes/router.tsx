@@ -39,6 +39,10 @@ const About = lazy(
 const Clinics = lazy(
   () => import('@/features/Doctor_Features/Profile/Clinics.sub.view'),
 );
+
+const ClinicDetails = lazy(
+  () => import('@/features/Doctor_Features/Profile/ClinicDetails.sub.view'),
+);
 const PatientOpinion = lazy(
   () => import('@/features/Doctor_Features/Profile/PatientOpinion.sub.view'),
 );
@@ -142,6 +146,10 @@ function useRoutes(): RouteObject[] {
             {
               path: paths.app.doctor.profile.info.clinics.path,
               element: <Clinics />,
+            },
+            {
+              path: paths.app.doctor.profile.info.clinic.path,
+              element: <ClinicDetails />,
             },
             {
               path: paths.app.doctor.profile.info.patientOpinion.path,

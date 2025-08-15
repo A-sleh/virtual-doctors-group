@@ -1,11 +1,12 @@
-import { paths } from "@/config/paths";
-import { NavLink } from "react-router";
+import { paths } from '@/config/paths';
+import { NavLink, useParams } from 'react-router';
 
 export default function ProfileLinks() {
+  const { id: doctorId } = useParams();
   return (
     <section className="rounded-box space-x-2">
       <NavLink
-        to={paths.app.doctor.profile.info.about.getHref(10)}
+        to={paths.app.doctor.profile.info.about.getHref(Number(doctorId))}
         className={({ isActive }) =>
           (isActive ? 'text-white bg-primary' : 'bg-transparent text-primary') +
           ' border border-primary btn-rounded font-medium rounded-tl-[0px] rounded-br-[0px] r bg-primary transition-all duration-200'
@@ -14,7 +15,7 @@ export default function ProfileLinks() {
         About
       </NavLink>
       <NavLink
-        to={paths.app.doctor.profile.info.clinics.getHref(10)}
+        to={paths.app.doctor.profile.info.clinics.getHref(Number(doctorId))}
         className={({ isActive }) =>
           (isActive ? 'text-white bg-primary' : 'bg-transparent text-primary') +
           ' border border-primary btn-rounded font-medium rounded-tl-[0px] rounded-br-[0px] r bg-primary transition-all duration-200'
@@ -23,7 +24,9 @@ export default function ProfileLinks() {
         Clinics
       </NavLink>
       <NavLink
-        to={paths.app.doctor.profile.info.patientOpinion.getHref(10)}
+        to={paths.app.doctor.profile.info.patientOpinion.getHref(
+          Number(doctorId),
+        )}
         className={({ isActive }) =>
           (isActive ? 'text-white bg-primary' : 'bg-transparent text-primary') +
           ' border border-primary btn-rounded font-medium rounded-tl-[0px] rounded-br-[0px] r bg-primary transition-all duration-200'

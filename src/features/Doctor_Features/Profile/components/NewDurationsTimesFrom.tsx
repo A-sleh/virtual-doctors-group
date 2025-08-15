@@ -3,7 +3,41 @@ import HasPermission from '@/context/auth/HasPermission';
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
 
+import { SubmitHandler, useForm } from 'react-hook-form';
+import ZodErrors from '@/components/custom/ZodErrors';
+import { useParams } from 'react-router';
+import {
+  useAddNewWorkHours,
+  WroktimeBodyReq,
+} from '../api/create-profile-info';
+import { useQueryClient } from '@tanstack/react-query';
+import { QYERY_KEYS } from '@/lib/query-key';
+
 export default function NewDurationsTimesFrom() {
+  const { clinicId } = useParams();
+  const queryClient = useQueryClient();
+  const { addNewWorkHours, isPaused } = useAddNewWorkHours();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<WroktimeBodyReq>();
+
+  const onSubmit: SubmitHandler<WroktimeBodyReq> = (data) => {
+    addNewWorkHours(
+      { ...data, clinicId: Number(clinicId) },
+      {
+        onSuccess: () => {
+          reset();
+          queryClient.invalidateQueries({
+            queryKey: [QYERY_KEYS.doctor.clinicTimes],
+          });
+        },
+      },
+    );
+  };
+
   return (
     <HasPermission allowedTo={['doctor']}>
       <AnimateUpEffect className="rounded-box space-y-2 flex-3 h-fit rounded-tl-none rounded-tr-none">
@@ -12,18 +46,56 @@ export default function NewDurationsTimesFrom() {
         </h5>
         <form
           className=" space-y-2 items-center "
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex gap-2">
-            <SettingInput type="text" lable="From" />
-            <SettingInput type="text" lable="To" />
+            <div className="w-full">
+              <SettingInput
+                type="text"
+                lable="From"
+                {...register('startWorkHours', {
+                  required: 'Please enter the start work hours',
+                  pattern: {
+                    value: /[0-9][0-9]:[0-9][0-9]/gi,
+                    message: 'The pattern most be like 00:00',
+                  },
+                })}
+              />
+              <ZodErrors
+                error={
+                  errors?.startWorkHours?.message
+                    ? [errors?.startWorkHours?.message?.toString()]
+                    : undefined
+                }
+              />
+            </div>
+            <div className="w-full">
+              <SettingInput
+                type="text"
+                lable="To"
+                {...register('endWorkHours', {
+                  required: 'Please enter the end work hours',
+                  pattern: {
+                    value: /[0-9][0-9]:[0-9][0-9]/gi,
+                    message: 'The pattern most be like 00:00',
+                  },
+                })}
+              />
+              <ZodErrors
+                error={
+                  errors?.endWorkHours?.message
+                    ? [errors?.endWorkHours?.message?.toString()]
+                    : undefined
+                }
+              />
+            </div>
           </div>
           <div className="flex gap-2">
-            <AnimateButton className="btn-rounded text-white bg-fourth border-1 flex-1">
+            <AnimateButton
+              scale={0.9}
+              className="btn-rounded text-white bg-fourth border-1 flex-1"
+            >
               Add
-            </AnimateButton>
-            <AnimateButton className="btn-rounded text-white bg-primary border-1  flex-2">
-              Apply
             </AnimateButton>
           </div>
         </form>

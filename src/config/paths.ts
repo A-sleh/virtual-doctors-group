@@ -52,8 +52,14 @@ export const paths = {
             getHref: (doctorId: number) => `/doctor/${doctorId}/profile/about`,
           },
           clinics: {
-            path: 'clinic',
-            getHref: (doctorId: number) => `/doctor/${doctorId}/profile/clinic`,
+            path: 'clinics',
+            getHref: (doctorId: number) =>
+              `/doctor/${doctorId}/profile/clinics`,
+          },
+          clinic: {
+            path: 'clinics/:clinicId',
+            getHref: (doctorId: number, clinicId: number) =>
+              `/doctor/${doctorId}/profile/clinics/${clinicId}`,
           },
           patientOpinion: {
             path: 'patientOpinion',

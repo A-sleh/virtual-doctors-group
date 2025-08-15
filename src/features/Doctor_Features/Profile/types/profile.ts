@@ -17,7 +17,6 @@ export type patientRatingProps = {
 
 export type workingTimeProps = {
   dayHours: string[];
-  workingHours: string[];
 };
 
 export type reservationBoxProps = {

@@ -4,7 +4,12 @@ export const QYERY_KEYS = {
   consultaionMessages: 'consultaions/messages',
   articles: 'articles',
   article: 'article',
-  doctor: {},
+  doctor: {
+    info: 'doctor/info',
+    clinics: 'doctor/clinics',
+    clinicTimes: 'doctor/clinic/times',
+    clinicDetails: 'doctor/clinic/details',
+  },
   patient: {
     Reservations: 'patient/reservation',
     userProfile: 'user/profile',

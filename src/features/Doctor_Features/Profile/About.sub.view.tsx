@@ -1,14 +1,24 @@
 import Article from '@/features/Articles/components/Article';
 import DiscriptionCard from './components/DiscriptionCard';
 import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
+import { useParams } from 'react-router';
+import { useGetDoctorInfo } from './api/get-profile-info';
+import DescritptionBoxSkeleton from '@/components/skeleton/profile/DescritptionBoxSkeleton';
 
 export default function About() {
+  const { id: doctorId } = useParams();
+  const { doctorInfo, isPending } = useGetDoctorInfo(Number(doctorId));
+
   return (
     <section className="space-y-3">
-      <DiscriptionCard
-        title="Abdulfatah asleh"
-        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda et cum illo enim ea placeat cumque beatae sed similique animi, ipsam dolore dolores, quae, aspernatur incidunt a aliquam quisquam eaque.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda et cum illo enim ea placeat cumque beatae sed similique animi, ipsam dolore dolores, quae, aspernatur incidunt a aliquam quisquam eaque."
-      />
+      {isPending ? (
+        <DescritptionBoxSkeleton />
+      ) : (
+        <DiscriptionCard
+          title={`${doctorInfo?.firstName} ${doctorInfo?.lastName}`}
+          description={doctorInfo?.description}
+        />
+      )}
 
       <div className="space-y-2">
         <AnimateFromToRight>

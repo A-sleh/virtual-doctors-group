@@ -9,75 +9,79 @@ import { MdSupportAgent } from 'react-icons/md';
 import { CgProfile } from 'react-icons/cg';
 import { MdOutlineSick } from 'react-icons/md';
 import { links } from './types/sidebar';
+import { useAuth } from '@/context/auth/AuthProvider';
 
 export const ICON_SIZE = 24;
 
-export const sidebarLinks: links = [
-  {
-    icon: <IoIosHome size={ICON_SIZE} />,
-    title: 'Home',
-    permission: ['admin', 'patient', 'doctor'],
-    path: {
-      admin: paths.app.dashboard.home.getHref(),
-      doctor: paths.app.doctor.home.getHref(),
-      patient: paths.app.patient.home.getHref(),
+export const SidebarLinks = (): links => {
+  const { userId } = useAuth();
+  return [
+    {
+      icon: <IoIosHome size={ICON_SIZE} />,
+      title: 'Home',
+      permission: ['admin', 'patient', 'doctor'],
+      path: {
+        admin: paths.app.dashboard.home.getHref(),
+        doctor: paths.app.doctor.home.getHref(),
+        patient: paths.app.patient.home.getHref(),
+      },
     },
-  },
-  {
-    icon: <FaUserDoctor size={ICON_SIZE} />,
-    title: 'Doctor',
-    permission: ['admin', 'patient', 'doctor'],
-    path: {
-      admin: paths.app.dashboard.doctor.getHref(),
-      doctor: paths.app.searchingDoctor.getHref(),
-      patient: paths.app.searchingDoctor.getHref(),
+    {
+      icon: <FaUserDoctor size={ICON_SIZE} />,
+      title: 'Doctor',
+      permission: ['admin', 'patient', 'doctor'],
+      path: {
+        admin: paths.app.dashboard.doctor.getHref(),
+        doctor: paths.app.searchingDoctor.getHref(),
+        patient: paths.app.searchingDoctor.getHref(),
+      },
     },
-  },
-  {
-    icon: <LiaCalendarAltSolid size={ICON_SIZE} />,
-    title: 'Reservations',
-    permission: ['doctor', 'patient'],
-    path: {
-      doctor: paths.app.doctor.reservation.getHref(1),
-      patient: paths.app.patient.reservation.getHref(1),
+    {
+      icon: <LiaCalendarAltSolid size={ICON_SIZE} />,
+      title: 'Reservations',
+      permission: ['doctor', 'patient'],
+      path: {
+        doctor: paths.app.doctor.reservation.getHref(userId),
+        patient: paths.app.patient.reservation.getHref(userId),
+      },
     },
-  },
-  {
-    icon: <PiChats size={ICON_SIZE} />,
-    title: 'Consultaion',
-    permission: ['doctor', 'patient'],
-    path: {
-      doctor: paths.app.consultation.getHref(1),
-      patient: paths.app.consultation.getHref(1),
+    {
+      icon: <PiChats size={ICON_SIZE} />,
+      title: 'Consultaion',
+      permission: ['doctor', 'patient'],
+      path: {
+        doctor: paths.app.consultation.getHref(userId),
+        patient: paths.app.consultation.getHref(userId),
+      },
     },
-  },
-  {
-    icon: <CgProfile size={ICON_SIZE} />,
-    title: 'Profile',
-    permission: ['doctor'],
-    path: {
-      doctor: paths.app.doctor.profile.getHref(10),
+    {
+      icon: <CgProfile size={ICON_SIZE} />,
+      title: 'Profile',
+      permission: ['doctor'],
+      path: {
+        doctor: paths.app.doctor.profile.getHref(userId),
+      },
     },
-  },
 
-  {
-    icon: <PiArticleMedium size={ICON_SIZE} />,
-    title: 'Articles',
-    permission: ['patient', 'doctor'],
-    path: {
-      doctor: paths.app.article.getHref(),
-      patient: paths.app.article.getHref(),
+    {
+      icon: <PiArticleMedium size={ICON_SIZE} />,
+      title: 'Articles',
+      permission: ['patient', 'doctor'],
+      path: {
+        doctor: paths.app.article.getHref(),
+        patient: paths.app.article.getHref(),
+      },
     },
-  },
-  {
-    icon: <MdOutlineSick size={ICON_SIZE} />,
-    title: 'Patient',
-    permission: ['admin'],
-    path: {
-      admin: paths.app.dashboard.patient.getHref(),
+    {
+      icon: <MdOutlineSick size={ICON_SIZE} />,
+      title: 'Patient',
+      permission: ['admin'],
+      path: {
+        admin: paths.app.dashboard.patient.getHref(),
+      },
     },
-  },
-];
+  ];
+};
 
 export const subSideBareLink: links = [
   {

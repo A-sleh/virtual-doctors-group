@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-import { ICON_SIZE, sidebarLinks, subSideBareLink } from './sdiebarLinks';
+import { ICON_SIZE, SidebarLinks, subSideBareLink } from './sdiebarLinks';
 import { IoMdLogIn } from 'react-icons/io';
 import { paths } from '@/config/paths';
 
@@ -24,7 +24,7 @@ export default function SideBar() {
       <Logo />
       <section className="flex flex-col gap-28">
         <AnimateParentUpEffect className="flex flex-col gap-7 ">
-          <List links={sidebarLinks} sideBarStatus={isOpen} />
+          <List links={SidebarLinks()} sideBarStatus={isOpen} />
           <hr className="text-[#6b6f74] w-[80%]  m-auto" />
           <List links={subSideBareLink} sideBarStatus={isOpen} />
         </AnimateParentUpEffect>

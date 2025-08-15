@@ -4,7 +4,8 @@ import { RiSettings5Fill } from 'react-icons/ri';
 import { discriptionCardProps } from '../types/profile';
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import HasPermission from '@/context/auth/HasPermission';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useUpdateDoctorDescription } from '../api/update-profile-info';
 
 export default function DiscriptionCard({
   title,
@@ -12,10 +13,23 @@ export default function DiscriptionCard({
 }: discriptionCardProps) {
   const [updateDescription, setUpdateDescription] = useState(false);
   const descriptionContainerRef = useRef<HTMLTextAreaElement | null>(null);
+  const [descriptionInput, setDescriptionInput] = useState<string>(
+    description || '',
+  );
+  const { updateDoctorDescription, isPending } = useUpdateDoctorDescription();
 
   function handlUpdateClicked() {
     setUpdateDescription(true);
     descriptionContainerRef.current?.focus();
+  }
+
+  function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    updateDoctorDescription(descriptionInput, {
+      onSuccess: () => {
+        setUpdateDescription(false);
+      },
+    });
   }
 
   return (
@@ -40,11 +54,14 @@ export default function DiscriptionCard({
           </AnimateButton>
         </HasPermission>
       </h1>
-      <form>
+      <form onSubmit={(e) => handleFormSubmit(e)}>
         <textarea
+          onChange={(e) => setDescriptionInput(e.target.value)}
+          readOnly={!updateDescription}
           className={`text-secondary font-serif w-full h-full resize-none  ${
             updateDescription && 'bg-third'
           } p-3 outline-none`}
+          defaultValue={description}
           ref={descriptionContainerRef}
           onFocus={(e) =>
             e.currentTarget.setSelectionRange(
@@ -52,9 +69,7 @@ export default function DiscriptionCard({
               e.currentTarget.value.length,
             )
           }
-        >
-          {description}
-        </textarea>
+        ></textarea>
         {updateDescription && (
           <AnimateButton className="btn-rounded bg-primary text-white mt-3 px-8 font-nourmal">
             Apply
