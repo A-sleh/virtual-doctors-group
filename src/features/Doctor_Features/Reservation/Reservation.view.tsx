@@ -1,30 +1,55 @@
-import { data } from './api/data';
 import ReservatDayCard from './components/ReservatDayCard';
 import ReservationHeader from './components/ReservationHeader';
 import Calendar from './components/Calendar';
 import Booking from '../Models/Booking.Model';
-import { CalenderProvider, useCalender } from '@/context/reservation/Calender';
+import { CalenderProvider } from '@/context/reservation/CalenderProvider';
 import { useGetReservation } from './api/get-clinic-reservation';
 import { PickTimeSlotProvider } from '@/context/reservation/PickTimeSlotProvieder';
+import { useCurrentClinic } from '@/context/doctor/CurrentClinicProvider';
+import ClinicReservationSkeleton from '@/components/skeleton/ClinicReservationSkeleton';
+import { useState } from 'react';
+import { getFullYearAsString, getTimeFromDate } from '@/utils';
 
 export default function Reservation() {
-  const { day } = useCalender();
-  const { clinicReservations } = useGetReservation(1, day as Date);
-  console.log(clinicReservations);
+  const [day, setDay] = useState<Date>(new Date());
+  const { clinic } = useCurrentClinic();
+  const { clinicReservations, isLoading } = useGetReservation(
+    clinic.id,
+    getFullYearAsString(day),
+  );
+  const filteredReservations = clinicReservations?.filter(
+    (reservation) => reservation.user != null,
+  );
+
   return (
     <PickTimeSlotProvider intialTime="10:12" intialDay={new Date()}>
-      <CalenderProvider>
-        <section className="flex flex-col-reverse lg:flex-row gap-2 text-nowrap">
+      <CalenderProvider setParentDay={setDay}>
+        <section className="flex flex-col-reverse lg:flex-row gap-2 text-nowrap ">
           <div className="flex-1 space-y-2">
             <div className="sub-header">Today reservation</div>
-            <div className="flex w-full flex-col gap-1">
-              {data.map((reservation, index: number) => (
-                <ReservatDayCard
-                  reservation={reservation}
-                  duration={index / 2}
-                  key={reservation.owner}
-                />
-              ))}
+            <div className="flex w-full flex-col gap-1 ">
+              {isLoading ? (
+                <ClinicReservationSkeleton />
+              ) : filteredReservations?.length == 0 ? (
+                <h2 className="px-1.5 py-1 text-center bg-white rounded-sm text-danger ">
+                  There are no reservations
+                </h2>
+              ) : (
+                filteredReservations?.map(
+                  ({ userId, scheduledAt, text, user }, index: number) => (
+                    <ReservatDayCard
+                      reservation={{
+                        desctiption: text,
+                        userId,
+                        owner: user?.firstName + ' ' + user?.lastName,
+                        time: getTimeFromDate(new Date(scheduledAt), false),
+                      }}
+                      duration={index / 2}
+                      key={userId}
+                    />
+                  ),
+                )
+              )}
               <Booking />
             </div>
           </div>

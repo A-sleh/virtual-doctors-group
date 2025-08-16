@@ -9,6 +9,8 @@ export const QYERY_KEYS = {
     clinics: 'doctor/clinics',
     clinicTimes: 'doctor/clinic/times',
     clinicDetails: 'doctor/clinic/details',
+    Reservations: 'doctor/reservation',
+    calendarDays: 'calendar/days',
   },
   patient: {
     Reservations: 'patient/reservation',

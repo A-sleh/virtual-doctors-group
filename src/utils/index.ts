@@ -74,7 +74,7 @@ function formatDateMonthYearDay(date: Date) {
   });
 }
 
-function getTimeFromDate(date: Date): string {
+function getTimeFromDate(date: Date, withSpace: boolean = true): string {
   const hoursDigit =
     date.getHours() == 0
       ? 1
@@ -83,10 +83,10 @@ function getTimeFromDate(date: Date): string {
     date.getMinutes() == 0
       ? 1
       : Math.floor(Math.log10(Number(date.getMinutes()))) + 1;
-
-  return `${hoursDigit == 1 ? '0' + date.getHours() : date.getHours()} : ${
-    minutsDigit == 1 ? '0' + date.getMinutes() : date.getMinutes()
-  }`;
+  const time = `${
+    hoursDigit == 1 ? '0' + date.getHours() : date.getHours()
+  } : ${minutsDigit == 1 ? '0' + date.getMinutes() : date.getMinutes()}`;
+  return withSpace ? time : time.split(' ').join('');
 }
 
 function secondsToDhms(totalSeconds: number) {
@@ -122,6 +122,10 @@ function calcTheNumbersOfConsultaions(
   };
 }
 
+function getFullYearAsString(date: Date): string {
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+}
+
 export {
   removeKeys,
   generateRangedNumber,
@@ -134,4 +138,5 @@ export {
   getTimeFromDate,
   secondsToDhms,
   calcTheNumbersOfConsultaions,
+  getFullYearAsString,
 };

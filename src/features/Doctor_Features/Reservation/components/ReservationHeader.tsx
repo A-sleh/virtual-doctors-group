@@ -5,7 +5,7 @@ import { IoCalendarOutline } from 'react-icons/io5';
 import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
 import { formatDateMonthYearDay, generateRangedNumber } from '@/utils';
 import SelectorWithIcon from '@/components/ui/inputs/SelectorWithIcon';
-import { useCalender } from '@/context/reservation/Calender';
+import { useCalender } from '@/context/reservation/CalenderProvider';
 
 export default function ReservationHeader() {
   const {

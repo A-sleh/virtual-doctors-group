@@ -34,8 +34,6 @@ export default function Account() {
     updateAccountSetting(data);
   };
 
-  console.log(isPending);
-
   return (
     <AnimateUpEffect className="rounded-box space-y-2">
       <div>

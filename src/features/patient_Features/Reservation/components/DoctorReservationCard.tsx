@@ -101,7 +101,6 @@ export default function DoctorReservationCard({
 function Timer({ timeStamp }: { timeStamp: number }) {
   const [time, setTime] = useState<number>(timeStamp);
   const { days, hours, minutes, seconds } = secondsToDhms(time);
-  console.log({ days, hours, minutes, seconds });
 
   useEffect(() => {
     const timerInterval = setInterval(() => {

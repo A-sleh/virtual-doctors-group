@@ -21,7 +21,7 @@ export const registerInputSchema = z.object({
     .string()
     .min(10, 'You should enter your perosn id, and at least 10 letters'),
   phone: z.string().min(10, 'The number most be equal 10 numbers').max(10),
-  birthDate: z.date(),
+  birthDate: z.string(),
   gender: z.enum(['male', 'female']).default('male'),
   profileImage: z.string().optional(),
   email: z.string().min(1, 'email is required').email('Invalid email'),

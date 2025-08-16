@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from '@/context/auth/AuthProvider';
 import { useRoutes } from './Routes/router';
 import { userLocalStorage } from '@/features/auth/localstorage/user.localstore';
+import { CurrentClinicProvider } from '@/context/doctor/CurrentClinicProvider';
 
 export default function AppProvider() {
   const router = createBrowserRouter(useRoutes());
@@ -18,23 +19,25 @@ export default function AppProvider() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <RouterProvider router={router} />
-        <Toaster />
-        <a
-          href="/auth/login"
-          onClick={() => userLocalStorage.removeUser()}
-          style={{
-            position: 'fixed',
-            right: '10px',
-            bottom: '10px',
-            zIndex: '400',
-            backgroundColor: 'red',
-            color: 'white',
-            fontWeight: 'bold',
-          }}
-        >
-          remove user
-        </a>
+        <CurrentClinicProvider>
+          <RouterProvider router={router} />
+          <Toaster />
+          <a
+            href="/auth/login"
+            onClick={() => userLocalStorage.removeUser()}
+            style={{
+              position: 'fixed',
+              right: '10px',
+              bottom: '10px',
+              zIndex: '400',
+              backgroundColor: 'red',
+              color: 'white',
+              fontWeight: 'bold',
+            }}
+          >
+            remove user
+          </a>
+        </CurrentClinicProvider>
       </AuthProvider>
     </QueryClientProvider>
   );

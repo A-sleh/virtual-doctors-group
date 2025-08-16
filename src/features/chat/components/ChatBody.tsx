@@ -34,7 +34,7 @@ export default function ChatBody() {
       },
     );
   }
-  console.log(isPending, doctorId);
+
   return (
     <AnimateUpEffect className="h-fit space-y-2 ">
       <section className="rounded-box flex flex-col space-y-3 h-[75vh] overflow-auto">
