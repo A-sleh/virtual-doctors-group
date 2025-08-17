@@ -8,6 +8,7 @@ export default function SettingInput({
   type,
   lable,
   placeHolder = '',
+
   ...props
 }: settingProps) {
   return (

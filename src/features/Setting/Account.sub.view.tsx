@@ -8,17 +8,15 @@ import {
 
 import Selector from '@/components/ui/inputs/Selector';
 import SettingInput from '@/components/ui/inputs/SettingInput';
-import NotifySetting from './components/NotifySetting';
 import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
 import AnimateButton from '@/lib/Animation/AnimateButton';
-import HasPermission from '@/context/auth/HasPermission';
 import { useState } from 'react';
 import ZodErrors from '@/components/custom/ZodErrors.tsx';
 import { useUserProfile } from '../auth/api/useUser.tsx';
 
 export default function Account() {
   const { userProfile } = useUserProfile();
-  const { updateAccountSetting, isPending } = useUpdateAccountSetting();
+  const { updateAccountSetting } = useUpdateAccountSetting();
   const [filedInvalidMessage, setFiledInvalidMessage] =
     useState<accountInputsErrorMessages>();
   const { register, handleSubmit } = useForm<accountInputs>({
@@ -109,9 +107,10 @@ export default function Account() {
           {...register('gender')}
         />
         <ZodErrors error={filedInvalidMessage?.gender} />
-        <HasPermission allowedTo={['patient']}>
+        {/* <HasPermission allowedTo={['patient']}>
           <NotifySetting {...register('notificationMe')} />
-        </HasPermission>
+          <ZodErrors error={filedInvalidMessage?.notificationMe} />
+        </HasPermission> */}
         <AnimateButton className="btn-rounded bg-primary text-white ">
           Apply
         </AnimateButton>

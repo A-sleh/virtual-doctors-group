@@ -1,8 +1,17 @@
+import { formIsNotValid } from '@/utils';
 import { z } from 'zod';
 
 export const doctorSettingSchema = z.object({
   syndicateId: z.string().min(1, 'Enter your syndicate Id ...'),
-  personalImage: z.string().min(1, 'Enter your personal identity iamge ...'),
+  note: z.string().min(1, 'Enter your syndicate Id ...').optional(),
+  specialityId: z.number().min(1, 'Please select your speciality'),
 });
 
 export type doctorSettingInputs = z.infer<typeof doctorSettingSchema>;
+export type doctorSettingInputsErrorMessages = {
+  [x in keyof doctorSettingInputs]?: string[] | undefined;
+};
+
+export function doctorSettingFormIsNotValid(data: doctorSettingInputs) {
+  return formIsNotValid(doctorSettingSchema, data);
+}

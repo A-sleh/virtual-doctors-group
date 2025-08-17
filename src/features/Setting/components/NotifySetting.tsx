@@ -1,7 +1,7 @@
 import Selector from '@/components/ui/inputs/Selector';
 import { useState } from 'react';
 
-export default function NotifySetting({...props}) {
+export default function NotifySetting({ ...props }) {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
@@ -14,7 +14,6 @@ export default function NotifySetting({...props}) {
         <div className="flex items-center justify-between w-fit">
           <label className="relative inline-flex items-center cursor-pointer">
             <input
-              {...props}
               type="checkbox"
               className="sr-only peer outline-none"
               checked={isChecked}
@@ -27,7 +26,7 @@ export default function NotifySetting({...props}) {
       </div>
 
       {isChecked && (
-        <Selector options={[30, 12, 1]} units={['mn', 'h', 'day']} />
+        <Selector options={[30, 12, 1]} units={['mn', 'h', 'day']} {...props} />
       )}
     </div>
   );

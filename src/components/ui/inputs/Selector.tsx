@@ -3,14 +3,16 @@ type selectorProps = {
   options: string[] | number[];
   units?: string[] | number[];
   placeHolder?: string;
-  overWriteStyle?:  string;
+  overWriteStyle?: string;
+  anotherValues?: (string | number)[] | undefined;
 };
 
 export default function Selector({
   lable = '',
   options,
   units = [],
-  overWriteStyle = '' ,
+  overWriteStyle = '',
+  anotherValues = undefined,
   ...props
 }: selectorProps) {
   return (
@@ -20,8 +22,15 @@ export default function Selector({
         id="inputRef"
         className={`peer p-2 pt-3 border capitalize border-gray-400 outline-none rounded-sm focus:border-primary ${overWriteStyle}`}
       >
-        {options.map((op: string | number,index:number) => {
-          return <option value={op} key={index}>{op} {units[index]}</option>;
+        {options.map((op: string | number, index: number) => {
+          return (
+            <option
+              value={anotherValues ? anotherValues[index] : op}
+              key={index}
+            >
+              {op} {units[index]}
+            </option>
+          );
         })}
       </select>
       <label

@@ -5,6 +5,7 @@ export const QYERY_KEYS = {
   articles: 'articles',
   article: 'article',
   doctor: {
+    speciality: 'Speciality',
     info: 'doctor/info',
     clinics: 'doctor/clinics',
     clinicTimes: 'doctor/clinic/times',
