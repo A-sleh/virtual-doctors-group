@@ -1,5 +1,6 @@
 import { paths } from '@/config/paths';
 import { NavLink, useParams } from 'react-router';
+import NewClinicModel from '../../Models/NewClinic.Model';
 
 export default function ProfileLinks() {
   const { id: doctorId } = useParams();
@@ -34,6 +35,7 @@ export default function ProfileLinks() {
       >
         Patient opinions
       </NavLink>
+      <NewClinicModel />
     </section>
   );
 }

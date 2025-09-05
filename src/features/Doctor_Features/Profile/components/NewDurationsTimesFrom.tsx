@@ -16,7 +16,7 @@ import { QYERY_KEYS } from '@/lib/query-key';
 export default function NewDurationsTimesFrom() {
   const { clinicId } = useParams();
   const queryClient = useQueryClient();
-  const { addNewWorkHours, isPaused } = useAddNewWorkHours();
+  const { addNewWorkHours } = useAddNewWorkHours();
   const {
     register,
     handleSubmit,

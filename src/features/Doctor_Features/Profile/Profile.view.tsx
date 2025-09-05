@@ -16,7 +16,7 @@ export default function Profile() {
   const { doctorInfo, isPending } = useGetDoctorInfo(Number(doctorId));
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 ">
       {isPending ? (
         <ProfileHeaderSkeleton />
       ) : (

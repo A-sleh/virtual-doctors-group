@@ -16,6 +16,7 @@ export default function AppProvider() {
       },
     },
   });
+
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
@@ -36,6 +37,21 @@ export default function AppProvider() {
             }}
           >
             remove user
+          </a>
+          <a
+            href="http://vdg.runasp.net/swagger/index.html"
+            target="_blank"
+            style={{
+              position: 'fixed',
+              right: '200px',
+              bottom: '10px',
+              zIndex: '400',
+              backgroundColor: 'green',
+              color: 'white',
+              fontWeight: 'bold',
+            }}
+          >
+            Open swagger
           </a>
         </CurrentClinicProvider>
       </AuthProvider>
