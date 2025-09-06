@@ -7,6 +7,7 @@ import fofImg from '@/assets/images/pexels-jrfotosgrand-fotografia-12660379.jpg'
 
 export default function DoctorVectorInfo({
   name,
+  doctorId,
   specility,
   imgSrc,
   children,
@@ -26,7 +27,7 @@ export default function DoctorVectorInfo({
       <AnimateFromToRight className="flex flex-col gap-2" run={withAnimation}>
         <div className="flex flex-col space-y-1">
           <Link
-            to={paths.app.doctor.profile.getHref(10)}
+            to={paths.app.doctor.profile.getHref(doctorId)}
             className={`font-medium ${fontSize}`}
           >
             {specility && <span className="text-primary ">Dr.</span>}

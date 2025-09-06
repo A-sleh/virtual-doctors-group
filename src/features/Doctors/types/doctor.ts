@@ -17,7 +17,6 @@ export type doctorSearchingProps = {
 
 export type doctorStatisticsProps = {
   location: string;
-  experianse: string; 
   rating: number;
 } 
 
@@ -25,6 +24,7 @@ export type DoctorVectorInfoProps = {
   imgSrc?: string;
   children?: React.ReactNode;
   imageSize?: string;
+  doctorId: number;
   fontSize?: string;
   withAnimation?: boolean;
 } & doctor;

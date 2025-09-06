@@ -1,15 +1,33 @@
 import AnimateFromToRight, {
   AnimateFromToRightInView,
 } from '@/lib/Animation/AnimateFromLeftToRight';
-import { doctors } from '../api/data';
-import DoctorConsultResarveBox from './DoctorConsultResarveBox';
+
+import { Spinner } from '@/components/ui/shadcn-io/spinner';
+import SearchingDoctorsSkeleton from '@/components/skeleton/doctor/SearchingDoctorsSkeleton';
+import DoctorDetails from './DoctorDetails';
+
+import { userDoctorsFilter } from '@/context/doctor/DoctorsFilterProvider';
+import { IDoctorInfo, useInfiniteDoctors } from '../api/get-doctor';
 
 export default function SearchingDoctors() {
+  const { filters } = userDoctorsFilter();
+  const { isLoading, data, hasNextPage, fetchNextPage,isFetchingNextPage } =
+    useInfiniteDoctors(filters);
+
+    console.log( isLoading, data, hasNextPage, fetchNextPage,isFetchingNextPage )
+
+  const doctors: IDoctorInfo[] = data?.pages?.flatMap((page: any) => page.data) as IDoctorInfo[];
+
+  if (isLoading) {
+    return <SearchingDoctorsSkeleton repeate={3} />;
+  }
+
   return (
     <section className="w-full rounded-md space-y-3 h-full overflow-hidden">
       <AnimateFromToRight>
         <header className="sub-header">
-          <span className="text-primary">45</span> Doctors Available
+          <span className="text-primary">{doctors?.length || 0}</span> Doctors
+          Available
         </header>
       </AnimateFromToRight>
       <div className="flex flex-col gap-2 overflow-y-auto h-full pb-20 ">
@@ -17,12 +35,23 @@ export default function SearchingDoctors() {
           return (
             <AnimateFromToRightInView
               duration={index < 3 ? index / 2 : 0.4}
-              key={doctor.name}
+              key={doctor.doctorId}
             >
-              <DoctorConsultResarveBox doctor={doctor} />
+              <DoctorDetails doctor={doctor} />
             </AnimateFromToRightInView>
           );
         })}
+        { hasNextPage && (
+          <div className="flex items-center justify-center py-4 text-primary underline cursor-pointer">
+            <button onClick={() => fetchNextPage?.()}  className='cursor-pointer'>
+              {isFetchingNextPage ? (
+                <Spinner />
+              ) : (
+                'Load More Doctors'
+              )}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

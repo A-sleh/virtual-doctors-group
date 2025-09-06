@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
 
 type positionType = {
@@ -14,7 +14,11 @@ function useGeolocation(defaultPosition = null) {
   const [_, setSearchParams] = useSearchParams();
   const [error, setError] = useState<string | null>(null);
 
-  function getPosition() {
+  useEffect(() => {    
+    setSearchParams({})
+  },[])
+
+  async function getPosition() {
     if (!navigator.geolocation)
       return setError('Your browser does not support geolocation');
 
@@ -39,7 +43,7 @@ function useGeolocation(defaultPosition = null) {
     );
   }
 
-  return { isLoading, position, error, getPosition };
+  return { isLoading, position, error, getPosition,setSearchParams };
 }
 
 export { useGeolocation };

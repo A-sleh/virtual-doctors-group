@@ -1,14 +1,20 @@
+import { userDoctorsFilter } from '@/context/doctor/DoctorsFilterProvider';
+
 type SearchProps = {
   placeHolder?: string;
 };
 
 export default function Search({ placeHolder = '' }: SearchProps) {
+  const { filters, setFilters } = userDoctorsFilter();
+
   return (
     <div className="relative bg-gray-200 rounded-md text-sm font-medium">
       <input
+        value={filters.name}
         type="search"
         placeholder={placeHolder}
-        className="p-2 text-black w-full"
+        onChange={(e) => setFilters(lastValues => ({...lastValues,name: e.target.value}))}
+        className="p-2 text-black w-full outline-none"
       />
       <input
         type="submit"

@@ -4,7 +4,7 @@ type selectorProps = {
   units?: string[] | number[];
   placeHolder?: string;
   overWriteStyle?: string;
-  anotherValues?: (string | number)[] | undefined;
+  anotherValues?: (string | number | null)[] | undefined;
 };
 
 export default function Selector({
@@ -15,6 +15,7 @@ export default function Selector({
   anotherValues = undefined,
   ...props
 }: selectorProps) {
+
   return (
     <div className="flex flex-col-reverse w-full ">
       <select
@@ -25,7 +26,7 @@ export default function Selector({
         {options.map((op: string | number, index: number) => {
           return (
             <option
-              value={anotherValues ? anotherValues[index] : op}
+              value={anotherValues ? anotherValues[index] || 'all' : op}
               key={index}
             >
               {op} {units[index]}
