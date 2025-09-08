@@ -59,16 +59,16 @@ export default function DoctorSetting() {
             type="text"
             placeHolder="10123123"
           />
-          <ZodErrors error={filedInvalidMessage?.specialityId} />
+          <ZodErrors error={filedInvalidMessage?.SpecialtyId} />
         </div>
         <div>
           <Selector
             lable="speciality"
             options={specialitesTitle}
             anotherValues={specialitesIds}
-            {...register('specialityId')}
+            {...register('SpecialtyId')}
           />
-          <ZodErrors error={filedInvalidMessage?.specialityId} />
+          <ZodErrors error={filedInvalidMessage?.SpecialtyId} />
         </div>
         <SettingInput
           {...register('note')}

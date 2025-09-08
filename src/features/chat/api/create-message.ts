@@ -6,8 +6,8 @@ enum createNewMessageController {
   BASE = '/Ticket',
 }
 
-type messageRequestBodyType = {
-  ticketId: number | string;
+export type messageRequestBodyType = {
+  ticketId: number | string | undefined;
   text: string;
   ownerId: number;
   date: Date;
@@ -17,7 +17,7 @@ async function createNewMessageApi({
   consultaionId,
   data,
 }: {
-  consultaionId: number | string;
+  consultaionId: number | string ;
   data: messageRequestBodyType;
 }) {
   const response = await api.post(

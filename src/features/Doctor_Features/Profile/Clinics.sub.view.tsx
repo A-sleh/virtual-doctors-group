@@ -4,7 +4,6 @@ import ClinicCard from './components/ClinicCard';
 import ClinicsSkeletion from '@/components/skeleton/profile/ClinicsSkeletion';
 
 import AnimateParentUpEffect from '@/lib/Animation/AnimateParentUpEffect';
-import NewClinicForm from './components/NewClinicForm';
 
 export default function Clinics() {
   const { id: doctorId } = useParams();
@@ -19,7 +18,6 @@ export default function Clinics() {
           return <ClinicCard clinic={clinic} />;
         })
       )}
-      <NewClinicForm />
     </AnimateParentUpEffect>
   );
 }

@@ -24,7 +24,7 @@ export type DoctorVectorInfoProps = {
   imgSrc?: string;
   children?: React.ReactNode;
   imageSize?: string;
-  doctorId: number;
+  doctorId?: number;
   fontSize?: string;
   withAnimation?: boolean;
 } & doctor;

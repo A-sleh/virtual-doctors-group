@@ -3,8 +3,9 @@ import { consultStatusProps } from '../types/consultaion';
 import { LiaCalendarDaySolid } from 'react-icons/lia';
 
 const STATUSCOLORS = {
-  Opened: 'text-fourth bg-fourth-hover',
+  Open: 'text-fourth bg-fourth-hover',
   Closed: 'text-danger bg-danger-hover',
+  Rejected: 'text-danger bg-danger-hover',
   Pending: 'text-fivth  bg-fivth-hover',
 };
 
@@ -14,7 +15,7 @@ export default function ConsultStatus({
   time,
 }: consultStatusProps) {
   let thereIsStatuscolors = null;
-  if (status != undefined) {
+  if (status != undefined ) {
     thereIsStatuscolors = STATUSCOLORS[status];
   }
 
@@ -25,7 +26,7 @@ export default function ConsultStatus({
       } justify-end gap-2 `}
     >
       {thereIsStatuscolors ? (
-        <p className={` px-1.5 py-0.5 rounded-md ${thereIsStatuscolors} `}>
+        <p className={` px-1.5 py-0.5 rounded-md  ${thereIsStatuscolors} `}>
           {status}
         </p>
       ) : (

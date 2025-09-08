@@ -9,7 +9,7 @@ export default function NewClinicModel() {
       <Model.Open opens="new-clinic">
         <AnimateButton
           scale={0.9}
-          className="flex items-center flex-1 justify-between gap-4 px-2 cursor-pointer text-lg bg-primary rounded-sm text-white font-normal outline-none h-fit "
+          className="flex items-center flex-1 w-fit justify-between gap-4 px-2 cursor-pointer text-lg bg-primary rounded-sm text-white font-normal outline-none h-fit "
         >
           <span>New clinic</span>
           <VscDiffAdded size={23} className="mt-0.5" />

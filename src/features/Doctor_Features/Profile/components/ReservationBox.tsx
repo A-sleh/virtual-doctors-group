@@ -9,6 +9,7 @@ import AnimateButton from '@/lib/Animation/AnimateButton';
 
 export default function ReservationBox({
   type,
+  register,
   children,
 }: reservationBoxProps) {
   const [updateCost, setUpdateCost] = useState(false);
@@ -34,9 +35,9 @@ export default function ReservationBox({
         </HasPermission>
       </h1>
       {updateCost ? (
-        <form className="px-5 mb-5">
-          <MinimalInput type="text" lable={type + ' cost'} unit="$" />
-        </form>
+        <div className="px-5 mb-5">
+          <MinimalInput type="text" lable={type + ' cost'} unit="$" {...register} />
+        </div>
       ) : (
         children
       )}

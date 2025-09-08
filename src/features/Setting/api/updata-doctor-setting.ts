@@ -4,7 +4,7 @@ import { z } from 'zod';
 export const doctorSettingSchema = z.object({
   syndicateId: z.string().min(1, 'Enter your syndicate Id ...'),
   note: z.string().min(1, 'Enter your syndicate Id ...').optional(),
-  specialityId: z.number().min(1, 'Please select your speciality'),
+  SpecialtyId: z.number().min(1, 'Please select your speciality'),
 });
 
 export type doctorSettingInputs = z.infer<typeof doctorSettingSchema>;

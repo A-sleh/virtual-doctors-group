@@ -21,6 +21,8 @@ import {
 import { useAuth } from '@/context/auth/AuthProvider';
 import Loader from '@/components/ui/loader/Loader';
 import { successToast } from '@/components/custom/toast';
+import { useQueryClient } from '@tanstack/react-query';
+import { QYERY_KEYS } from '@/lib/query-key';
 
 export default function ConsultADoctor({
   doctorId,
@@ -35,11 +37,13 @@ export default function ConsultADoctor({
     specility: string;
   };
 }) {
+  const { userId } = useAuth();
+  const queryClient = useQueryClient()
+
   const [nextStep, setNextStep] = useState<boolean>(false);
   const { register, handleSubmit,reset } = useForm<consultaionInput>();
-
+  
   const { createNewConsultaion, isPending } = useCreateNewConsultaion();
-  const { userId } = useAuth();
   const [filedInvalidMessage, setFiledInvalidMessage] =
     useState<consultaionInputErrorMessage>();
 
@@ -61,6 +65,9 @@ export default function ConsultADoctor({
         successToast(`It was deducted ${cost} from your balance`)
         setNextStep(false)
         reset()
+        queryClient.invalidateQueries({
+          queryKey: [QYERY_KEYS.consultaions]
+        })
       }
     });
   };

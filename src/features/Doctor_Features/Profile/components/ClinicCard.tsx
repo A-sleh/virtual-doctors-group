@@ -2,6 +2,7 @@ import { Link } from 'react-router';
 import { IDoctorClinicsResponse } from '../api/get-profile-info';
 import { paths } from '@/config/paths';
 import { AnimateChildUpEffect } from '@/lib/Animation/AnimateParentUpEffect';
+import Map from '@/lib/googleMap/Maps';
 
 export default function ClinicCard({
   clinic,
@@ -16,6 +17,7 @@ export default function ClinicCard({
     name,
     previewCost,
     status,
+    locationCoords,
     id: clinicId,
   } = clinic;
 
@@ -28,7 +30,14 @@ export default function ClinicCard({
           {status} / {previewCost == 0 ? 'free' : previewCost + ' $'} for
           preview
         </span>
-        <img src="" className="w-full h-[10rem] bg-fourth rounded-md" />
+        <div className="w-full h-[15rem] bg-fourth rounded-md">
+          <Map
+            showOnly={true}
+            zoom={100}
+            withControle={false}
+            defaultPosition={locationCoords.split(',')}
+          />
+        </div>
         <h3 className="font-bold my-3 text-secondary flex justify-between items-center">
           {name} <span className="text-secondary font-medium">{location}</span>
         </h3>

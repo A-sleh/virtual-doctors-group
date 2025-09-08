@@ -2,14 +2,14 @@ import { withChildProps } from '@/types/api';
 import { createContext, useContext, useState } from 'react';
 
 export type FiltersType = {
-  name: string | null ;
+  name: string  ;
   gender: 'male' | 'female' | null | string;
   cost: number | null;
   minRate: number | null;
   lat: number | null;
   lon: number | null;
   ShortestDistanceFirst: boolean;
-  SpecialityId: number | null;
+  SpecialtyId: number | null;
 };
 
 type DoctorsFilterContextType = {
@@ -18,14 +18,14 @@ type DoctorsFilterContextType = {
 };
 
 export const intialValues:FiltersType = {
-    name: null,
+    name: '',
     gender: null,
     cost: null,
     minRate: null,
     lat: null ,
     lon: null,
     ShortestDistanceFirst: false,
-    SpecialityId: null
+    SpecialtyId: null
 }
 
 const DoctorsFilterContext = createContext<DoctorsFilterContextType>(

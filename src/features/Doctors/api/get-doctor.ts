@@ -38,6 +38,7 @@ type ISpecialitiesResponse = {
 enum doctorsController {
   SPECIALITY = '/Speciality',
   FILTRED_DOCTORS = '/Doctor/GetFilteredDoctors',
+  GET_DOCTOR_BY_NAME = '/Doctor/GetByName'
 }
 
 async function getAllSpecialitiesApi() {
@@ -64,11 +65,14 @@ const getDoctorsApi = ({
   pageSize?: number;
   page?: number;
 }): Promise<SearchDoctorsResponse> => {
-  return api.get(`${doctorsController.FILTRED_DOCTORS}`, {
+
+  const params = filters.name != '' ? {name: filters.name} : {...filters,name: null}
+
+  return api.get(`${filters.name != '' ? doctorsController.GET_DOCTOR_BY_NAME : doctorsController.FILTRED_DOCTORS}`, {
     params: {
       pageSize,
       page,
-      ...filters,
+      ...params,
     },
   });
 };
@@ -90,7 +94,7 @@ const getInfiniteCommentsQueryOptions = (filters: FiltersType) => {
 
 const useInfiniteDoctors = (filters: FiltersType) => {
   // Because this filter field is required
-  if (!filters.SpecialityId)
+  if (!filters.SpecialtyId)
     return { isLoading: true, data: [], hasNextPage: false,fetchNextPage: null,isFetchingNextPage: false };
 
   return useInfiniteQuery({

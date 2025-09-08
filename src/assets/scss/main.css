@@ -51,6 +51,9 @@
   .modal {
     @apply fixed top-[50%] left-[50%] translate-[-50%] p-2 bg-third rounded-md  min-h-fit w-[90%] sm:w-xl;
   }
+  .leaflet-control-attribution {
+    @apply hidden;
+  }
 }
 
 @utility li-style {

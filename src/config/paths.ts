@@ -108,9 +108,9 @@ export const paths = {
       getHref: (id: number) => `/consultation/${id}`,
     },
     consultaionChat: {
-      path: 'consultation/:id/chat/:chatId',
-      getHref: (id: number, chatId: number) =>
-        `/consultation/${id}/chat/${chatId}`,
+      path: 'consultation/:id/chat/:doctorId',
+      getHref: (id: number, doctorId: number) =>
+        `/consultation/${id}/chat/${doctorId}`,
     },
     admin: {
       home: {

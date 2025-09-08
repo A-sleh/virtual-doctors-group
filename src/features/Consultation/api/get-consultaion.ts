@@ -10,10 +10,10 @@ export type IGetConsultaionsResponse = {
   id: number;
   userId: number;
   doctorId: number;
-  status: 'Opened' | 'Closed' | 'Pending' | undefined;
+  status: 'Open' | 'Closed' | 'Pending' | 'Rejected' | undefined;
   closeDate: Date;
   openDate: Date;
-  specility: string;
+  doctorSpeciality: string;
 };
 
 async function getConsultaionsApi(

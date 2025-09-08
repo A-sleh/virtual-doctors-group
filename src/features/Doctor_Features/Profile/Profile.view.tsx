@@ -3,13 +3,12 @@ import { FaLocationDot } from 'react-icons/fa6';
 
 import DoctorVectorInfo from '@/features/Doctors/components/DoctorVectorInfo';
 import RatingItem from '@/features/Doctors/components/RatingItem';
-
-import MainInformation from './components/MainInformation';
-import ProfileLinks from './components/ProfileLinks';
-import { Outlet, useParams } from 'react-router';
-import DoctorStarsRating from './components/DoctorStarsRating';
-import { useGetDoctorInfo } from './api/get-profile-info';
 import ProfileHeaderSkeleton from '@/components/skeleton/profile/ProfileHeaderSkeleton';
+import ProfileLinks from './components/ProfileLinks';
+import DoctorStarsRating from './components/DoctorStarsRating';
+
+import { Outlet, useParams } from 'react-router';
+import { useGetDoctorInfo } from './api/get-profile-info';
 
 export default function Profile() {
   const { id: doctorId } = useParams();
@@ -24,6 +23,7 @@ export default function Profile() {
           <section className="rounded-box flex justify-between">
             <div className="space-y-3 ">
               <DoctorVectorInfo
+                doctorId={Number(doctorId)}
                 name={`${doctorInfo?.firstName} ${doctorInfo?.lastName}`}
                 specility={doctorInfo?.speciality}
                 imageSize={'h-40 w-40'}
@@ -34,9 +34,8 @@ export default function Profile() {
                   <RatingItem Icon={FaLocationDot} text={'syria, aleppo'} />
                 </div>
               </DoctorVectorInfo>
-              <DoctorStarsRating starsNumber={3.5} />
+              <DoctorStarsRating starsNumber={Number(doctorInfo?.doctorId) % 6} />
             </div>
-            <MainInformation />
           </section>
           <ProfileLinks />
         </>

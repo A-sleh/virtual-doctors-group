@@ -23,7 +23,7 @@ export default function ClinicInformation({
   setValue: UseFormSetValue<IClinicDetailsResponse>;
   getValues: UseFormGetValues<IClinicDetailsResponse>;
 }) {
-  const [updateClinicInfo, setUpdateClinicInfo] = useState(true);
+  const [updateClinicInfo, setUpdateClinicInfo] = useState(false);
 
   function handleUpdateFormClicked(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

@@ -102,11 +102,12 @@ function secondsToDhms(totalSeconds: number) {
 
 function calcTheNumbersOfConsultaions(
   consultaions: IGetConsultaionsResponse[],
-): { opened: number; closed: number; pending: number } {
+): { opened: number; closed: number; pending: number,Rejected: number } {
   const obj = new Map<string, number>([
     ['Closed', 0],
-    ['Opened', 0],
+    ['Open', 0],
     ['Pending', 0],
+    ['Rejected', 0],
   ]);
 
   consultaions.forEach((consultaion) =>
@@ -116,9 +117,10 @@ function calcTheNumbersOfConsultaions(
     ),
   );
   return {
-    opened: obj.get('Opened') || 0,
+    opened: obj.get('Open') || 0,
     closed: obj.get('Closed') || 0,
     pending: obj.get('Pending') || 0,
+    Rejected: obj.get('Rejected') || 0,
   };
 }
 

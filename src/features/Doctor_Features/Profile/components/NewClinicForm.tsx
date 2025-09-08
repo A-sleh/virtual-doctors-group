@@ -4,6 +4,7 @@ import {
   clinicInputsErrorMessages,
   clinicInputsType,
   newClinicFormIsNotValid,
+  useCreateNewClinic,
 } from '../api/create-profile-info';
 import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
 import { mapedDays } from '@/utils';
@@ -12,23 +13,56 @@ import ZodErrors from '@/components/custom/ZodErrors';
 import Map from '@/lib/googleMap/Maps';
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import { useUrlPosition } from '@/hooks/useUrlPosition';
+import { errorToast } from '@/components/custom/toast';
+import { useAuth } from '@/context/auth/AuthProvider';
+import { useQueryClient } from '@tanstack/react-query';
+import { QYERY_KEYS } from '@/lib/query-key';
 
 export default function NewClinicForm() {
+  const queryClient = useQueryClient();
   const [nextStep, setNextStep] = useState<boolean>(false);
-  const { register, handleSubmit } = useForm<clinicInputsType>();
   const [filedInvalidMessage, setFiledInvalidMessage] =
     useState<clinicInputsErrorMessages | null>(null);
+
+  const { userId } = useAuth();
+  const { createNewClinic } = useCreateNewClinic();
+  const { register, handleSubmit, getValues, reset } =
+    useForm<clinicInputsType>();
   const { lat, lng, setSearchParams } = useUrlPosition();
 
   const onSubmit: SubmitHandler<clinicInputsType> = (data) => {
     let messages;
     if ((messages = newClinicFormIsNotValid(data))) {
       setFiledInvalidMessage(messages as clinicInputsErrorMessages);
-      setSearchParams((pre) => pre);
       return;
     }
     if (!nextStep) setNextStep(true);
-    else {
+    else if (lat == null || lng == null || !getValues('location')) {
+      errorToast('Please select your clinic location, and title');
+    } else {
+      createNewClinic(
+        {
+          ...data,
+          doctorId: userId,
+          locationCoords: `${lat},${lng}`,
+          workTime: {
+            endWorkHours: data.endWorkHours,
+            startWorkHours: data.startWorkHours,
+            holidays: data.holidays,
+          },
+        },
+        {
+          onSuccess: () => {
+            setSearchParams({});
+            setFiledInvalidMessage(null);
+            setNextStep(false);
+            reset();
+            queryClient.invalidateQueries({
+              queryKey: [QYERY_KEYS.doctor.clinics],
+            });
+          },
+        },
+      );
     }
   };
 
@@ -40,7 +74,6 @@ export default function NewClinicForm() {
             <div className="flex-2">
               <Map showOnly={false} withControle={true} zoom={3} />
             </div>
-
             <SettingInput
               {...register('location')}
               lable="Location name"
@@ -122,7 +155,7 @@ export default function NewClinicForm() {
             </div>
           </div>
         )}
-        <AnimateButton className="px-4 py-1 bg-primary text-white rounded-md float-end cursor-pointer">
+        <AnimateButton className="px-4 py-1 bg-primary text-white rounded-md cursor-pointer">
           {nextStep ? 'Apply' : 'Next'}
         </AnimateButton>
       </form>

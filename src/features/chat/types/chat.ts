@@ -1,7 +1,7 @@
 export type message = {
   ownerId: number;
-  message: string;
-  time: string;
+  text: string;
+  date: Date;
 };
 
 export type messagesProps = {

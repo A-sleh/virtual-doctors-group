@@ -3,16 +3,16 @@ import { DoctorBoxProps } from '../types/consultaion';
 import ConsultStatus from './ConsultStatus';
 
 export default function DoctorBox({ doctor, children }: DoctorBoxProps) {
-  const { name, specility, description = null, date, status, time } = doctor;
+  const { name, specility, description = null, date, status, time ,doctorId} = doctor;
 
   return (
-    <div className="rounded-box flex flex-col space-y-3 ">
+    <div className={`rounded-box flex flex-col space-y-3 ${status == "Rejected" && 'border-2  border-danger'}`}>
       <section
         className={`sm:flex justify-between gap-3 ${status && 'flex'} ${
           description == null ? 'flex-col' : 'flex-row'
         }`}
       >
-        <DoctorVectorInfo name={name} specility={specility} />
+        <DoctorVectorInfo doctorId={doctorId} name={name} specility={specility} />
         <ConsultStatus date={date} status={status} time={time} />
       </section>
       <div

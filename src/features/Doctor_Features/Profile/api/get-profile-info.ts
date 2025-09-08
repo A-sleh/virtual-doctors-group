@@ -27,6 +27,7 @@ export type IDoctorClinicsResponse = {
   previewCost: number;
   startWorkHours: string;
   endWorkHours: string;
+  locationCoords: string;
 };
 
 export type IClinicDetailsResponse = {

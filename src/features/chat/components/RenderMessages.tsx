@@ -1,11 +1,21 @@
-
 import ChatBox from './ChatBox';
-import { messagesProps } from '../types/chat';
-const OWNER = 1;
+import { useAuth } from '@/context/auth/AuthProvider';
+import { messageRequestBodyType } from '../api/create-message';
 
-export default function Messages({ messages }: messagesProps) {
+export default function Messages({
+  messages,
+}: {
+  messages: messageRequestBodyType[];
+}) {
+  const { userId } = useAuth();
+
   const messageList = messages.map((message) => (
-    <ChatBox {...message} owner={OWNER === message.ownerId} />
+    <ChatBox
+      ownerId={message.ownerId}
+      date={new Date(message.date)}
+      text={message.text}
+      owner={userId === message.ownerId}
+    />
   ));
   return messageList;
 }

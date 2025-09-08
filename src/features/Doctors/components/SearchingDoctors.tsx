@@ -14,10 +14,9 @@ export default function SearchingDoctors() {
   const { isLoading, data, hasNextPage, fetchNextPage,isFetchingNextPage } =
     useInfiniteDoctors(filters);
 
-    console.log( isLoading, data, hasNextPage, fetchNextPage,isFetchingNextPage )
-
   const doctors: IDoctorInfo[] = data?.pages?.flatMap((page: any) => page.data) as IDoctorInfo[];
 
+  console.log(doctors)
   if (isLoading) {
     return <SearchingDoctorsSkeleton repeate={3} />;
   }
@@ -31,7 +30,7 @@ export default function SearchingDoctors() {
         </header>
       </AnimateFromToRight>
       <div className="flex flex-col gap-2 overflow-y-auto h-full pb-20 ">
-        {doctors.map((doctor, index: number) => {
+        {doctors?.map((doctor, index: number) => {
           return (
             <AnimateFromToRightInView
               duration={index < 3 ? index / 2 : 0.4}

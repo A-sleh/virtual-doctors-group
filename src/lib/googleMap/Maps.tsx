@@ -15,9 +15,9 @@ import 'leaflet-routing-machine';
 
 import { useUrlPosition } from '@/hooks/useUrlPosition.tsx';
 import { useGeolocation } from '@/hooks/useGeolocation';
-import AnimateButton from '../Animation/AnimateButton';
+import { GiResize } from 'react-icons/gi';
 
-type points = [number, number];
+type points = number[] | string[];
 
 type mapType = {
   zoom?: number;
@@ -27,6 +27,7 @@ type mapType = {
     name: string;
     speciality: string;
   };
+  resize: boolean;
   withControle: boolean;
   showOnly: boolean;
 };
@@ -58,15 +59,17 @@ function Routing({ points }: { points: points[] }) {
 function Map({
   defaultPosition = [20, 22],
   doctorInfo,
+  resize = false,
   zoom = 20,
   showOnly = true,
   withControle = true,
 }: mapType) {
+  const [fullWindow, setFullWindow] = useState(false);
   const [mapPosition, setMapPosition] = useState<points>(
     defaultPosition ?? [33, 36],
   );
 
-  const [mapLat, mapLng] = useUrlPosition();
+  const { lat: mapLat, lng: mapLng } = useUrlPosition();
   const {
     isLoading: isLoadingPosition,
     getPosition,
@@ -83,26 +86,35 @@ function Map({
   }, [geoLocationPosition]);
 
   return (
-    <div className="w-full h-full  relative bg-white space-y-1 p-2 rounded-md">
+    <div
+      className={
+        'bg-white space-y-1 p-2 rounded-md ' +
+        (fullWindow
+          ? 'fixed w-[90%]  h-[90%] z-[5000] top-[5%] left-[5%] lay-out'
+          : `w-full h-full relative  `)
+      }
+    >
       <div className="absolute top-2 right-2 z-[500] ">
         {geoLocationPosition == null && withControle && (
-          <AnimateButton
+          <span
             onClick={() => getPosition()}
-            className="px-2 py-1 bg-primary rounded-md text-white "
+            className="px-4 py-1 bg-primary text-white rounded-md cursor-pointer"
           >
             {isLoadingPosition
               ? 'Loding...'
               : showOnly
               ? 'Show the shortest path'
               : 'Use my location'}
-          </AnimateButton>
+          </span>
         )}
       </div>
       <MapContainer
         center={mapPosition}
         zoom={zoom}
         style={{ height: '100%' }}
-        scrollWheelZoom={true}
+        zoomControl={!showOnly}
+        scrollWheelZoom={!showOnly}
+        ch
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -123,6 +135,13 @@ function Map({
           />
         )}
       </MapContainer>
+      {resize && (
+        <GiResize
+          size={25}
+          onClick={() => setFullWindow((pre) => !pre)}
+          className="transition-all text-primary hover:text-primary-hover cursor-pointer z-[40000] absolute bottom-[2%] left-[2%]"
+        />
+      )}
     </div>
   );
 }

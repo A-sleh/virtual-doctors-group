@@ -1,20 +1,23 @@
 import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
 import AnimateScale from '@/lib/Animation/AnimateScale';
 import { DoctorVectorInfoProps } from '../types/doctor';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import { paths } from '@/config/paths';
 import fofImg from '@/assets/images/pexels-jrfotosgrand-fotografia-12660379.jpg';
 
 export default function DoctorVectorInfo({
   name,
-  doctorId,
+  doctorId ,
   specility,
   imgSrc,
   children,
   imageSize = 'h-14 w-14',
   fontSize = '',
   withAnimation = false,
-}: DoctorVectorInfoProps) {
+}: DoctorVectorInfoProps ) {
+
+  const currentPath = useLocation().pathname
+  
   return (
     <div className="flex gap-3">
       <AnimateScale run={withAnimation}>
@@ -27,10 +30,10 @@ export default function DoctorVectorInfo({
       <AnimateFromToRight className="flex flex-col gap-2" run={withAnimation}>
         <div className="flex flex-col space-y-1">
           <Link
-            to={paths.app.doctor.profile.getHref(doctorId)}
+            to={doctorId ?  paths.app.doctor.profile.getHref(doctorId) : currentPath}
             className={`font-medium ${fontSize}`}
           >
-            {specility && <span className="text-primary ">Dr.</span>}
+            {specility && <span className="text-primary ">{doctorId&&'Dr.'}</span>}
             {name}
           </Link>
           {specility && (

@@ -1,3 +1,4 @@
+
 export type discriptionCardProps = {
   title: string;
   description?: string;
@@ -21,5 +22,6 @@ export type workingTimeProps = {
 
 export type reservationBoxProps = {
   type: string;
+  register: any;
   children?: React.ReactNode;
 };

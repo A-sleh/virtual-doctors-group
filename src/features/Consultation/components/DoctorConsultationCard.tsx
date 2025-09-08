@@ -15,6 +15,7 @@ export default function DoctorConsultationCard({
   consultaion: IGetConsultaionsResponse;
 }) {
   const { ROLE } = useAuth();
+
   const {
     status,
     id: consultaionId,
@@ -23,30 +24,39 @@ export default function DoctorConsultationCard({
     userName,
     openDate,
     doctorName,
-    specility,
+    doctorSpeciality,
   } = consultaion;
+
   const doctor: consultaionContent = {
+    doctorId: doctorId,
     name: userName || doctorName,
-    specility: specility ? specility : undefined,
+    specility: doctorSpeciality ? doctorSpeciality : undefined,
     description: text ? text : 'Please help me for test case',
     date: formatDateMonthYearDay(openDate),
     status: status,
   };
 
+  
   function renderOpenChatButton(status: string): boolean {
-    return status !== 'Pending' || (status == 'Pending' && ROLE == 'patient');
+    return status !== 'Pending';
   }
 
   return (
     <DoctorBox doctor={doctor}>
       <div className="flex gap-2.5">
-        {renderOpenChatButton(status || '') && (
+        {renderOpenChatButton(status || '') && status != 'Rejected' && (
           <AnimateButton
             scale={0.7}
             className="btn-rounded bg-primary hover:bg-primary-hover text-white transition-all duration-100 "
           >
             <Link
-              to={paths.app.consultaionChat.getHref(consultaionId, doctorId)}
+              to={{
+                pathname: paths.app.consultaionChat.getHref(
+                  consultaionId,
+                  doctorId,
+                ),
+                search: `userName=${userName || doctorName}&isDoctor=${!!doctorSpeciality}`,
+              }}
             >
               Open chat
             </Link>

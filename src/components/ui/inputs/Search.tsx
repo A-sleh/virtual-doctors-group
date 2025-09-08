@@ -10,7 +10,7 @@ export default function Search({ placeHolder = '' }: SearchProps) {
   return (
     <div className="relative bg-gray-200 rounded-md text-sm font-medium">
       <input
-        value={filters.name}
+        value={filters.name || ''}
         type="search"
         placeholder={placeHolder}
         onChange={(e) => setFilters(lastValues => ({...lastValues,name: e.target.value}))}

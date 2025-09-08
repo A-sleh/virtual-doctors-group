@@ -1,4 +1,4 @@
-import { successToast } from '@/components/custom/toast';
+import { errorToast, successToast } from '@/components/custom/toast';
 import { api } from '@/lib/api-client';
 import { formIsNotValid } from '@/utils';
 import { useMutation } from '@tanstack/react-query';
@@ -10,11 +10,12 @@ enum profileController {
 
 const clinicSchema = z.object({
   name: z.string().min(1, 'Please enter the title of the clinic'),
-  avgService: z.string(),
-  previewCost: z.string(),
+  avgService: z.coerce
+    .number()
+    .positive("The avarage of service can't be negative"),
+  previewCost: z.coerce.number().positive("Preview cost can't be negative"),
   location: z.string().optional(),
   locationCoords: z.string().optional(),
-
   startWorkHours: z
     .string()
     .refine(
@@ -31,6 +32,14 @@ const clinicSchema = z.object({
 });
 
 export type clinicInputsType = z.infer<typeof clinicSchema>;
+export type clinicFormReques = clinicInputsType & {
+  workTime: Pick<
+    clinicInputsType,
+    'endWorkHours' | 'startWorkHours' | 'holidays'
+  >;
+  doctorId: number;
+};
+
 export type clinicInputsErrorMessages = {
   [z in keyof clinicInputsType]: string[] | undefined;
 };
@@ -54,6 +63,24 @@ async function addNewWrokHoursApi(data: WroktimeBodyReq) {
   return response;
 }
 
+async function createNewClinicApi(data: clinicFormReques) {
+  const response = await api.post(`${profileController.CLINIC_BASE}`, data);
+  return response;
+}
+
+function useCreateNewClinic() {
+  const { mutate: createNewClinic, isPaused } = useMutation({
+    mutationFn: createNewClinicApi,
+    onSuccess: () => {
+      successToast('The clinic was created');
+    },
+    onError: () => {
+      errorToast('Some thing went wron, Please try again');
+    },
+  });
+  return { createNewClinic, isPaused };
+}
+
 function useAddNewWorkHours() {
   const { mutate: addNewWorkHours, isPaused } = useMutation({
     mutationFn: addNewWrokHoursApi,
@@ -61,10 +88,10 @@ function useAddNewWorkHours() {
       successToast('The work time was added');
     },
     onError: () => {
-      successToast('Some thing went wron, Please try again');
+      errorToast('Some thing went wron, Please try again');
     },
   });
   return { addNewWorkHours, isPaused };
 }
 
-export { useAddNewWorkHours };
+export { useAddNewWorkHours, useCreateNewClinic };

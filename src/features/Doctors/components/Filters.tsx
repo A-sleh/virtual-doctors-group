@@ -47,11 +47,11 @@ export default function Filters() {
 
   useEffect(() => {
 
-    // Set intial value to SpecialityId because this field is required
-    if(Specialities && Specialities?.length !== 0 && !isPending && !filters.SpecialityId) {
-        setFilters(lastValues => ({...lastValues, SpecialityId: Specialities[0]?.id }))
+    // Set intial value to SpecialtyId because this field is required
+    if(Specialities && Specialities?.length !== 0 && !isPending && !filters.SpecialtyId) {
+        setFilters(lastValues => ({...lastValues, SpecialtyId: Specialities[0]?.id }))
     }
-  },[Specialities,filters.SpecialityId])
+  },[Specialities,filters.SpecialtyId])
 
   return (
     <>
@@ -84,11 +84,11 @@ export default function Filters() {
                     return speciality.id;
                   }) || []
                 }
-                value={filters.SpecialityId}
+                value={filters.SpecialtyId}
                 onChange={(e: any) =>
                   setFilters((lastValues) => ({
                     ...lastValues,
-                    SpecialityId: e.target.value,
+                    SpecialtyId: e.target.value,
                   }))
                 }
                 overWriteStyle="border-none text-primary"

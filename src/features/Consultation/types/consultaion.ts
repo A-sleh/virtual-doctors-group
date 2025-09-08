@@ -9,19 +9,21 @@ export type FilterBoxProps = {
 };
 
 export type consultaionContent = {
+  doctorId: number;
   date: string;
   description: string;
-  status?: 'Opened' | 'Closed' | 'Pending';
+  status?: 'Open' | 'Closed' | 'Pending' | "Rejected" | undefined;
   time?: string;
 } & doctor;
 
 export type upConmingResType = {
+  doctorId: number;
   name: string;
   specility: string;
   date: string;
   time: string;
   description?: string;
-  status?: 'Opened' | 'Closed' | 'Pending';
+  status?: 'Open' | 'Closed' | 'Pending';
 };
 
 export type consultaionContentProps = {
@@ -34,7 +36,7 @@ export type DoctorBoxProps = {
 };
 
 export type consultStatusProps = {
-  status: 'Opened' | 'Closed' | 'Pending' | undefined;
+  status: 'Open' | 'Closed' | 'Pending' | 'Rejected' | undefined;
   date: string;
   time?: string;
 };
