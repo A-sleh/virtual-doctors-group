@@ -39,11 +39,11 @@ async function getUserProfile(): Promise<IUserProfileResponse> {
 }
 
 export function useUserProfile() {
-  const { data: userProfile, isPaused } = useQuery({
+  const { data: userProfile, isPending } = useQuery({
     queryKey: [QYERY_KEYS.patient.userProfile],
     queryFn: async () => getUserProfile(),
   });
-  return { userProfile, isPaused };
+  return { userProfile, isPending };
 }
 
 export function useUser() {

@@ -41,7 +41,7 @@ export default function ClinicDetails() {
         <WorkingTime dayHours={['Sun', 'Mun', 'Tue', 'Thur']} />
 
         <div className="flex-1/12 space-y-2">
-          <ReservationBox
+          {/* <ReservationBox
             register={{ ...register('doctor.ticketCost') }}
             type={isPatient(ROLE) ? 'Preview now' : 'Preview'}
           >
@@ -60,7 +60,7 @@ export default function ClinicDetails() {
                 </p>
               </HasPermission>
             </div>
-          </ReservationBox>
+          </ReservationBox> */}
 
           <ReservationBox
             register={{ ...register('previewCost') }}

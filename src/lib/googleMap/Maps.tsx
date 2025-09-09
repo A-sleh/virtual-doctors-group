@@ -113,8 +113,7 @@ function Map({
         zoom={zoom}
         style={{ height: '100%' }}
         zoomControl={!showOnly}
-        scrollWheelZoom={!showOnly}
-        ch
+        scrollWheelZoom={true}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

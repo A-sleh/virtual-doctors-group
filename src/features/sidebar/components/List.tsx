@@ -14,7 +14,7 @@ export default function List({ links, sideBarStatus }: linksProps) {
   const textContainerStyle = sideBarStatus
     ? 'md:min-w-48 md:flex w-full sm:w-fit md:w-full '
     : 'w-0 sm:w-fit md:flex';
-
+  console.log(ROLE)
   return (
     <ul className="flex flex-col gap-4">
       {sectionLinks.map((link, index: number) => {

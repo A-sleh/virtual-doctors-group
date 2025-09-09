@@ -30,7 +30,7 @@ function generateDaysFrom(
 }
 
 function removeKeys<T>(
-  obj: { [key: string]: string | Date },
+  obj: { [key: string]:  any},
   keysToRemove: string[],
 ): T {
   return Object.keys(obj)

@@ -13,6 +13,7 @@ export default function AvialableDays({ children }: withChildProps) {
   const initDayRef = useRef<HTMLDivElement | null>(null);
   const [move, setMove] = useState(0);
   const currentDate = new Date();
+  console.log(currentDate)
 
   const days = generateDaysFrom(
     currentDate.getFullYear(),

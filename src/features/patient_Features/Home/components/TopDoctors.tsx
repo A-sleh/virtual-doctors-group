@@ -9,6 +9,7 @@ import Header from './Header';
 import { limitProps } from '../types/home';
 
 export default function TopDoctors({ limitNumber = 2 }: limitProps) {
+
   const doctors = topDoctors.slice(0, limitNumber);
 
   return (

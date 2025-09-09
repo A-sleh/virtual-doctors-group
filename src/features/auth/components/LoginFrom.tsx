@@ -74,9 +74,9 @@ export default function LoginFrom() {
               Remember me
             </label>
           </span>
-          <span className="text-primary">
+          {/* <span className="text-primary">
             <Link to={paths.auth.login.getHref()}> Forgot password?</Link>
-          </span>
+          </span> */}
         </div>
       </AnimateParentLeftEffect>
       <Btn

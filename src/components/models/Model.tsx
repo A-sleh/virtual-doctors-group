@@ -28,6 +28,8 @@ const ModelContext = createContext<modelContextType>({
   close,
 });
 
+
+
 function Model({ children }: { children: React.ReactNode }) {
   const [openName, setOpenName] = useState<string>('');
 
@@ -39,6 +41,12 @@ function Model({ children }: { children: React.ReactNode }) {
       {children}
     </ModelContext.Provider>
   );
+}
+
+export function useCloseModelAfterAnyAction(): () => void {
+  const { close } = useContext(ModelContext);
+
+  return close ;
 }
 
 function Open({ children, opens: openWindowName }: openProps) {
@@ -78,7 +86,7 @@ function Window({ children, name, title = null, className = '' }: windowProps) {
         {children}
       </div>
     </div>,
-    document.body,
+    document.getElementById('root') as HTMLElement,
   );
 }
 

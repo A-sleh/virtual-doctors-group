@@ -99,7 +99,7 @@ const useInfiniteDoctors = (filters: FiltersType) => {
 
   return useInfiniteQuery({
     ...getInfiniteCommentsQueryOptions(filters),
-  });
+  }) ;
 };
 
 export { useGetAllSppecialities, useInfiniteDoctors };

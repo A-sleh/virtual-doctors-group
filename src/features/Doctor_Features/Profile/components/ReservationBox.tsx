@@ -5,13 +5,15 @@ import { RiSettings5Fill } from 'react-icons/ri';
 import { useState } from 'react';
 import MinimalInput from '@/components/ui/inputs/MinimalInput';
 import { IoMdClose } from 'react-icons/io';
-import AnimateButton from '@/lib/Animation/AnimateButton';
+import PatientBooking from '@/features/patient_Features/Models/PatientBooking.Model';
+import { useAuth } from '@/context/auth/AuthProvider';
 
 export default function ReservationBox({
   type,
   register,
   children,
 }: reservationBoxProps) {
+  const { userId } = useAuth();
   const [updateCost, setUpdateCost] = useState(false);
 
   return (
@@ -36,18 +38,22 @@ export default function ReservationBox({
       </h1>
       {updateCost ? (
         <div className="px-5 mb-5">
-          <MinimalInput type="text" lable={type + ' cost'} unit="$" {...register} />
+          <MinimalInput
+            type="text"
+            lable={type + ' cost'}
+            unit="$"
+            {...register}
+          />
         </div>
       ) : (
         children
       )}
-      <HasPermission allowedTo={['doctor', 'patient']} condition={updateCost}>
-        <AnimateButton
-          scale={1.1}
-          className="text-center bg-primary w-full p-2 text-white font-medium cursor-pointer"
-        >
-          {type}
-        </AnimateButton>
+      <HasPermission allowedTo={[ 'patient']} condition={updateCost}>
+        <PatientBooking
+          openKey="Book"
+          requestMethod="POST"
+          // reservationDetails={{userId,virtualId:,}}
+        />
       </HasPermission>
     </AnimateDownEffectInview>
   );

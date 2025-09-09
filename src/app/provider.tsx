@@ -4,7 +4,6 @@ import { Toaster } from 'sonner';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from '@/context/auth/AuthProvider';
 import { useRoutes } from './Routes/router';
-import { userLocalStorage } from '@/features/auth/localstorage/user.localstore';
 import { CurrentClinicProvider } from '@/context/doctor/CurrentClinicProvider';
 
 export default function AppProvider() {
@@ -23,21 +22,6 @@ export default function AppProvider() {
         <CurrentClinicProvider>
           <RouterProvider router={router} />
           <Toaster />
-          <a
-            href="/auth/login"
-            onClick={() => userLocalStorage.removeUser()}
-            style={{
-              position: 'fixed',
-              right: '10px',
-              bottom: '10px',
-              zIndex: '400',
-              backgroundColor: 'red',
-              color: 'white',
-              fontWeight: 'bold',
-            }}
-          >
-            remove user
-          </a>
           <a
             href="http://vdg.runasp.net/swagger/index.html"
             target="_blank"

@@ -4,7 +4,6 @@ import RenderButtons from './ConsultationButtons';
 
 import { Link } from 'react-router';
 import { paths } from '@/config/paths';
-import { useAuth } from '@/context/auth/AuthProvider';
 import { IGetConsultaionsResponse } from '../api/get-consultaion';
 import { formatDateMonthYearDay } from '@/utils';
 import { consultaionContent } from '../types/consultaion';
@@ -14,8 +13,8 @@ export default function DoctorConsultationCard({
 }: {
   consultaion: IGetConsultaionsResponse;
 }) {
-  const { ROLE } = useAuth();
-
+  
+  console.log(consultaion,'here')
   const {
     status,
     id: consultaionId,

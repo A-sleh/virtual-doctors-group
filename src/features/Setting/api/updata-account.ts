@@ -5,16 +5,12 @@ import { useMutation } from '@tanstack/react-query';
 import { z } from 'zod';
 
 enum accountSettingController {
-  BASE = '/Account',
+  BASE = '/User',
 }
 
 export const accountSchema = z.object({
   firstName: z.string().min(3, 'Please enter your name'),
   lastName: z.string().min(3, 'Please enter your last name'),
-  email: z
-    .string()
-    .min(1, 'Please enter your email')
-    .email('This email invalid'),
   phone: z
     .string()
     .min(10, 'The number most be 10 digits')
@@ -22,7 +18,6 @@ export const accountSchema = z.object({
   birthDate: z.string().min(1, 'Please enter your birth date'),
   personalId: z.string().min(10, 'Please enter your personal id ...'),
   gender: z.enum(['male', 'female']),
-  notificationMe: z.string().optional(),
 });
 
 export type accountInputs = z.infer<typeof accountSchema>;
@@ -34,8 +29,8 @@ export function accountSettingFormIsNotValid(data: accountInputs) {
   return formIsNotValid(accountSchema, data);
 }
 
-async function updateAccountSettingApi() {
-  const response = await api.put(`${accountSettingController.BASE}`);
+async function updateAccountSettingApi(body: accountInputs) {
+  const response = await api.put(`${accountSettingController.BASE}`, body);
   return response;
 }
 

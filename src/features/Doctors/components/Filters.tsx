@@ -16,7 +16,8 @@ import { useEffect } from 'react';
 export default function Filters() {
   const { filters, setFilters } = userDoctorsFilter();
   const { Specialities, isPending } = useGetAllSppecialities();
-  const { isLoading, getPosition, position, setSearchParams } = useGeolocation();
+  const { isLoading, getPosition, position, setSearchParams } =
+    useGeolocation();
 
   async function handleTrackLocation(isTrack: boolean) {
     if (isTrack) {
@@ -41,17 +42,27 @@ export default function Filters() {
   function hanelRestFields() {
     setFilters((lastValues) => ({
       ...intialValues,
-      name: lastValues.name
+      name: lastValues.name,
     }));
   }
 
   useEffect(() => {
-
     // Set intial value to SpecialtyId because this field is required
-    if(Specialities && Specialities?.length !== 0 && !isPending && !filters.SpecialtyId) {
-        setFilters(lastValues => ({...lastValues, SpecialtyId: Specialities[0]?.id }))
+    if (
+      Specialities &&
+      Specialities?.length !== 0 &&
+      !isPending &&
+      !filters.SpecialtyId
+    ) {
+      setFilters((lastValues) => ({
+        ...lastValues,
+        SpecialtyId: Specialities[0]?.id,
+      }));
     }
-  },[Specialities,filters.SpecialtyId])
+  }, [Specialities, filters.SpecialtyId]);
+
+  // Hidden the filters list if the useer using search input 
+  if (filters.name) return null;
 
   return (
     <>
@@ -102,13 +113,13 @@ export default function Filters() {
                 value={filters.gender || 'all'}
                 onChange={(e: any) =>
                   setFilters((lastValues) => {
-                    console.log(e.target.value)
-                    return ({
-                    ...lastValues,
-                    gender: e.target.value == 'all' ? null : e.target.value, 
-                  })})
+                    console.log(e.target.value);
+                    return {
+                      ...lastValues,
+                      gender: e.target.value == 'all' ? null : e.target.value,
+                    };
+                  })
                 }
-                
                 overWriteStyle="border-none text-primary"
               />
             </FilterInput>
@@ -132,7 +143,10 @@ export default function Filters() {
                 onChange={(e) =>
                   setFilters((lastValues) => ({
                     ...lastValues,
-                    cost: Number(e.target.value) == 0 ? null : Number(e.target.value),
+                    cost:
+                      Number(e.target.value) == 0
+                        ? null
+                        : Number(e.target.value),
                   }))
                 }
               />
@@ -165,4 +179,3 @@ export default function Filters() {
     </>
   );
 }
-

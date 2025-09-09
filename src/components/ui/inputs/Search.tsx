@@ -16,11 +16,11 @@ export default function Search({ placeHolder = '' }: SearchProps) {
         onChange={(e) => setFilters(lastValues => ({...lastValues,name: e.target.value}))}
         className="p-2 text-black w-full outline-none"
       />
-      <input
+      {/* <input
         type="submit"
         value="Search"
         className="absolute top-0 right-0 h-full px-8 bg-primary rounded-md text-white"
-      />
+      /> */}
     </div>
   );
 }

@@ -13,6 +13,6 @@ export default function HasPermission({
 }: HasPermissionProps) {
   const { ROLE } = useAuth();
   // dont render the element if the condition doesn't equal to true
-  if (!allowedTo.includes(ROLE) || !condition) return null;
+  if (!allowedTo.includes(ROLE.toLowerCase()) || !condition) return null;
   return children;
 }
