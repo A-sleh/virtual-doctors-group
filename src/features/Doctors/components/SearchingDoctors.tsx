@@ -16,7 +16,6 @@ export default function SearchingDoctors() {
 
   const doctors: IDoctorInfo[] = data?.pages?.flatMap((page: any) => page.data) as IDoctorInfo[];
 
-  console.log(doctors)
   if (isLoading) {
     return <SearchingDoctorsSkeleton repeate={3} />;
   }

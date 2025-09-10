@@ -6,6 +6,8 @@ import { WroktimeBodyReq } from './create-profile-info';
 export enum ProfileControler {
   BASE = '/Doctor',
   CLINIC_BASE = '/Clinic',
+  CLINIC_SETTING = '/Doctor/Settings',
+  DOCTOR_RATING = '/Rating/GetDoctorRate'
 }
 
 export type IDoctorInfoResponse = {
@@ -15,6 +17,10 @@ export type IDoctorInfoResponse = {
   description: string;
   firstName: string;
   lastName: string;
+  doctorInfo: number;
+  ticketCost: number;
+  ticketOption: string;
+
   phone: string;
 };
 
@@ -26,8 +32,17 @@ export type IDoctorClinicsResponse = {
   location: string;
   previewCost: number;
   startWorkHours: string;
+  ticketCost: number;
   endWorkHours: string;
   locationCoords: string;
+};
+
+export type workTimeType = {
+  clinicId: number;
+  day: string;
+  endWorkHours: string;
+  id: number;
+  startWorkHours: string;
 };
 
 export type IClinicDetailsResponse = {
@@ -38,9 +53,16 @@ export type IClinicDetailsResponse = {
   location: string;
   locationCoords: string;
   previewCost: number;
-  holidays: string[];
+  workTimes: workTimeType[];
+  doctor: IDoctorInfoResponse;
 };
 
+async function getDoctorRatingApi(doctorId: number) {
+  const response = await api.get(
+    `${ProfileControler.DOCTOR_RATING}?DoctorId=${doctorId}`,
+  );
+  return response;
+}
 async function getDoctorInfoApi(doctorId: number) {
   const response = await api.get<unknown, IDoctorInfoResponse>(
     `${ProfileControler.BASE}/${doctorId}`,
@@ -67,6 +89,14 @@ async function getClinicDetailsApi(clinicId: number) {
     `${ProfileControler.CLINIC_BASE}/${clinicId}`,
   );
   return response;
+}
+
+function useGetDcotorRating(doctorId: number) {
+  const { data: doctorRating, isPending } = useQuery({
+    queryFn: async () =>  getDoctorRatingApi(doctorId),
+    queryKey: [QYERY_KEYS.doctor.rating,doctorId]
+  });
+  return { doctorRating, isPending };
 }
 
 function useGetDoctorClinics(doctorId: number) {
@@ -100,7 +130,7 @@ function useGetClinicWorkingTimes(clinicId: number) {
     WroktimeBodyReq[]
   >({
     queryFn: async () => getClinicWorkingHoursApi(clinicId),
-    queryKey: [QYERY_KEYS.doctor.clinicTimes],
+    queryKey: [QYERY_KEYS.doctor.clinicTimes, clinicId],
   });
   return { workingTimes, isPending };
 }
@@ -112,7 +142,7 @@ function useGetClinicDetails(clinicId: number) {
     IClinicDetailsResponse
   >({
     queryFn: async () => getClinicDetailsApi(clinicId),
-    queryKey: [QYERY_KEYS.doctor.clinicDetails],
+    queryKey: [QYERY_KEYS.doctor.clinicDetails, clinicId],
   });
   return { clinicDetails, isPending };
 }
@@ -122,4 +152,5 @@ export {
   useGetDoctorClinics,
   useGetClinicWorkingTimes,
   useGetClinicDetails,
+  useGetDcotorRating
 };

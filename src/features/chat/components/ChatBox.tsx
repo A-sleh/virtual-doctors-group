@@ -20,7 +20,7 @@ export default function ChatBox({ text, date, owner }: chatBoxProps) {
           }`}
         >
           <p className={`font-sans ${owner && 'text-left'} `} >{text}</p>
-          <span className={`${!owner && 'text-right'} `}>{getTimeFromDate(date,false)}</span>
+          <span className={`${!owner && 'float-end'} `}>{getTimeFromDate(date,false)}</span>
         </div>
       </div>
     </AnimateUpInView>

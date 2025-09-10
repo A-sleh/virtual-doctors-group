@@ -6,6 +6,7 @@ import z from 'zod';
 
 enum profileController {
   CLINIC_BASE = '/Clinic',
+  REATE = '/Rating/Rate'
 }
 
 const clinicSchema = z.object({
@@ -52,6 +53,7 @@ export type WroktimeBodyReq = {
   clinicId: number;
   startWorkHours: string;
   endWorkHours: string;
+  day:string;
   id: number;
 };
 
@@ -63,9 +65,31 @@ async function addNewWrokHoursApi(data: WroktimeBodyReq) {
   return response;
 }
 
+
+async function rateDoctorApi(data: WroktimeBodyReq) {
+  const response = await api.post(
+    `${profileController.REATE}`,
+    data,
+  );
+  return response;
+}
+
 async function createNewClinicApi(data: clinicFormReques) {
   const response = await api.post(`${profileController.CLINIC_BASE}`, data);
   return response;
+}
+
+function useRateDoctor() {
+  const { mutate: rateDoctor, isPending } = useMutation({
+    mutationFn: rateDoctorApi,
+    onSuccess: () => {
+      successToast('Your review was send');
+    },
+    onError: () => {
+      errorToast('Some thing went wron, Please try again');
+    },
+  });
+  return { rateDoctor, isPending };
 }
 
 function useCreateNewClinic() {
@@ -94,4 +118,4 @@ function useAddNewWorkHours() {
   return { addNewWorkHours, isPaused };
 }
 
-export { useAddNewWorkHours, useCreateNewClinic };
+export { useAddNewWorkHours, useCreateNewClinic , useRateDoctor};

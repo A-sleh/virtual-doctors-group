@@ -9,6 +9,9 @@ import DoctorStarsRating from './components/DoctorStarsRating';
 
 import { Outlet, useParams } from 'react-router';
 import { useGetDoctorInfo } from './api/get-profile-info';
+import ConsultADoctor from '@/features/patient_Features/Models/ConsultADoctor.Model';
+import HasPermission from '@/context/auth/HasPermission';
+import UpdateTitcketCost from './components/UpdateTitcketCost';
 
 export default function Profile() {
   const { id: doctorId } = useParams();
@@ -34,8 +37,37 @@ export default function Profile() {
                   <RatingItem Icon={FaLocationDot} text={'syria, aleppo'} />
                 </div>
               </DoctorVectorInfo>
-              <DoctorStarsRating starsNumber={Number(doctorInfo?.doctorId) % 6} />
+              <DoctorStarsRating
+                starsNumber={Number(doctorInfo?.doctorId) % 6}
+              />
             </div>
+            {doctorInfo?.ticketOption.toLocaleLowerCase() != 'none' && (
+              <HasPermission allowedTo={['patient']}>
+                <div className="">
+                  <span className="font-light px-2 h-fit bg-danger text-white rounded-tl-sm rounded-br-sm text-nowrap w-full ">
+                    {doctorInfo?.ticketCost === 0
+                      ? 'Free'
+                      : `${doctorInfo?.ticketCost}$`}
+                  </span>
+                  <ConsultADoctor
+                    doctorId={Number(doctorId)}
+                    cost={doctorInfo?.ticketCost}
+                    doctor={{
+                      name: doctorInfo?.firstName + ' ' + doctorInfo?.lastName,
+                      specility: doctorInfo?.speciality || '',
+                      location: '',
+                    }}
+                  />
+                </div>
+              </HasPermission>
+            )}
+
+            <HasPermission allowedTo={['doctor']}>
+              <UpdateTitcketCost
+                ticketCost={doctorInfo?.ticketCost}
+                ticketOption={doctorInfo?.ticketOption}
+              />
+            </HasPermission>
           </section>
           <ProfileLinks />
         </>

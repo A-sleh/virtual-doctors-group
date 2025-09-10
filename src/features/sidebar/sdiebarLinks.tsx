@@ -83,14 +83,16 @@ export const SidebarLinks = (): links => {
   ];
 };
 
-export const subSideBareLink: links = [
-  {
+export const SubSideBareLink = (): links => {
+  const { userId } = useAuth();
+  return [
+    {
     icon: <GrSettingsOption size={ICON_SIZE} />,
     title: 'Setting',
     permission: ['doctor', 'patient'],
     path: {
-      patient: paths.app.setting.getHref(1),
-      doctor: paths.app.setting.getHref(1),
+      patient: paths.app.setting.getHref(userId),
+      doctor: paths.app.setting.getHref(userId),
     },
   },
   {
@@ -103,4 +105,6 @@ export const subSideBareLink: links = [
       patient: paths.app.support.getHref(),
     },
   },
-];
+]
+}
+

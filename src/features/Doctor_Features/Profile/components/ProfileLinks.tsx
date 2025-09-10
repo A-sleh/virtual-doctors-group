@@ -1,6 +1,8 @@
 import { paths } from '@/config/paths';
 import { NavLink, useParams } from 'react-router';
 import NewClinicModel from '../../Models/NewClinic.Model';
+import HasPermission from '@/context/auth/HasPermission';
+import RatingDoctor from '@/features/patient_Features/Models/RatingDoctor';
 
 export default function ProfileLinks() {
   const { id: doctorId } = useParams();
@@ -44,7 +46,12 @@ export default function ProfileLinks() {
         </NavLink>
       </div>
       <div className="w-fit">
-        <NewClinicModel />
+        <HasPermission allowedTo={['patient']}>
+          <RatingDoctor doctorId={doctorId} />
+        </HasPermission>
+        <HasPermission allowedTo={['doctor']}>
+          <NewClinicModel />
+        </HasPermission>
       </div>
     </section>
   );

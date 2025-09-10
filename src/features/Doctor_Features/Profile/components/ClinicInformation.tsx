@@ -1,7 +1,10 @@
 import HasPermission from '@/context/auth/HasPermission';
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
+
 import { useState } from 'react';
+import { LiaBusinessTimeSolid } from 'react-icons/lia';
+import { MdLocationPin } from 'react-icons/md';
 import { IoMdClose } from 'react-icons/io';
 import { RiSettings5Fill } from 'react-icons/ri';
 import { IClinicDetailsResponse } from '../api/get-profile-info';
@@ -25,26 +28,24 @@ export default function ClinicInformation({
 }) {
   const [updateClinicInfo, setUpdateClinicInfo] = useState(false);
 
-  function handleUpdateFormClicked(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-  }
-
   function handlUpdateClicked() {
     setUpdateClinicInfo(true);
   }
+
   return (
-    <AnimateDownEffect className="rounded-box p-6  w-full flex-3">
-      <form className="space-y-3" onSubmit={(e) => handleUpdateFormClicked(e)}>
-        <div className="text-3xl font-medium flex justify-between transition-all">
-          <input
-            {...register('name')}
-            readOnly={!updateClinicInfo}
-            className={`outline-0 ${
-              updateClinicInfo ? 'border-b-4 border-primary pb-2' : ''
-            }`}
-          />
-          <HasPermission allowedTo={['doctor']}>
-            <AnimateButton withInitialScale={true}>
+    <AnimateDownEffect className="rounded-box p-6 flex-[0.5]">
+      <div className="space-y-3 flex-[0.5]">
+        <div>
+          <div className="text-3xl font-medium flex justify-between transition-all">
+            <input
+              {...register('name')}
+              readOnly={!updateClinicInfo}
+              className={`outline-0 ${
+                updateClinicInfo ? 'border-b-4 border-primary pb-2' : ''
+              }`}
+            />
+
+            <HasPermission allowedTo={['doctor']}>
               {!updateClinicInfo ? (
                 <RiSettings5Fill
                   size={25}
@@ -58,60 +59,56 @@ export default function ClinicInformation({
                   onClick={() => setUpdateClinicInfo(false)}
                 />
               )}
-            </AnimateButton>
-          </HasPermission>
+            </HasPermission>
+          </div>
+          <div className="flex gap-3">
+            {updateClinicInfo && (
+              <LuRefreshCcw
+                onClick={() =>
+                  setValue(
+                    'status',
+                    getValues('status') == 'Active' ? 'Close' : 'Active',
+                  )
+                }
+                size={25}
+                className="text-secondary hover:rotate-180 transition-all duration-300 cursor-pointer"
+              />
+            )}
+
+            <input
+              type="text"
+              {...register('status')}
+              readOnly={true}
+              className={` text-white px-2 py-1 rounded-md min-w-[10px] font-bold  uppercase w-[4rem] block ${
+                clinicInfo?.status == 'open' ? 'bg-fourth' : 'bg-danger'
+              }`}
+            />
+          </div>
         </div>
-        <div className="flex gap-3">
+
+        <div className="flex items-center p-1 gap-2 text-xl  ">
+          <MdLocationPin size={25} />
           <input
             type="text"
-            {...register('status')}
-            readOnly={true}
-            className={`font-bold text-white px-2 py-1 rounded-md  uppercase  ${
-              clinicInfo?.status == 'open' ? 'bg-fourth' : 'bg-danger'
-            }`}
+            {...register('location')}
+            readOnly={!updateClinicInfo}
+            className={` ${updateClinicInfo && 'outline-0'} `}
           />
-
-          {updateClinicInfo && (
-            <LuRefreshCcw
-              onClick={() =>
-                setValue(
-                  'status',
-                  getValues('status') == 'open' ? 'close' : 'open',
-                )
-              }
-              size={25}
-              className="text-secondary hover:rotate-180 transition-all duration-300 cursor-pointer"
-            />
-          )}
         </div>
-        <section className="flex gap-4 my-4">
-          <div className="w-full">
-            <label className=" text-2xl">The avreage of service</label> <br />
+
+        <div className="flex items-center p-1 gap-2 w-fit text-xl  ">
+          <LiaBusinessTimeSolid size={25} />
+          <div className="relative">
             <input
               type="text"
               {...register('avgService')}
               readOnly={!updateClinicInfo}
-              className={`border-primary text-xl px-2 py-2 rounded-tl-md rounded-br-md mt-1 border outline-0 w-full ${
-                updateClinicInfo
-                  ? 'bg-white text-primary'
-                  : 'bg-primary text-white'
-              }`}
+              className={` ${updateClinicInfo && 'outline-0'} `}
             />
+            <span className="absolute left-7 text-primary">/ min</span>
           </div>
-          <div className="w-full">
-            <label className=" text-2xl">Located at</label> <br />
-            <input
-              type="text"
-              {...register('location')}
-              readOnly={!updateClinicInfo}
-              className={`border-primary text-xl px-2 py-2 rounded-tl-md rounded-br-md mt-1 border outline-0 w-full ${
-                updateClinicInfo
-                  ? 'bg-white text-primary'
-                  : 'bg-primary text-white'
-              }`}
-            />
-          </div>
-        </section>
+        </div>
+
         {updateClinicInfo && (
           <AnimateButton
             scale={0.9}
@@ -120,7 +117,7 @@ export default function ClinicInformation({
             Apply
           </AnimateButton>
         )}
-      </form>
+      </div>
     </AnimateDownEffect>
   );
 }

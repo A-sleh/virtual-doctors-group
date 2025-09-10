@@ -8,7 +8,7 @@ import AnimateParentUpEffect from '@/lib/Animation/AnimateParentUpEffect';
 export default function Clinics() {
   const { id: doctorId } = useParams();
   const { doctorClinics, isPending } = useGetDoctorClinics(Number(doctorId));
-
+  
   return (
     <AnimateParentUpEffect className="space-y-3 grid md:grid-cols-2 lg:grid-cols-4 gap-2">
       {isPending ? (

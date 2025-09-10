@@ -1,4 +1,5 @@
-import { doctor } from '@/features/Doctors/types/doctor';
+
+import { IAllDoctorInfo } from '../api/get-doctors';
 
 export type headerProps = {
   title: string;
@@ -6,8 +7,7 @@ export type headerProps = {
 };
 
 export type DoctorInfoProps = {
-  doctor: doctor;
-  rating?: string;
+  doctor: IAllDoctorInfo;
 };
 
 export type limitProps = {

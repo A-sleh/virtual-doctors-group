@@ -113,7 +113,6 @@ export default function Filters() {
                 value={filters.gender || 'all'}
                 onChange={(e: any) =>
                   setFilters((lastValues) => {
-                    console.log(e.target.value);
                     return {
                       ...lastValues,
                       gender: e.target.value == 'all' ? null : e.target.value,

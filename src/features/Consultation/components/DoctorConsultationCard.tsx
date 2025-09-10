@@ -13,8 +13,8 @@ export default function DoctorConsultationCard({
 }: {
   consultaion: IGetConsultaionsResponse;
 }) {
-  
-  console.log(consultaion,'here')
+
+  console.log(consultaion,'forlkj;kljklj')
   const {
     status,
     id: consultaionId,
@@ -35,7 +35,6 @@ export default function DoctorConsultationCard({
     status: status,
   };
 
-  
   function renderOpenChatButton(status: string): boolean {
     return status !== 'Pending';
   }
@@ -54,7 +53,9 @@ export default function DoctorConsultationCard({
                   consultaionId,
                   doctorId,
                 ),
-                search: `userName=${userName || doctorName}&isDoctor=${!!doctorSpeciality}`,
+                search: `userName=${
+                  userName || doctorName
+                }&isDoctor=${!!doctorSpeciality}`,
               }}
             >
               Open chat

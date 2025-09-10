@@ -10,17 +10,23 @@ const NUMBER_OF_FUTHER_DAYS = 30;
 
 export default function AvialableDays({ children }: withChildProps) {
   const { selectedDay, setSelectedDay } = usePickTimeSlot();
+  const [intialDay, _] = useState(selectedDay);
   const initDayRef = useRef<HTMLDivElement | null>(null);
   const [move, setMove] = useState(0);
   const currentDate = new Date();
-  console.log(currentDate)
 
   const days = generateDaysFrom(
     currentDate.getFullYear(),
     currentDate.getMonth(),
-    currentDate.getDay() + 3,
+    currentDate.getDate() ,
     NUMBER_OF_FUTHER_DAYS,
   );
+
+  useEffect(() => {
+    return () => {
+      setSelectedDay(intialDay);
+    };
+  }, []);
 
   useEffect(() => {
     if (initDayRef)

@@ -10,6 +10,10 @@ export default function Reservation() {
   const { userId } = useAuth();
   const { reservations, isLoading } = useGetReservation(Number(userId));
 
+  if (isLoading) {
+    return <DoctorBoxSkeleton repeat={3} />;
+  }
+
   return (
     <section className="space-y-2">
       <AnimateDownEffect className="sub-header">
@@ -18,7 +22,7 @@ export default function Reservation() {
         reservations
       </AnimateDownEffect>
       <section className="flex flex-col gap-2.5 w-full">
-        {!isLoading && reservations != undefined ? (
+        {reservations?.length ? (
           reservations.map((reservation) => {
             const { virtualClinic: reservationInfo } = reservation;
             return (
@@ -30,7 +34,9 @@ export default function Reservation() {
             );
           })
         ) : (
-          <DoctorBoxSkeleton repeat={3} />
+          <h2 className="px-1.5 py-1 text-xl text-center bg-white rounded-sm text-danger ">
+            {"You don't make any reservation yet ..."}
+          </h2>
         )}
       </section>
     </section>

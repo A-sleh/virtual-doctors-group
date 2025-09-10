@@ -25,7 +25,7 @@ export default function ConfirmModel({
           <AiOutlineInfoCircle size={100} className="mx-auto" />
         </AnimateScale>
         <AnimateFromToRight>
-          <p className="text-center w-[25rem] font-unset text-gray-600 my-3 px-3">
+          <p className="text-center w-[25rem] font-unset text-gray-600 my-3 px-3 text-wrap">
             {description}
           </p>
         </AnimateFromToRight>

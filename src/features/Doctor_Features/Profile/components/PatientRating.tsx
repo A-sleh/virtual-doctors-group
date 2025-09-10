@@ -3,33 +3,40 @@ import RatingItem from '@/features/Doctors/components/RatingItem';
 import { PiHandHeartLight } from 'react-icons/pi';
 import { FaRegHandshake } from 'react-icons/fa';
 import { patientRatingProps } from '../types/profile';
+import { MdOutlinePendingActions } from "react-icons/md";
 
 export default function PatientRating({ patient }: patientRatingProps) {
-  const { name, delayRating, rating, description, serviceRating } = patient;
+  const { userFullName, avgWait, avgService, act } = patient;
 
   return (
     <div className="rounded-box">
-      <div className="flex gap-3">
-        <img src="" alt="" className="bg-black rounded-full h-14 w-14" />
-        <div className="w-full">
-          <h3 className="font-medium flex items-center justify-between w-full mb-2">
-            {name}
+      <div className=" p-3  text-center">
+        <h3 className="font-medium w-full  text-xl mb-5">{userFullName}</h3>
+
+        <div className="flex gap-2">
+          <div className="flex gap-2 bg-primary rounded-sm px-2 py-0.5 text-white">
+            <MdOutlinePendingActions size={25} />
             <RatingItem
               Icon={MdOutlineStarPurple500}
               overWriteStyle="flex-row-reverse"
-              text={rating.toString() + ' / 5'}
+              text={avgWait.toString() + ' / 5'}
             />
-          </h3>
-          <p className="text-secondary text-sm ">{description}</p>
-          <div className="flex gap-2 float-right font-medium">
-            <div className="px-3 py-0.5 flex items-center gap-2 bg-primary text-white rounded-sm">
-              <PiHandHeartLight size={24} />
-              {delayRating}%
-            </div>
-            <div className="px-3 py-0.5 flex items-center gap-2 bg-primary text-white rounded-sm">
-              <FaRegHandshake size={24} />
-              {serviceRating}%
-            </div>
+          </div>
+          <div className="flex gap-2 bg-primary rounded-sm px-2 py-0.5 text-white">
+            <FaRegHandshake size={25} />
+            <RatingItem
+              Icon={MdOutlineStarPurple500}
+              overWriteStyle="flex-row-reverse"
+              text={avgService.toString() + ' / 5'}
+            />
+          </div>
+          <div className="flex gap-2 bg-primary rounded-sm px-2 py-0.5 text-white">
+              <PiHandHeartLight size={25} />
+            <RatingItem
+              Icon={MdOutlineStarPurple500}
+              overWriteStyle="flex-row-reverse"
+              text={act.toString() + ' / 5'}
+            />
           </div>
         </div>
       </div>

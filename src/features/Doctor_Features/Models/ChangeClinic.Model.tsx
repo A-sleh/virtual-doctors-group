@@ -5,15 +5,14 @@ import { useGetDoctorClinics } from '../Profile/api/get-profile-info';
 import { useAuth } from '@/context/auth/AuthProvider';
 import { useCurrentClinic } from '@/context/doctor/CurrentClinicProvider';
 import ClinicOptientsSkeleton from '@/components/skeleton/ClinicOptientsSkeleton';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function ChangeClinic() {
-
   const { userId } = useAuth();
 
+  const [closeModel, setCloseModel] = useState(false);
   const { setClinic, clinic } = useCurrentClinic();
   const { doctorClinics, isPending } = useGetDoctorClinics(userId);
-  const closeModel  = useCloseModelAfterAnyAction()
 
   useEffect(() => {
     // Set default value in first render if there is a clinic
@@ -24,15 +23,25 @@ export default function ChangeClinic() {
 
   async function handleChangeClinic(id: number, name: string) {
     await setClinic({ id, name });
-    console.log(closeModel)
+
     // closeModel
+  }
+
+  useEffect(() => {
+    if (closeModel) {
+      setCloseModel(false);
+    }
+  }, [closeModel]);
+
+  if (closeModel) {
+    return null;
   }
 
   return (
     <Model>
       <Model.Open opens="change-clinic">
         <LuRefreshCcw
-          size={33}
+          size={25}
           className="text-secondary bg-third p-1 rounded-full hover:rotate-180 transition-all duration-300 cursor-pointer"
         />
       </Model.Open>
@@ -44,7 +53,9 @@ export default function ChangeClinic() {
             doctorClinics?.map(({ id, name }, index: number) => (
               <AnimateFromToRight
                 duration={index / 3}
-                onClick={() => handleChangeClinic(id, name)}
+                onClick={() => {
+                  handleChangeClinic(id, name), setCloseModel(true);
+                }}
                 className={`cursor-pointer hover:bg-primary hover:text-white transition-all duration-150 p-2 rounded-sm font-medium ${
                   clinic.id == id
                     ? 'bg-primary text-white'

@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   MapContainer,
   Marker,
@@ -30,6 +30,7 @@ type mapType = {
   resize: boolean;
   withControle: boolean;
   showOnly: boolean;
+  clinicTitle?: string;
 };
 
 function Routing({ points }: { points: points[] }) {
@@ -59,12 +60,15 @@ function Routing({ points }: { points: points[] }) {
 function Map({
   defaultPosition = [20, 22],
   doctorInfo,
+  clinicTitle,
   resize = false,
   zoom = 20,
   showOnly = true,
   withControle = true,
 }: mapType) {
+  const containerRef = useRef(null);
   const [fullWindow, setFullWindow] = useState(false);
+  const [zoomState, setZoomState] = useState(zoom);
   const [mapPosition, setMapPosition] = useState<points>(
     defaultPosition ?? [33, 36],
   );
@@ -76,21 +80,27 @@ function Map({
     position: geoLocationPosition,
   } = useGeolocation();
 
-  useEffect(() => {
-    if (mapLat && mapLng) setMapPosition([Number(mapLat), Number(mapLng)]);
-  }, [mapLat, mapLng]);
+  function changeToFullScreen() {
+    setFullWindow((pre) => !pre);
+    setZoomState(10);
+  }
 
   useEffect(() => {
-    if (geoLocationPosition)
+    if (mapLat && mapLng) setMapPosition([Number(mapLat), Number(mapLng)]);
+  }, [mapLat, mapLng,showOnly]);
+
+  useEffect(() => {
+    if (geoLocationPosition) 
       setMapPosition([geoLocationPosition.lat, geoLocationPosition.lng]);
-  }, [geoLocationPosition]);
+  }, [geoLocationPosition,showOnly]);
 
   return (
     <div
+      ref={containerRef}
       className={
         'bg-white space-y-1 p-2 rounded-md ' +
         (fullWindow
-          ? 'fixed w-[90%]  h-[90%] z-[5000] top-[5%] left-[5%] lay-out'
+          ? 'fixed w-[100%]  h-[100%] z-[5000] top-[0%] left-[0%] lay-out'
           : `w-full h-full relative  `)
       }
     >
@@ -110,7 +120,7 @@ function Map({
       </div>
       <MapContainer
         center={mapPosition}
-        zoom={zoom}
+        zoom={zoomState}
         style={{ height: '100%' }}
         zoomControl={!showOnly}
         scrollWheelZoom={true}
@@ -125,6 +135,8 @@ function Map({
           <Marker position={defaultPosition} />
         )}
 
+        {clinicTitle && <Popup position={defaultPosition}>{clinicTitle}</Popup>}
+
         <ChangeCenter position={mapPosition} />
         {!showOnly && <DetectClick />}
 
@@ -133,11 +145,13 @@ function Map({
             points={[defaultPosition, [Number(mapLat), Number(mapLng)]]}
           />
         )}
+        <ResizeHandler containerRef={containerRef} />
+        <ZoomController zoom={zoomState} />
       </MapContainer>
       {resize && (
         <GiResize
           size={25}
-          onClick={() => setFullWindow((pre) => !pre)}
+          onClick={changeToFullScreen}
           className="transition-all text-primary hover:text-primary-hover cursor-pointer z-[40000] absolute bottom-[2%] left-[2%]"
         />
       )}
@@ -148,6 +162,12 @@ function Map({
 function ChangeCenter({ position }: { position: points }) {
   const map = useMap();
   map.setView(position);
+  return null;
+}
+
+function ZoomController({ zoom }) {
+  const map = useMap();
+  map.setZoom(zoom);
   return null;
 }
 
@@ -163,6 +183,26 @@ function DetectClick() {
       });
     },
   });
+}
+
+function ResizeHandler({ containerRef }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new ResizeObserver(() => {
+      setTimeout(() => {
+        map.invalidateSize(); // إعادة ضبط حجم الخريطة
+      }, 100); // تأخير بسيط لتجنب مشاكل التوقيت
+    });
+
+    observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
+  }, [map, containerRef]);
+
+  return null;
 }
 
 export default Map;

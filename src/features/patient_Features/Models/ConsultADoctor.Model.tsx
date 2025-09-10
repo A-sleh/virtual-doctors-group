@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useState } from 'react';
 
-import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
+import { MdClose, MdKeyboardDoubleArrowRight } from 'react-icons/md';
 
 import AnimateButton from '@/lib/Animation/AnimateButton';
 import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
@@ -38,11 +38,11 @@ export default function ConsultADoctor({
   };
 }) {
   const { userId } = useAuth();
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   const [nextStep, setNextStep] = useState<boolean>(false);
-  const { register, handleSubmit,reset } = useForm<consultaionInput>();
-  
+  const { register, handleSubmit, reset } = useForm<consultaionInput>();
+
   const { createNewConsultaion, isPending } = useCreateNewConsultaion();
   const [filedInvalidMessage, setFiledInvalidMessage] =
     useState<consultaionInputErrorMessage>();
@@ -52,80 +52,100 @@ export default function ConsultADoctor({
   ) => {
     let errorsMessages;
     if ((errorsMessages = consultaionFormIsNotValid(data))) {
-      setFiledInvalidMessage(errorsMessages as consultaionInputErrorMessage);
-      if (!nextStep && filedInvalidMessage?.message == undefined) {
-        setNextStep(true);
-        setFiledInvalidMessage({});
+      if (errorsMessages?.message == undefined && cost == 0) {
+      } else {
+        setFiledInvalidMessage(errorsMessages as consultaionInputErrorMessage);
+        if (!nextStep && errorsMessages?.message == undefined) {
+          setNextStep(true);
+          setFiledInvalidMessage({});
+        }
+        return;
       }
-      return;
     }
 
-    createNewConsultaion({ doctorId, text: data.message, userId },{
-      onSuccess: () => {
-        successToast(`It was deducted ${cost} from your balance`)
-        setNextStep(false)
-        reset()
-        queryClient.invalidateQueries({
-          queryKey: [QYERY_KEYS.consultaions]
-        })
-      }
-    });
+    createNewConsultaion(
+      { doctorId, text: data.message, userId },
+      {
+        onSuccess: () => {
+          successToast(`It was deducted ${cost} from your balance`);
+          setNextStep(false);
+          reset();
+          queryClient.invalidateQueries({
+            queryKey: [QYERY_KEYS.consultaions],
+          });
+        },
+      },
+    );
   };
 
-  return (
-    <>
-      {isPending && (
-        <Loader variant="bars" className="text-primary" size={80} />
-      )}
+  function reSetFields() {
+    setNextStep(false);
+    reset();
+    setFiledInvalidMessage({});
+  }
 
-      <Model>
-        <Model.Open opens="consult-doctor">
-          <AnimateButton className="btn-rounded pr-1 flex gap-x-3 items-center bg-white text-primary border-1 transition-all duration-100 border-primary hover:bg-primary hover:text-white">
-            Consult now
-            <MdKeyboardDoubleArrowRight className="" />
-          </AnimateButton>
-        </Model.Open>
-        <Model.Window name="consult-doctor" title="Consult a doctor">
-          <AnimateFromToRight className="space-y-2">
-            <DoctorInfoHeader
-              specility={doctor?.specility}
-              name={doctor?.name}
-              location={doctor?.location}
-            >
-              <span className="font-light px-2 h-fit bg-danger text-white rounded-tl-sm rounded-br-sm text-nowrap">
-                {cost === 0 ? 'Free' : `${cost}$`}
-              </span>
-            </DoctorInfoHeader>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-              {!nextStep ? (
-                <div className="rounded-box">
-                  <h4 className="sub-header text-lg flex justify-between items-center gap-3 text-secondary font-medium mb-2">
-                    Consultation content
-                  </h4>
-                  <MainInput
-                    type="text"
-                    lable="Description of consultaion"
-                    placeHolder="Enter your message ..."
-                    {...register('message')}
-                  />
-                  <ZodErrors error={filedInvalidMessage?.message} />
-                </div>
-              ) : (
-                <PaymentForm
-                  register={register}
-                  filedInvalidMessage={filedInvalidMessage}
+  if (isPending) {
+    return <Loader variant="bars" className="text-primary" size={80} />;
+  }
+
+  return (
+    <Model>
+      <Model.Open opens="consult-doctor">
+        <AnimateButton className="btn-rounded pr-1 flex gap-x-3 items-center bg-white text-primary border-1 transition-all duration-100 border-primary hover:bg-primary hover:text-white">
+          Consult now
+          <MdKeyboardDoubleArrowRight className="" />
+        </AnimateButton>
+      </Model.Open>
+      <Model.Window
+        name="consult-doctor"
+        title="Consult a doctor"
+        outClose={
+          <MdClose
+            size={24}
+            onClick={reSetFields}
+            className="text-danger cursor-pointer"
+          />
+        }
+      >
+        <AnimateFromToRight className="space-y-2">
+          <DoctorInfoHeader
+            specility={doctor?.specility}
+            name={doctor?.name}
+            location={doctor?.location}
+          >
+            <span className="font-light px-2 h-fit bg-danger text-white rounded-tl-sm rounded-br-sm text-nowrap">
+              {cost === 0 ? 'Free' : `${cost}$`}
+            </span>
+          </DoctorInfoHeader>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+            {!nextStep ? (
+              <div className="rounded-box">
+                <h4 className="sub-header text-lg flex justify-between items-center gap-3 text-secondary font-medium mb-2">
+                  Consultation content
+                </h4>
+                <MainInput
+                  type="text"
+                  lable="Description of consultaion"
+                  placeHolder="Enter your message ..."
+                  {...register('message')}
                 />
-              )}
-              <AnimateButton
-                withInitialScale={true}
-                className="px-4 py-1 bg-primary text-white rounded-md float-end cursor-pointer"
-              >
-                {!nextStep ? 'Next' : 'send'}
-              </AnimateButton>
-            </form>
-          </AnimateFromToRight>
-        </Model.Window>
-      </Model>
-    </>
+                <ZodErrors error={filedInvalidMessage?.message} />
+              </div>
+            ) : (
+              <PaymentForm
+                register={register}
+                filedInvalidMessage={filedInvalidMessage}
+              />
+            )}
+            <AnimateButton
+              withInitialScale={true}
+              className="px-4 py-1 bg-primary text-white rounded-md float-end cursor-pointer"
+            >
+              {!nextStep ? 'Next' : 'send'}
+            </AnimateButton>
+          </form>
+        </AnimateFromToRight>
+      </Model.Window>
+    </Model>
   );
 }

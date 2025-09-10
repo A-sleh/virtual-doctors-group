@@ -28,6 +28,7 @@ export default function DoctorSetting() {
   const specialitesIds = new Array<number>();
   const specialitesTitle = new Array<string>();
 
+  
   if (Specialities) {
     for (let i = 0; i < Specialities?.length; ++i) {
       specialitesIds.push(Specialities[i].id);

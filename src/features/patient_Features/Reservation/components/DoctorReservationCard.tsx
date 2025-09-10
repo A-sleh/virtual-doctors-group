@@ -15,6 +15,10 @@ import { useAuth } from '@/context/auth/AuthProvider';
 import { errorToast } from '@/components/custom/toast';
 import { IReservationResponse } from '../api/get-reservations';
 import { useEffect, useState } from 'react';
+import DoctorInfoHeader from '../../Models/components/DoctorInfoHeader';
+import { useQueryClient } from '@tanstack/react-query';
+import { QYERY_KEYS } from '@/lib/query-key';
+import Loader from '@/components/ui/loader/Loader';
 
 export default function DoctorReservationCard({
   reservationInfo,
@@ -22,31 +26,43 @@ export default function DoctorReservationCard({
   reservationInfo: IReservationResponse;
 }) {
   const { userId } = useAuth();
-  const { deleteReservation, isPending } = useDeleteReservation();
+
+  const queryClient = useQueryClient();
+  const { deleteReservation, isPending: isDeleted } = useDeleteReservation();
 
   const {
     scheduledAt,
     text,
     virtualClinic,
     id: reservatinoId,
+    type,
+    status,
   } = reservationInfo;
-  const { doctorId, doctor } = virtualClinic;
-  const { firstName, lastName, speciality } = doctor;
+
+  const { doctor, id: clinicId } = virtualClinic;
+  const { firstName, lastName, speciality, location, id: doctorId } = doctor;
   const scheduledAtDate = new Date(scheduledAt);
 
-  if (isPending) return <h2>Loading ...</h2>;
-
   const reservationInput: resvervationInput = {
-    virtualId: doctorId || 0,
+    virtualId: clinicId || 0,
     text: text,
     userId,
+    id: reservatinoId,
+    type,
+    status,
   };
 
   function onCancelClicked(reservationId: number) {
     if (calcTheNumberOfDaysFromCurrentDateTo(scheduledAt) < 1) {
       errorToast("You can't cancel the reservation before 24 hours");
     } else {
-      deleteReservation(reservationId);
+      deleteReservation(reservationId, {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [QYERY_KEYS.patient.Reservations],
+          });
+        },
+      });
     }
   }
 
@@ -59,19 +75,31 @@ export default function DoctorReservationCard({
     description: text,
   };
 
+  if (isDeleted) {
+    return <Loader variant="bars" className="text-primary" size={70} />;
+  }
+
   return (
     <>
       <DoctorBox doctor={doctorDTO}>
         <div className="flex gap-2.5">
           <PickTimeSlotProvider
             intialDay={scheduledAtDate}
-            intialTime={getTimeFromDate(scheduledAtDate)}
+            intialTime={getTimeFromDate(scheduledAtDate, false)}
           >
             <PatientBooking
               requestMethod="PUT"
               openKey={'Reschedule'}
               reservationDetails={reservationInput}
-            />
+              clinicId={clinicId}
+            >
+              <DoctorInfoHeader
+                location={location}
+                name={doctorDTO.name}
+                specility={speciality}
+                doctorId={doctorId}
+              />
+            </PatientBooking>
           </PickTimeSlotProvider>
           {calcTheNumberOfDaysFromCurrentDateTo(scheduledAt) > 1 ? (
             <ConfirmModel

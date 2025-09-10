@@ -10,20 +10,18 @@ import Selector from '@/components/ui/inputs/Selector';
 import SettingInput from '@/components/ui/inputs/SettingInput';
 import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
 import AnimateButton from '@/lib/Animation/AnimateButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ZodErrors from '@/components/custom/ZodErrors.tsx';
 import { useUserProfile } from '../auth/api/useUser.tsx';
 import Loader from '@/components/ui/loader/Loader.tsx';
 import { removeKeys } from '@/utils/index.ts';
 
 export default function Account() {
-  const { userProfile , isPending: isFetchUserInfo} = useUserProfile();
+  const { userProfile, isPending: isFetchUserInfo } = useUserProfile();
   const { updateAccountSetting, isPending } = useUpdateAccountSetting();
   const [filedInvalidMessage, setFiledInvalidMessage] =
     useState<accountInputsErrorMessages>();
-  const { register, handleSubmit } = useForm<accountInputs>({
-    defaultValues: removeKeys({...userProfile},['role','userId','email']),
-  });
+  const { register, handleSubmit, reset } = useForm<accountInputs>();
 
   const onSubmit: SubmitHandler<accountInputs> = (data) => {
     let errorMessage;
@@ -35,13 +33,21 @@ export default function Account() {
     updateAccountSetting(data);
   };
 
-  if(isFetchUserInfo) {
-      return <Loader variant="bars" className="text-primary" size={70} />
+  useEffect(() => {
+    if (userProfile) {
+      reset(removeKeys({ ...userProfile }, ['role', 'userId', 'email']));
+    }
+  }, [reset, userProfile]);
+
+  if (isFetchUserInfo) {
+    return <Loader variant="bars" className="text-primary" size={70} />;
   }
 
   return (
     <>
-      {isPending && <Loader variant="bars" className="text-primary" size={70} />}
+      {isPending && (
+        <Loader variant="bars" className="text-primary" size={70} />
+      )}
       <AnimateUpEffect className="rounded-box space-y-2">
         <div>
           <h2 className="font-bold text-lg">Your profile</h2>

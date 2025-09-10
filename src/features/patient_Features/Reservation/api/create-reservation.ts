@@ -4,11 +4,11 @@ import z from 'zod';
 import { errorToast, successToast } from '@/components/custom/toast';
 
 enum reservationControler {
-  BASE = '/Reservation/Revision',
+  BASE = '/Reservation/Preview',
 }
 
 export const resvervationInputSchema = z.object({
-  scheduledAt: z.date().optional(),
+  scheduledAt: z.string().optional(),
   userId: z.number(),
   virtualId: z.number(),
   text: z
@@ -22,8 +22,12 @@ export type resvervationInputErrorMessages = {
 };
 
 async function createReservationApi(data: resvervationInput) {
-  const response = await api.post(`${reservationControler.BASE}`, data);
-  return response;
+  try {
+    const response = await api.post(`${reservationControler.BASE}`, data);
+    return response;
+  } catch (er) {
+    throw new Error(er.response.data);
+  }
 }
 
 function useCreateReservation() {
@@ -38,7 +42,7 @@ function useCreateReservation() {
       successToast('Reservation was created successfuly');
     },
     onError: (err: Error) => {
-      errorToast(`Error while create a new reservation,${err.message}`);
+      errorToast(err.message);
     },
   });
 

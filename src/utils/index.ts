@@ -1,7 +1,47 @@
 import { IGetConsultaionsResponse } from '@/features/Consultation/api/get-consultaion';
 import { AnyZodObject } from 'zod';
 
+
+
+type WorkTimes = {
+  id: number;
+  startWorkHours: string;
+  endWorkHours: string;
+  day: string;
+};
+
+type WorkTime = Omit<WorkTimes,'day'>
+
 const mapedDays = ['Sun', 'Mon', 'Tues', 'Wed', 'Thrus', 'Fri', 'Sat'];
+const fullNamedDays = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+
+
+const workTimeObj = new Map<string, WorkTime[]>();
+
+function addWorkTime(key: string, newEntry: WorkTime) {
+  const existing = workTimeObj.get(key) || [];
+  workTimeObj.set(key, [...existing, newEntry]);
+}
+
+export function mappingWorkTimes(workTimes: WorkTimes[]) {
+  workTimeObj.clear() // To avoid the conflect between clinics
+  return new Promise(async (resolve) => {
+    await workTimes?.map((wrokTime) => {
+     addWorkTime(wrokTime.day,(removeKeys(wrokTime, ['day'])));
+   });
+   
+   resolve(workTimeObj)
+  })
+}
+
 
 function generateRangedNumber(
   start: number,
@@ -13,6 +53,11 @@ function generateRangedNumber(
     Numbers.push(i);
   }
   return Numbers;
+}
+
+function getDateFromDayAndTime(day: string, time: string) {
+  const date = new Date(`${day} ${time.split(' ').join('')}`);
+  return `${date.getFullYear()}-${(date.getMonth()+1 < 10 )&& '0'}${date.getMonth()+1}-${date.getDate()}T${time}:00`
 }
 
 function generateDaysFrom(
@@ -29,10 +74,7 @@ function generateDaysFrom(
   return days;
 }
 
-function removeKeys<T>(
-  obj: { [key: string]:  any},
-  keysToRemove: string[],
-): T {
+function removeKeys<T>(obj: { [key: string]: any }, keysToRemove: string[]): T {
   return Object.keys(obj)
     .filter((key) => !keysToRemove.includes(key))
     .reduce((newObj: { [key: string]: string | Date }, key) => {
@@ -102,7 +144,7 @@ function secondsToDhms(totalSeconds: number) {
 
 function calcTheNumbersOfConsultaions(
   consultaions: IGetConsultaionsResponse[],
-): { opened: number; closed: number; pending: number,Rejected: number } {
+): { opened: number; closed: number; pending: number; Rejected: number } {
   const obj = new Map<string, number>([
     ['Closed', 0],
     ['Open', 0],
@@ -128,6 +170,25 @@ function getFullYearAsString(date: Date): string {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }
 
+const convertPhotoToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (typeof reader.result === 'string') {
+        resolve(reader.result.split(',')[1]);
+      } else {
+        reject(new Error('Failed to convert file to Base64.'));
+      }
+    };
+
+    reader.onerror = () => {
+      reject(new Error('Error reading the file.'));
+    };
+
+    reader.readAsDataURL(file);
+  });
+};
+
 export {
   removeKeys,
   generateRangedNumber,
@@ -141,4 +202,7 @@ export {
   secondsToDhms,
   calcTheNumbersOfConsultaions,
   getFullYearAsString,
+  fullNamedDays,
+  getDateFromDayAndTime,
+  convertPhotoToBase64
 };

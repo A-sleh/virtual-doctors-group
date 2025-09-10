@@ -3,6 +3,10 @@ export type reservation = {
   owner: string;
   desctiption: string;
   userId: number;
+  id: number;
+  status: string;
+  type: string;
+  clinicId: number;
 };
 
 export type reservatDayCardProps = {

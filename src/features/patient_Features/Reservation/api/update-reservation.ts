@@ -12,6 +12,9 @@ enum reservationControler {
 export const timeSlotInputSchema = z.object({
   time: z.string().min(1, 'Please select one of an available time slot'),
   date: z.string().min(1, 'Please select one of an available date slot'),
+  text: z
+    .string()
+    .min(1, 'Please write why you needed to reserve this booking'),
 });
 
 export type timeSlotInput = z.infer<typeof timeSlotInputSchema>;
@@ -26,6 +29,27 @@ export function timeSlotNotValid(data: timeSlotInput) {
 async function updateReservationApi(data: resvervationInput) {
   const response = await api.put(`${reservationControler.BASE}`, data);
   return response;
+}
+
+async function changeRservationStatusApi(reservationId: number) {
+  const response = await api.put(
+    `${reservationControler.BASE}/${reservationId}/Preview`,
+  );
+  return response;
+}
+
+function usePreviweRservation() {
+  const { mutate: previweReservation, isPending } = useMutation({
+    mutationFn: changeRservationStatusApi,
+    onSuccess: () => {
+      successToast('Reservation was previwed successfuly');
+    },
+    onError: (err: Error) => {
+      errorToast(`Error while previwed the reservation,${err.message}`);
+    },
+  });
+
+  return { previweReservation, isPending };
 }
 
 function useUpdateReservation() {
@@ -47,4 +71,4 @@ function useUpdateReservation() {
   return { updateReservation, isPending };
 }
 
-export { useUpdateReservation };
+export { useUpdateReservation ,usePreviweRservation };

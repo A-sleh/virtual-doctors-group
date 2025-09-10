@@ -23,7 +23,7 @@ const AuthContext = createContext<userAuthType>(intialUserAuth);
 function AuthProvider({ children }: { children: React.ReactNode }) {
   const { user } = useUser();
   const [userAuth, setUserAuth] = useState<userAuthType>(intialUserAuth);
-  console.log(user)
+
   useEffect(() => {
     const userInfo = userLocalStorage.getUser();
     if (userInfo) {

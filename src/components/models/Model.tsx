@@ -28,8 +28,6 @@ const ModelContext = createContext<modelContextType>({
   close,
 });
 
-
-
 function Model({ children }: { children: React.ReactNode }) {
   const [openName, setOpenName] = useState<string>('');
 
@@ -46,7 +44,7 @@ function Model({ children }: { children: React.ReactNode }) {
 export function useCloseModelAfterAnyAction(): () => void {
   const { close } = useContext(ModelContext);
 
-  return close ;
+  return close;
 }
 
 function Open({ children, opens: openWindowName }: openProps) {
@@ -65,28 +63,44 @@ function Close({ children }: { children: React.ReactNode }) {
   return cloneElement(children, { onClick: () => close() });
 }
 
-function Window({ children, name, title = null, className = '' }: windowProps) {
+function Window({
+  children,
+  name,
+  title = null,
+  className = '',
+  outClose,
+}: windowProps) {
   const { openName, close } = useContext(ModelContext);
 
   if (name !== openName) return null;
 
-  return createPortal(
+  return (
     <div className="over-lay">
       <div className={cn('modal', className)}>
         {title != null && (
           <AnimateDownEffect className="sub-header flex justify-between items-center gap-3 text-secondary font-medium mb-2">
             {title}
-            <MdClose
-              size={24}
-              className="text-danger cursor-pointer"
-              onClick={close}
-            />
+            {outClose ? (
+              cloneElement(outClose, {
+                onClick: (e) => {
+                  if (outClose.props.onClick) {
+                    outClose.props.onClick(e);
+                  }
+                  close();
+                },
+              })
+            ) : (
+              <MdClose
+                size={24}
+                className="text-danger cursor-pointer"
+                onClick={close}
+              />
+            )}
           </AnimateDownEffect>
         )}
         {children}
       </div>
-    </div>,
-    document.getElementById('root') as HTMLElement,
+    </div>
   );
 }
 

@@ -28,7 +28,6 @@ export default function ArticleFrom({
       return;
     }
     setFiledInvalidMessage({});
-    alert('done');
   };
 
   return (

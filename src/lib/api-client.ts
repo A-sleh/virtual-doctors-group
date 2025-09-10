@@ -33,7 +33,8 @@ api.interceptors.response.use(
   (error) => {
     const message = error.response?.data?.message || error.message;
 
-    errorToast(message);
+    if(message.toLowerCase() === 'net work error')
+      errorToast(message);
 
     if (error.response?.status === 401) {
       const searchParams = new URLSearchParams();

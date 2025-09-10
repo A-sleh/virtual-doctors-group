@@ -32,14 +32,19 @@ async function getCalendarDays(clinicId: number, date: string) {
 
 async function getClinicReservations(clinicId: number, date: string) {
   const response = await api.get<unknown, IClinicReservationResponse[]>(
-    `${reservationControler.BASE}/${clinicId}?date=${date}`,
+    `${reservationControler.BASE}/${clinicId}`,
+    {
+      params: {
+        date,
+      },
+    },
   );
   return response;
 }
 
 function useGetCalendarDays(clinicId: number, date: string) {
   const { data: calendarDays, isLoading } = useQuery({
-    queryKey: [QYERY_KEYS.doctor.calendarDays, date],
+    queryKey: [QYERY_KEYS.doctor.calendarDays, clinicId, date],
     queryFn: async () => getCalendarDays(clinicId, date),
     enabled: clinicId != undefined && date != undefined,
   });
@@ -48,9 +53,8 @@ function useGetCalendarDays(clinicId: number, date: string) {
 }
 function useGetReservation(clinicId: number, date: string) {
   const { data: clinicReservations, isLoading } = useQuery({
-    queryKey: [QYERY_KEYS.doctor.Reservations, date],
+    queryKey: [QYERY_KEYS.doctor.Reservations, clinicId, date],
     queryFn: async () => getClinicReservations(clinicId, date),
-    enabled: clinicId != undefined && date != undefined,
   });
 
   return { clinicReservations, isLoading };

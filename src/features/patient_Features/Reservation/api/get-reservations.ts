@@ -12,15 +12,19 @@ export type IReservationResponse = {
     name: string;
     doctorId: number;
     doctor: {
+      id: number;
       speciality: string;
       firstName: string;
       lastName: string;
+      location: string;
     };
   };
   userId: number;
   id: number;
   text: string;
   scheduledAt: string;
+  type: string;
+  status: string;
 };
 
 async function getReservations(

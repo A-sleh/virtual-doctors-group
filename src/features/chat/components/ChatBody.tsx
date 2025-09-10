@@ -18,8 +18,6 @@ export default function ChatBody() {
   const [connection, setConnection] = useState<signalR.HubConnection | null>(
     null,
   );
-  const [user, setUser] = useState('');
-  const [chatLog, setChatLog] = useState([]);
 
   const { userId } = useAuth();
 
@@ -56,40 +54,6 @@ export default function ChatBody() {
     );
   }
 
-  useEffect(() => {
-    const newConnection = new signalR.HubConnectionBuilder()
-      .withUrl('http://vdg.runasp.net/chathub')
-      .withAutomaticReconnect()
-      .build();
-    setConnection(newConnection);
-  }, []);
-
-  useEffect(() => {
-    async function lisnTo() {
-      if (!connection) return;
-      console.log('here')
-      connection.on('ReceiveMessage', (...arg) => {
-        console.log(...arg);
-      });
-      try {
-
-        await connection.start();
-        console.log('success')
-      }catch(err) {
-        console.log(err)
-      }
-    }
-
-    lisnTo();
-  }, [connection]);
-
-  const sendMessage1 = async (e) => {
-    e.preventDefault();
-    if (connection) {
-      await connection.invoke('SendMessageAsync', userId, chatId, message);
-    }
-  };
-
   if (fetchMessages) return;
 
   // The key will be array with two dimention ( the first one to data , and the second one to messages)
@@ -115,7 +79,7 @@ export default function ChatBody() {
       </section>
       <form
         className="flex justify-between items-center rounded-box"
-        onSubmit={(e) => sendMessage1(e)}
+        onSubmit={(e) => handleSendMessageClicked(e)}
       >
         <input
           onChange={(e) => setMessage(e.target.value)}

@@ -6,28 +6,27 @@ type timeSlotType = {
   selectedDay: string;
   setSelectedTime: React.Dispatch<SetStateAction<string>>;
   setSelectedDay: React.Dispatch<SetStateAction<string>>;
-  getFullDate: () => Date;
 };
 
 const PickTimeSlotContext = createContext<timeSlotType>({} as timeSlotType);
 type PickTimeSlotProviderType = {
   intialDay: Date;
-  intialTime: string;
+  intialTime?: string;
 } & withChildProps;
 
 function PickTimeSlotProvider({
   children,
   intialDay,
-  intialTime,
+  intialTime ='',
 }: PickTimeSlotProviderType) {
+  
   const [selectedTime, setSelectedTime] = useState<string>(intialTime);
   const [selectedDay, setSelectedDay] = useState<string>(
     intialDay?.toDateString(),
   );
 
-  function getFullDate(): Date {
-    return new Date(`${selectedDay} ${selectedTime.split(' ').join('')}`);
-  }
+  console.log(intialDay)
+
 
   return (
     <PickTimeSlotContext.Provider
@@ -35,8 +34,7 @@ function PickTimeSlotProvider({
         selectedTime,
         selectedDay,
         setSelectedDay,
-        setSelectedTime,
-        getFullDate,
+        setSelectedTime
       }}
     >
       {children}

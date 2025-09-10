@@ -5,7 +5,9 @@ export const QYERY_KEYS = {
   articles: 'articles',
   article: 'article',
   doctors: 'doctors',
+  topDoctors: 'top/doctors',
   doctor: {
+    rating: 'doctor/rating',
     speciality: 'Speciality',
     info: 'doctor/info',
     clinics: 'doctor/clinics',

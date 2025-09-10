@@ -5,11 +5,13 @@ import { isPatient } from '@/lib/auth';
 import { NavLink } from 'react-router';
 
 export default function SettingHeader() {
-  const { ROLE } = useAuth();
+
+
+  const { ROLE ,userId } = useAuth();
   return (
     <AnimateDownEffect className="sub-header space-x-4">
       <NavLink
-        to={paths.app.setting.account.getHref(1)}
+        to={paths.app.setting.account.getHref(userId)}
         end
         className={({ isActive }) =>
           isActive
@@ -20,7 +22,7 @@ export default function SettingHeader() {
         Account
       </NavLink>
       <NavLink
-        to={paths.app.setting.subscribAsDoctor.getHref(1)}
+        to={paths.app.setting.subscribAsDoctor.getHref(userId)}
         end
         className={({ isActive }) =>
           isActive

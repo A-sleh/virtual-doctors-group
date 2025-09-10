@@ -46,7 +46,7 @@
   }
 
   .over-lay {
-    @apply bg-[#0000004d] fixed top-0 left-0 w-full h-[100vh] z-[9000];
+    @apply bg-[#0000004d] fixed top-0 left-0 w-full h-[100vh] z-[90000000];
   }
   .modal {
     @apply fixed top-[50%] left-[50%] translate-[-50%] p-2 bg-third rounded-md  min-h-fit w-[90%] sm:w-xl;

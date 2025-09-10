@@ -1,3 +1,4 @@
+import { IDoctorInfoResponse } from "../api/get-profile-info";
 
 export type discriptionCardProps = {
   title: string;
@@ -21,6 +22,9 @@ export type workingTimeProps = {
 };
 
 export type reservationBoxProps = {
+  reservationCost?: number;
+  lcocation: any;
+  doctor: IDoctorInfoResponse | undefined;
   type: string;
   register: any;
   children?: React.ReactNode;

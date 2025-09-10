@@ -21,15 +21,21 @@ export default function UpcomingReservations({ limitNumber = 2 }: limitProps) {
     <section className="flex flex-col gap-2 ">
       <Header
         title="Upcoming Reservations"
-        link={paths.app.patient.reservation.getHref(1)}
+        link={paths.app.patient.reservation.getHref(userId)}
       />
-      {upComingRerservations.map((reservation, index: number) => {
-        return (
-          <AnimateFromToRight duration={(index + 1) / 2} key={reservation.id}>
-            <DoctorReservationCard reservationInfo={reservation} />
-          </AnimateFromToRight>
-        );
-      })}
+      {upComingRerservations.length ? (
+        upComingRerservations.map((reservation, index: number) => {
+          return (
+            <AnimateFromToRight duration={(index + 1) / 2} key={reservation.id}>
+              <DoctorReservationCard reservationInfo={reservation} />
+            </AnimateFromToRight>
+          );
+        })
+      ) : (
+        <h2 className="px-1.5 py-1 text-xl text-center bg-white rounded-sm text-danger ">
+          {"You don't make any reservation yet ..."}
+        </h2>
+      )}
     </section>
   );
 }

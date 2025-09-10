@@ -13,7 +13,7 @@ import {
 import { useQueryClient } from '@tanstack/react-query';
 import { QYERY_KEYS } from '@/lib/query-key';
 
-export default function NewDurationsTimesFrom() {
+export default function NewDurationsTimesFrom({selectedDay}:{selectedDay: string}) {
   const { clinicId } = useParams();
   const queryClient = useQueryClient();
   const { addNewWorkHours } = useAddNewWorkHours();
@@ -24,9 +24,11 @@ export default function NewDurationsTimesFrom() {
     formState: { errors },
   } = useForm<WroktimeBodyReq>();
 
-  const onSubmit: SubmitHandler<WroktimeBodyReq> = (data) => {
+  const onSubmit: SubmitHandler<WroktimeBodyReq> = (data,e) => {
+    e?.preventDefault()
+
     addNewWorkHours(
-      { ...data, clinicId: Number(clinicId) },
+      { ...data, clinicId: Number(clinicId),day: selectedDay },
       {
         onSuccess: () => {
           reset();
@@ -91,8 +93,10 @@ export default function NewDurationsTimesFrom() {
             </div>
           </div>
           <div className="flex gap-2">
+            
             <AnimateButton
               scale={0.9}
+              type="submit"
               className="btn-rounded text-white bg-fourth border-1 flex-1"
             >
               Add
