@@ -19,13 +19,14 @@ export default function Home() {
 
             <ChartLineLabel />
           </div>
+          <PatientOpinion />
         </div>
         <div className="flex-1 ">
           <UpConmingConsultation />
           <UpComingReservations />
         </div>
       </div>
-      <PatientOpinion />
+      
     </section>
   );
 }

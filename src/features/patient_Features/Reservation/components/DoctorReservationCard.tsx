@@ -79,28 +79,38 @@ export default function DoctorReservationCard({
     return <Loader variant="bars" className="text-primary" size={70} />;
   }
 
+  const timeer = Math.floor(
+    (scheduledAtDate.getTime() - new Date().getTime()) / 1000,
+  );
+
   return (
     <>
       <DoctorBox doctor={doctorDTO}>
         <div className="flex gap-2.5">
-          <PickTimeSlotProvider
-            intialDay={scheduledAtDate}
-            intialTime={getTimeFromDate(scheduledAtDate, false)}
-          >
-            <PatientBooking
-              requestMethod="PUT"
-              openKey={'Reschedule'}
-              reservationDetails={reservationInput}
-              clinicId={clinicId}
+          {timeer > 0 ? (
+            <PickTimeSlotProvider
+              intialDay={scheduledAtDate}
+              intialTime={getTimeFromDate(scheduledAtDate, false)}
             >
-              <DoctorInfoHeader
-                location={location}
-                name={doctorDTO.name}
-                specility={speciality}
-                doctorId={doctorId}
-              />
-            </PatientBooking>
-          </PickTimeSlotProvider>
+              <PatientBooking
+                requestMethod="PUT"
+                openKey={'Reschedule'}
+                reservationDetails={reservationInput}
+                clinicId={clinicId}
+              >
+                <DoctorInfoHeader
+                  location={location}
+                  name={doctorDTO.name}
+                  specility={speciality}
+                  doctorId={doctorId}
+                />
+              </PatientBooking>
+            </PickTimeSlotProvider>
+          ) : (
+            <span className="px-4 py-1 rounded-ms bg-danger text-white">
+              Apoointment has been passed
+            </span>
+          )}
           {calcTheNumberOfDaysFromCurrentDateTo(scheduledAt) > 1 ? (
             <ConfirmModel
               onConfirmClick={() => onCancelClicked(reservatinoId)}
@@ -116,11 +126,13 @@ export default function DoctorReservationCard({
             </ConfirmModel>
           ) : null}
         </div>
-        <Timer
-          timeStamp={Math.floor(
-            (scheduledAtDate.getTime() - new Date().getTime()) / 1000,
-          )}
-        />
+        {timeer > 0 && (
+          <Timer
+            timeStamp={Math.floor(
+              (scheduledAtDate.getTime() - new Date().getTime()) / 1000,
+            )}
+          />
+        )}
       </DoctorBox>
     </>
   );

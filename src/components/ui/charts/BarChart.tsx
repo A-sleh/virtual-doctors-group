@@ -47,7 +47,7 @@ async function getReservationStat() {
 }
 
 export function ChartBarMultiple() {
-  const { clinic } = useCurrentClinic();
+  
 
   const { data, isPending } = useQuery({
     queryKey: ['ticket-sta'],
@@ -63,7 +63,7 @@ export function ChartBarMultiple() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Servied appoitment this month</CardTitle>
+        <CardTitle>Ticket this week </CardTitle>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
