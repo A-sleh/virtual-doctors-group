@@ -2,6 +2,7 @@ import React, {
   createContext,
   SetStateAction,
   useContext,
+  useEffect,
   useState,
 } from 'react';
 
@@ -32,7 +33,7 @@ function CalenderProvider({
   const [year, setYear] = useState<number>(currentDate.getFullYear());
   const [month, setMonth] = useState<number>(currentDate.getMonth() + 1);
   const [day, setCurrentDay] = useState<Date>(
-    new Date(year, month - 1, currentDate.getDate() - 1),
+    new Date(year, month - 1, currentDate.getDate()),
   );
 
   function getFullDate(): Date {
@@ -64,6 +65,11 @@ function CalenderProvider({
     setCurrentDay(date);
     setParentDay?.(date);
   }
+
+  useEffect(() => {
+    if (year && month)
+      setCurrentDay(new Date(year, month - 1, currentDate.getDate()));
+  }, [year, month]);
 
   return (
     <CalenderContext.Provider

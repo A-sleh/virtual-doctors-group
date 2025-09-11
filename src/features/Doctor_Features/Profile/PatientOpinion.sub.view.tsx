@@ -5,11 +5,15 @@ import PatientRating from './components/PatientRating';
 import { useParams } from 'react-router';
 import { useGetDcotorRating } from './api/get-profile-info';
 import DoctorBoxSkeleton from '@/components/skeleton/DoctorBoxSkeleton';
+import { useAuth } from '@/context/auth/AuthProvider';
+import { isDoctor } from '@/lib/auth';
 
 export default function PatientOpinion() {
   const { id } = useParams();
-  const { doctorRating, isPending } = useGetDcotorRating(id);
-  
+  const { ROLE, userId } = useAuth();
+  const idd = isDoctor(ROLE) ? userId : id ;
+  const { doctorRating, isPending } = useGetDcotorRating(idd);
+
   return (
     <div className="space-y-1">
       <AnimateDownEffect className="sub-header">

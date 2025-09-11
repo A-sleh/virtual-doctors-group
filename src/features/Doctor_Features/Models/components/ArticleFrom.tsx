@@ -18,6 +18,7 @@ import { useAuth } from '@/context/auth/AuthProvider';
 import Loader from '@/components/ui/loader/Loader';
 import { useQueryClient } from '@tanstack/react-query';
 import { QYERY_KEYS } from '@/lib/query-key';
+import { useUpdateArticle } from '@/features/Articles/api/update-article';
 
 export default function ArticleFrom({
   initalArticleInfo,
@@ -35,6 +36,7 @@ export default function ArticleFrom({
   const [filedInvalidMessage, setFiledInvalidMessage] =
     useState<articleInputErrorMessage>();
   const { createNewArticle, isPending } = useCreateNewArticle();
+  const {} = useUpdateArticle()
 
   const onSubmit: SubmitHandler<articleInput> = (data) => {
     let errorMessages;

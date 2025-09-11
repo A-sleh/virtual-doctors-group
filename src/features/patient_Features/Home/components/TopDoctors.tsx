@@ -15,7 +15,7 @@ export default function TopDoctors({ limitNumber = 2 }: limitProps) {
   console.log(topDoctors)
   
   if(isPending) {
-    return <TopDoctorsSkeleton />
+    return <div className='grid grid-cols-2'>   <TopDoctorsSkeleton /></div>
   }
 
   const topFourDoctors = topDoctors?.slice(0, limitNumber) || [];

@@ -63,10 +63,10 @@ export default function NavBar() {
             <ChangeClinic />
           </span>
         </HasPermission>
-        <IoMdNotificationsOutline
+        {/* <IoMdNotificationsOutline
           size={33}
           className="text-secondary bg-third p-1 rounded-full rotate-12 hover:rotate-0  transition-all duration-300 cursor-pointer"
-        />
+        /> */}
         <AiOutlineLogout
           onClick={() => logout()}
           size={30}

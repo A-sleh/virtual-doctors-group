@@ -12,6 +12,8 @@ import ConfirmModel from '@/components/models/ConfirmModel';
 import { useDeleteArticle } from '../api/delete-article';
 import Loader from '@/components/ui/loader/Loader';
 import { SERVER_URL } from '@/config/app.config';
+import { useQueryClient } from '@tanstack/react-query';
+import { QYERY_KEYS } from '@/lib/query-key';
 
 export default function Article({
   id,
@@ -22,10 +24,11 @@ export default function Article({
   articleImage,
   showOwner = true,
 }: articleProps) {
+  const queryClient = useQueryClient();
   const { deleteArticle, isPending } = useDeleteArticle();
 
-  if(isPending) {
-    return <Loader variant="bars" className="text-primary" size={80} />
+  if (isPending) {
+    return <Loader variant="bars" className="text-primary" size={80} />;
   }
 
   return (
@@ -36,18 +39,34 @@ export default function Article({
       />
       {showOwner && (
         <div className="absolute top-5 left-5 md:top-0 md:left-0 md:relative">
-          <DoctorVectorInfo name={doctor?.name} specility={doctor?.specility} imageSize={imageUrl} />
+          <DoctorVectorInfo
+            name={doctor?.name}
+            specility={doctor?.specility}
+            imageSize={imageUrl}
+            doctorId={doctor.doctorId}
+          />
         </div>
       )}
       <h4 className="my-4 font-medium uppercase flex items-baseline justify-between">
         {title}
         <HasPermission allowedTo={['doctor']} userIdOut={doctor.doctorId}>
           <div className="flex gap-2">
-            <UpdateArticle
+            {/* <UpdateArticle
               initalArticleInfo={{ title, description, articleImage }}
-            />
+            /> */}
             <ConfirmModel
-              onConfirmClick={() => deleteArticle(id)}
+              onConfirmClick={() =>
+                deleteArticle(id, {
+                  onSuccess: () => {
+                    queryClient.invalidateQueries({
+                      queryKey: [QYERY_KEYS.articles]
+                    });
+                    queryClient.invalidateQueries({
+                      queryKey: [QYERY_KEYS.article]
+                    });
+                  },
+                })
+              }
               description="Are you sure you want to delete your article, If not you cant click on cancle button below"
               openKey="delete-article"
             >

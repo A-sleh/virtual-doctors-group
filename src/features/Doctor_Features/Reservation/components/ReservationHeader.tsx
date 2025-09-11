@@ -19,13 +19,17 @@ export default function ReservationHeader() {
   } = useCalender();
   const currentDate = new Date();
 
+  console.log(day,'dauuu')
+
   return (
     <AnimateDownEffect
       duration={0.3}
       offsetValue={-100}
       className="sub-header py-1 text-lg items-center sm:flex justify-between"
     >
-      {formatDateMonthYearDay(day || currentDate)}
+      {formatDateMonthYearDay(day )}
+
+      
       <div className="flex gap-4 cursor-pointer">
         <MdArrowBackIos
           size={38}

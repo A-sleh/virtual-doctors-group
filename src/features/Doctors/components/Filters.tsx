@@ -12,21 +12,42 @@ import {
 import { useGeolocation } from '@/hooks/useGeolocation';
 import Loader from '@/components/ui/loader/Loader';
 import { useEffect } from 'react';
+import { useUrlPosition } from '@/hooks/useUrlPosition';
 
 export default function Filters() {
   const { filters, setFilters } = userDoctorsFilter();
   const { Specialities, isPending } = useGetAllSppecialities();
   const { isLoading, getPosition, position, setSearchParams } =
     useGeolocation();
+  const { lat, lng } = useUrlPosition();
 
   async function handleTrackLocation(isTrack: boolean) {
     if (isTrack) {
       await getPosition();
+      // setFilters((lastValues) => ({
+      //   ...lastValues,
+      //   ShortestDistanceFirst: true,
+      //   lat: Number(lat),
+      //   lon: Number(lng),
+      // }));
+    } else {
+      // setFilters((lastValues) => ({
+      //   ...lastValues,
+      //   ShortestDistanceFirst: false,
+      //   lat: null,
+      //   lon: null,
+      // }));
+      setSearchParams({});
+    }
+  }
+
+  useEffect(() => {
+    if (lng) {
       setFilters((lastValues) => ({
         ...lastValues,
         ShortestDistanceFirst: true,
-        lat: Number(position?.lat),
-        lon: Number(position?.lng),
+        lat: Number(lat),
+        lon: Number(lng),
       }));
     } else {
       setFilters((lastValues) => ({
@@ -35,9 +56,8 @@ export default function Filters() {
         lat: null,
         lon: null,
       }));
-      setSearchParams({});
     }
-  }
+  }, [lat, lng]);
 
   function hanelRestFields() {
     setFilters((lastValues) => ({
@@ -61,7 +81,7 @@ export default function Filters() {
     }
   }, [Specialities, filters.SpecialtyId]);
 
-  // Hidden the filters list if the useer using search input 
+  // Hidden the filters list if the useer using search input
   if (filters.name) return null;
 
   return (
