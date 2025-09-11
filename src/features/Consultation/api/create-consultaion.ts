@@ -13,10 +13,9 @@ export const paymentInputSchema = z.object({
       message: 'Digists are not allowed',
     }),
 
-  cardNumber: z.coerce.number().lt(16, 'Card number must be 16 numbers').min(1,"please enter your card number"),
+  cardNumber: z.string().length(16, 'Card number must be 16 numbers').min(1,"please enter your card number"),
   expirDate: z.string().min(1, 'Please enter the expir date').optional(),
-  postalCode: z.coerce
-    .number()
+  postalCode: z.string()
     .min(3, 'Must be  at lest 3')
     .max(4, 'Must be at most 4 '),
 });
@@ -30,7 +29,7 @@ export const consultaionInputSchema = z.object({
       message: 'Digists are not allowed',
     }),
 
-  cardNumber: z.coerce.number().lt(16, 'Card number must be 16 numbers').min(1,"please enter your card number"),
+  cardNumber: z.string().length(16, 'Card number must be 16 numbers').min(1,"please enter your card number"),
   expirDate: z.string().min(1, 'Please enter the expir date').optional(),
   postalCode: z.coerce
     .number()
