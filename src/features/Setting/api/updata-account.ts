@@ -15,7 +15,7 @@ export const accountSchema = z.object({
     .string()
     .min(10, 'The number most be 10 digits')
     .max(11, 'The number most be 10 digits'),
-  birthDate: z.string().min(1, 'Please enter your birth date'),
+  birthDate: z.string().optional(),
   personalId: z.string().min(10, 'Please enter your personal id ...'),
   gender: z.enum(['male', 'female']),
 });

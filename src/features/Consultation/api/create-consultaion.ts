@@ -6,17 +6,36 @@ import { useMutation } from '@tanstack/react-query';
 import { errorToast, successToast } from '@/components/custom/toast';
 
 export const paymentInputSchema = z.object({
-  cardName: z.string().min(1, 'Please enter your card name'),
-  cardNumber: z.string().length(16, 'Card number must be 16 numbers'),
+  cardName: z
+    .string()
+    .min(1, 'Please enter your card name')
+    .regex(/^[a-zA-Z]+$/, {
+      message: 'Digists are not allowed',
+    }),
+
+  cardNumber: z.coerce.number().lt(16, 'Card number must be 16 numbers').min(1,"please enter your card number"),
   expirDate: z.string().min(1, 'Please enter the expir date').optional(),
-  postalCode: z.string().min(3, 'Must be  at lest 3').max(4,'Must be at most 4 '),
+  postalCode: z.coerce
+    .number()
+    .min(3, 'Must be  at lest 3')
+    .max(4, 'Must be at most 4 '),
 });
 
 export const consultaionInputSchema = z.object({
-  cardName: z.string().min(1, 'Please enter your card name'),
-  cardNumber: z.string().min(16, 'Card number must be 16 numbers'),
+  message: z.string().min(1,"Please enter your condition"),
+  cardName: z
+    .string()
+    .min(1, 'Please enter your card name')
+    .regex(/^[a-zA-Z]+$/, {
+      message: 'Digists are not allowed',
+    }),
+
+  cardNumber: z.coerce.number().lt(16, 'Card number must be 16 numbers').min(1,"please enter your card number"),
   expirDate: z.string().min(1, 'Please enter the expir date').optional(),
-  postalCode: z.string().min(3, 'Must be  at lest 3').max(4,'Must be at most 4 '),
+  postalCode: z.coerce
+    .number()
+    .min(3, 'Must be  at lest 3')
+    .max(4, 'Must be at most 4 '),
 });
 
 export type consultaionInput = z.infer<typeof consultaionInputSchema>;

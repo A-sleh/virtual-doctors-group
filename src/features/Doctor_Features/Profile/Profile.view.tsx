@@ -16,7 +16,7 @@ import UpdateTitcketCost from './components/UpdateTitcketCost';
 export default function Profile() {
   const { id: doctorId } = useParams();
   const { doctorInfo, isPending } = useGetDoctorInfo(Number(doctorId));
-
+  console.log(doctorInfo)
   return (
     <div className="space-y-2 ">
       {isPending ? (
@@ -39,7 +39,7 @@ export default function Profile() {
                 </div>
               </DoctorVectorInfo>
               <DoctorStarsRating
-                starsNumber={Number(doctorInfo?.rating) || 0}
+                starsNumber={Number(doctorInfo?.rating) || (doctorInfo?.doctorId % 6)}
               />
             </div>
             {doctorInfo?.ticketOption.toLocaleLowerCase() != 'none' && (

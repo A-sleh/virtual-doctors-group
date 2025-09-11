@@ -15,8 +15,11 @@ import ZodErrors from '@/components/custom/ZodErrors.tsx';
 import { useUserProfile } from '../auth/api/useUser.tsx';
 import Loader from '@/components/ui/loader/Loader.tsx';
 import { removeKeys } from '@/utils/index.ts';
+import { useQueryClient } from '@tanstack/react-query';
+import { QYERY_KEYS } from '@/lib/query-key.ts';
 
 export default function Account() {
+  const queryClient = useQueryClient()
   const { userProfile, isPending: isFetchUserInfo } = useUserProfile();
   const { updateAccountSetting, isPending } = useUpdateAccountSetting();
   const [filedInvalidMessage, setFiledInvalidMessage] =
@@ -30,7 +33,13 @@ export default function Account() {
       return;
     }
 
-    updateAccountSetting(data);
+    updateAccountSetting(data,{
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [QYERY_KEYS.patient.userProfile]
+        })
+      }
+    });
   };
 
   useEffect(() => {
