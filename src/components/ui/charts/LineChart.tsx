@@ -15,6 +15,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
+import { api } from '@/lib/api-client';
+import { useCurrentClinic } from '@/context/doctor/CurrentClinicProvider';
+import { useQuery } from '@tanstack/react-query';
 
 export const description = 'A line chart with a label';
 
@@ -27,29 +30,49 @@ const chartData = [
   { month: 'June', desktop: 214, mobile: 140 },
 ];
 
+// const chartConfig = {
+//   desktop: {
+//     label: 'Desktop',
+//     color: 'var(--chart-1)',
+//   },
+//   mobile: {
+//     label: 'Mobile',
+//     color: 'var(--chart-2)',
+//   },
+// } satisfies ChartConfig;
+
 const chartConfig = {
   desktop: {
-    label: 'Desktop',
+    label: 'reservations',
     color: 'var(--chart-1)',
-  },
-  mobile: {
-    label: 'Mobile',
-    color: 'var(--chart-2)',
   },
 } satisfies ChartConfig;
 
+async function getReservationStat(clinicId) {
+  const res = await api.get(
+    `/Reservation/GetReservationStatistics?virtualId=${clinicId}`,
+  );
+  return res;
+}
+
 export function ChartLineLabel() {
+  const { clinic } = useCurrentClinic();
+
+  const { data, isPending } = useQuery({
+    queryKey: ['clinic-stat'],
+    queryFn: async () => getReservationStat(clinic.id),
+  });
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Line Chart - Label</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Servied appoitment this month</CardTitle>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
           <LineChart
             accessibilityLayer
-            data={chartData}
+            data={data}
             margin={{
               top: 20,
               left: 12,
@@ -58,7 +81,7 @@ export function ChartLineLabel() {
           >
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="month"
+              dataKey="day"
               tickLine={false}
               axisLine={false}
               tickMargin={8}
@@ -90,14 +113,14 @@ export function ChartLineLabel() {
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
+      {/* <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 leading-none font-medium">
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div>
         <div className="text-muted-foreground leading-none">
           Showing total visitors for the last 6 months
         </div>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   );
 }

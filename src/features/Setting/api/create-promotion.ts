@@ -24,20 +24,25 @@ export function doctorSettingFormIsNotValid(data: doctorSettingInputs) {
 }
 
 async function joinAsDcotorApi(body: doctorSettingInputs) {
-  const reponse = await api.post(`${doctorSettingController.PROMOTION}`, body);
-  return reponse;
+  try {
+    const reponse = await api.post(
+      `${doctorSettingController.PROMOTION}`,
+      body,
+    );
+    return reponse;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
 }
 
 function useJoinAsDoctor() {
   const { mutate: joinAsDcotro, isPending } = useMutation({
     mutationFn: joinAsDcotorApi,
     onSuccess: () => {
-      successToast(
-        'Your request was sended, ckeck your email messages ',
-      );
+      successToast('Your request was sended, ckeck your email messages ');
     },
-    onError: () => {
-      errorToast('Some thing went wron, please try again later ...');
+    onError: (err) => {
+      errorToast(err.message);
     },
   });
   return { joinAsDcotro, isPending };

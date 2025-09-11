@@ -8,17 +8,21 @@ async function getArticleByIdApi(articleId: number) {
   return response;
 }
 
-async function getallArticlesApi() {
-  const response = await api.get(`${articleController.BASE}`);
+async function getAllDoctorArticlesApi(doctorId: number) {
+  const response = await api.get(`${articleController.BASE}/GetAllPosts`,{
+    params: {
+      doctorId
+    }
+  });
   return response;
 }
 
-function useGetAllArticles() {
-  const { data: articles, isPending } = useQuery({
-    queryKey: [QYERY_KEYS.articles],
-    queryFn: async () => getallArticlesApi(),
+function useGetAllDoctorArticles(doctorId: number) {
+  const { data: doctorArticles, isPending } = useQuery({
+    queryKey: [QYERY_KEYS.articles,doctorId],
+    queryFn: async () => getAllDoctorArticlesApi(doctorId),
   });
-  return { articles, isPending };
+  return { doctorArticles, isPending };
 }
 
 function useGetArticle(articleId: number) {
@@ -29,4 +33,4 @@ function useGetArticle(articleId: number) {
   return { article, isPending };
 }
 
-export { useGetAllArticles, useGetArticle };
+export { useGetAllDoctorArticles, useGetArticle };

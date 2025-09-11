@@ -4,14 +4,17 @@ import { useMutation } from '@tanstack/react-query';
 
 enum deleteReservationControler {
   BASE = '/Reservation',
-
 }
 
 async function deleteReservationAPI(reservationId: number) {
-  const response = await api.delete(
-    `${deleteReservationControler.BASE}/${reservationId}`,
-  );
-  return response;
+  try {
+    const response = await api.delete(
+      `${deleteReservationControler.BASE}/${reservationId}`,
+    );
+    return response;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
 }
 
 function useDeleteReservation() {

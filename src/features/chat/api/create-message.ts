@@ -17,21 +17,25 @@ async function createNewMessageApi({
   consultaionId,
   data,
 }: {
-  consultaionId: number | string ;
+  consultaionId: number | string;
   data: messageRequestBodyType;
 }) {
-  const response = await api.post(
-    `${createNewMessageController.BASE}/${consultaionId}/Message`,
-    data,
-  );
-  return response;
+  try {
+    const response = await api.post(
+      `${createNewMessageController.BASE}/${consultaionId}/Message`,
+      data,
+    );
+    return response;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
 }
 
 function useCreateNewMessage() {
   const { mutate: sendMessage, isPending } = useMutation({
     mutationFn: createNewMessageApi,
-    onError: () => {
-      errorToast('You are offline');
+    onError: (err) => {
+      errorToast(err.message);
     },
   });
   return { sendMessage, isPending };

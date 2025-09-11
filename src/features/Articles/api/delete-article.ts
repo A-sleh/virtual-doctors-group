@@ -4,8 +4,14 @@ import { articleController } from './create-article';
 import { errorToast, successToast } from '@/components/custom/toast';
 
 async function deleteArticleApi(articleId: number) {
-  const response = await api.post(`${articleController.BASE}/${articleId}`);
-  return response;
+  try {
+    const response = await api.delete(
+      `${articleController.BASE}/DeletePost?postId=${articleId}`,
+    );
+    return response;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
 }
 
 function useDeleteArticle() {
@@ -14,8 +20,8 @@ function useDeleteArticle() {
     onSuccess: () => {
       successToast('The article was deleted');
     },
-    onError: () => {
-      errorToast('Some thing went wrong, Please try again leater');
+    onError: (err) => {
+      errorToast(err.message);
     },
   });
   return { deleteArticle, isPending };

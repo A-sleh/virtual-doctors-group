@@ -14,7 +14,7 @@ import Loader from '@/components/ui/loader/Loader.tsx';
 
 export default function Support() {
   const { isPending, sendSupportMessage } = useNewSupportMessage();
-  const { register, handleSubmit } = useForm<supportInput>();
+  const { register, handleSubmit, reset } = useForm<supportInput>();
   const [filedInvalidMessage, setFiledInvalidMessage] =
     useState<supportInputErrorMessages>();
 
@@ -24,7 +24,11 @@ export default function Support() {
       setFiledInvalidMessage(errorMessage as supportInputErrorMessages);
       return;
     }
-    sendSupportMessage(data);
+    sendSupportMessage(data,{
+      onSuccess: () => {
+        reset()
+      }
+    });
   };
 
   return (

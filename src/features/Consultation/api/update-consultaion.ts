@@ -15,11 +15,15 @@ async function updateConsultaionApi({
   consultId,
   changeStatusTo,
 }: updateConsultaionType) {
-  const response = await api.put(
-    `${ConsultaionController.BASE}/${consultId}/${changeStatusTo}`,
-  );
+  try {
+    const response = await api.put(
+      `${ConsultaionController.BASE}/${consultId}/${changeStatusTo}`,
+    );
 
-  return response;
+    return response;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
 }
 
 function useUpdateConsultaion() {
@@ -33,10 +37,8 @@ function useUpdateConsultaion() {
     onSuccess: () => {
       successToast('The status of the consultaion was changed');
     },
-    onError: () => {
-      errorToast(
-        'Some thing went wrong when change the status of the consultaion',
-      );
+    onError: (err) => {
+      errorToast(err.message);
     },
   });
 

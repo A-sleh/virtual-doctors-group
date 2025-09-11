@@ -4,14 +4,17 @@ import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
 import { useParams } from 'react-router';
 import { useGetDoctorInfo } from './api/get-profile-info';
 import DescritptionBoxSkeleton from '@/components/skeleton/profile/DescritptionBoxSkeleton';
+import { useGetAllDoctorArticles } from '@/features/Articles/api/get-article';
 
 export default function About() {
   const { id: doctorId } = useParams();
   const { doctorInfo, isPending } = useGetDoctorInfo(Number(doctorId));
+  const { doctorArticles, isPending: articlesIsFetching } =
+    useGetAllDoctorArticles(doctorId);
 
   return (
     <section className="space-y-3">
-      {isPending ? (
+      {isPending || articlesIsFetching ? (
         <DescritptionBoxSkeleton />
       ) : (
         <DiscriptionCard
@@ -23,14 +26,30 @@ export default function About() {
       <div className="space-y-2">
         <AnimateFromToRight>
           <h2 className="sub-header text-xl px-8">
-            <span className="text-primary">50</span> Articles
+            <span className="text-primary">{doctorArticles?.length}</span> Articles
           </h2>
         </AnimateFromToRight>
-        <Article
-          title="veniam et magnam blanditiis"
-          description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora magni recusandae omnis deleniti quae. Molestiae ipsam, impedit quisquam vitae commodi culpa maxime necessitatibus ipsum sunt rerum obcaecati delectus excepturi autem inventore ullam repellat asperiores qui error! Sed necessitatibus, veniam et magnam blanditiis deleniti soluta, aliquid expedita itaque incidunt distinctio vero.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora magni recusandae omnis deleniti quae. Molestiae ipsam, impedit quisquam vitae commodi culpa maxime necessitatibus ipsum sunt rerum obcaecati delectus excepturi autem inventore ullam repellat asperiores qui error! Sed necessitatibus, veniam et magnam blanditiis deleniti soluta, aliquid expedita itaque incidunt distinctio vero.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora magni recusandae omnis deleniti quae. Molestiae ipsam, impedit quisquam vitae commodi culpa maxime necessitatibus ipsum sunt rerum obcaecati delectus excepturi autem inventore ullam repellat asperiores qui error! Sed necessitatibus, veniam et magnam blanditiis deleniti soluta, aliquid expedita itaque incidunt distinctio vero.Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora magni recusandae omnis deleniti quae. Molestiae ipsam, impedit quisquam vitae commodi culpa maxime necessitatibus ipsum sunt rerum obcaecati delectus excepturi autem inventore ullam repellat asperiores qui error! Sed necessitatibus, veniam et magnam blanditiis deleniti soluta, aliquid expedita itaque incidunt distinctio vero."
-          showOwner={false}
-        />
+        {doctorArticles?.length === 0 ? (
+          <h2 className="px-1.5 py-1 text-xl text-center bg-white rounded-sm text-danger ">
+            This doctor doesn't publish any article
+          </h2>
+        ) : (
+          doctorArticles?.map((article) => {
+            return (
+              <Article
+                doctor={{
+                  name: article.doctorName,
+                  specility: article.doctorSpeciality,
+                }}
+                id={article.id}
+                title={article.title}
+                articleImage={article.imageUrl}
+                description={article.content}
+                showOwner={false}
+              />
+            );
+          })
+        )}
       </div>
     </section>
   );

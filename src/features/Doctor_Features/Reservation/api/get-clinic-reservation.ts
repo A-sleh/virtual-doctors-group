@@ -24,10 +24,14 @@ type IClinicReservationResponse = {
 };
 
 async function getCalendarDays(clinicId: number, date: string) {
-  const response = await api.get<unknown, ICalendarResponse[]>(
-    `${reservationControler.BASE}/${clinicId}/MonthBusyness?date=${date}`,
-  );
-  return response;
+  try {
+    const response = await api.get<unknown, ICalendarResponse[]>(
+      `${reservationControler.BASE}/${clinicId}/MonthBusyness?date=${date}`,
+    );
+    return response;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
 }
 
 async function getClinicReservations(clinicId: number, date: string) {

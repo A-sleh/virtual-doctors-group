@@ -18,6 +18,7 @@ export default function DoctorDetails({ doctor }: { doctor: IDoctorInfo }) {
     doctorDescription,
     rating,
     clinics,
+    speciality,
     shortestDistanceLocation,
   } = doctor;
 
@@ -30,20 +31,23 @@ export default function DoctorDetails({ doctor }: { doctor: IDoctorInfo }) {
       <div className="sm:flex justify-between space-y-2">
         <DoctorVectorInfo
           name={doctorName}
-          specility={'specility'}
+          imgSrc={doctor?.imageUrl}
+          specility={speciality}
           doctorId={doctorId}
         />
         <div className="space-y-2 h-fit">
-          <DoctorStatistics
-            rating={rating}
-            location={shortestDistanceLocation}
-          />
           {openForConsultaion ? (
-            <h3 className="font-medium px-2 h-fit bg-danger text-white rounded-tl-sm rounded-br-sm text-nowrap w-fit ml-auto">
-              <span className="font-bold">
-                {ticketCost == 0 ? 'Free' : `${ticketCost} $`}
-              </span>
-            </h3>
+            <>
+              <h3 className="font-medium px-2 h-fit bg-danger text-white rounded-tl-sm rounded-br-sm text-nowrap w-fit ml-auto">
+                <span className="font-bold">
+                  consultation {ticketCost == 0 ? 'Free' : `${ticketCost} $`}
+                </span>
+              </h3>
+              <DoctorStatistics
+                rating={rating}
+                location={shortestDistanceLocation}
+              />
+            </>
           ) : (
             <h3 className="font-medium px-2 h-fit bg-danger text-white rounded-tl-sm rounded-br-sm text-nowrap w-fit ml-auto">
               Close for consultaion

@@ -27,15 +27,23 @@ export function timeSlotNotValid(data: timeSlotInput) {
 }
 
 async function updateReservationApi(data: resvervationInput) {
-  const response = await api.put(`${reservationControler.BASE}`, data);
-  return response;
+  try {
+    const response = await api.put(`${reservationControler.BASE}`, data);
+    return response;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
 }
 
 async function changeRservationStatusApi(reservationId: number) {
-  const response = await api.put(
-    `${reservationControler.BASE}/${reservationId}/Preview`,
-  );
-  return response;
+  try {
+    const response = await api.put(
+      `${reservationControler.BASE}/${reservationId}/Preview`,
+    );
+    return response;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
 }
 
 function usePreviweRservation() {
@@ -71,4 +79,4 @@ function useUpdateReservation() {
   return { updateReservation, isPending };
 }
 
-export { useUpdateReservation ,usePreviweRservation };
+export { useUpdateReservation, usePreviweRservation };

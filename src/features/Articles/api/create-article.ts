@@ -5,13 +5,13 @@ import { useMutation } from '@tanstack/react-query';
 import { z } from 'zod';
 
 export enum articleController {
-  BASE = '/Article',
+  BASE = '/Post', 
 }
 
 export const articleSchema = z.object({
   title: z.string().min(1, 'Please enter the article title'),
-  description: z.string().min(1, 'Please enter the article description'),
-  image: z.any(),
+  content: z.string().min(1, 'Please enter the article description'),
+  imageUrl: z.any(),
 });
 
 export type articleInput = z.infer<typeof articleSchema>;
@@ -24,7 +24,7 @@ export function articalFormIsValid(data: articleInput) {
 }
 
 async function createNewArticleApi(data: articleInput) {
-  const response = await api.post(`${articleController.BASE}`, data);
+  const response = await api.post(`${articleController.BASE}/AddPost`, data);
   return response;
 }
 

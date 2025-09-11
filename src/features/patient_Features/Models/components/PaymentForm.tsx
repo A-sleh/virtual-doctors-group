@@ -44,7 +44,7 @@ export default function PaymentForm({
         <div className="flex gap-2 flex-col sm:flex-row">
           <div className="flex-1">
             <MainInput
-              type="text"
+              type="date"
               lable="Expiry date"
               placeHolder="Enter expiry date ... "
               {...register('expirDate')}

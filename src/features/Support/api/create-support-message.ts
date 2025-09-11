@@ -5,7 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import { z } from 'zod';
 
 enum supportControler {
-  BASE = '/Support',
+  BASE = '/Support/AddSupportMessage',
 }
 
 export const supportSchema = z.object({
@@ -23,8 +23,8 @@ export function supportFormIsNotValid(data: supportInput) {
   return formIsNotValid(supportSchema, data);
 }
 
-async function createNewSupportMessageApi() {
-  const reposnse = await api.post(`${supportControler.BASE}`);
+async function createNewSupportMessageApi(data) {
+  const reposnse = await api.post(`${supportControler.BASE}?message=${data.message}`);
   return reposnse;
 }
 

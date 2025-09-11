@@ -15,7 +15,7 @@ export default function DoctorConsultResarveBox({
   return (
     <div className="rounded-box space-y-3">
       <div className="sm:flex justify-between space-y-2">
-        <DoctorVectorInfo name={name} specility={specility} />
+        <DoctorVectorInfo name={name} specility={specility} imgSrc={doctor?.imageUrl} />
         <h3 className="font-medium px-2 h-fit bg-danger text-white rounded-tl-sm rounded-br-sm text-nowrap w-fit ml-auto">
           consultaion cost (<span className="font-bold">100$</span>)
         </h3>

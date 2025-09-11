@@ -33,7 +33,7 @@ export default function DoctorVectorInfo({
             to={doctorId ?  paths.app.doctor.profile.getHref(doctorId) : currentPath}
             className={`font-medium ${fontSize}`}
           >
-            {specility && <span className="text-primary ">{doctorId&&'Dr.'}</span>}
+            {specility && <span className="text-primary ">{doctorId &&'Dr.'}</span>}
             {name}
           </Link>
           {specility && (

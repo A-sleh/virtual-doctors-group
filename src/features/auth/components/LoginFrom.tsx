@@ -45,6 +45,7 @@ export default function LoginFrom() {
       className="pt-10 pb-5 w-[90vw] sm:w-full px-2 sm:px-7 md:pr-15  z-50 flex flex-col justify-between space-y-4"
     >
       <AnimateParentLeftEffect className="space-y-2">
+        <input type="password" security />
         <FormTitle
           title="Welcom Back!"
           text="Provide your personal detatails"

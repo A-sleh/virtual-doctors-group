@@ -15,13 +15,19 @@ import { useState } from 'react';
 import ZodErrors from '@/components/custom/ZodErrors';
 import { useLogin } from '../api/useLogin';
 import { removeKeys } from '@/utils';
+import { api } from '@/lib/api-client';
+import ModelInput from '@/components/ui/inputs/ModelInput';
+import Loader from '@/components/ui/loader/Loader';
 
 export default function RegisterForm() {
   const { register, handleSubmit } = useForm<RegisterInput>({
     defaultValues: {
-      birthDate: new Date(2020, 1, 1),
+      birthDate: new Date(),
     },
   });
+
+  const [isLoadding, setIsLoadding] = useState(false);
+  const [urlImage, setUrlImage] = useState('');
   const [filedInvalidMessage, setFiledInvalidMessage] = useState<
     RegisterInputErrorMessage | undefined
   >(undefined);
@@ -35,14 +41,15 @@ export default function RegisterForm() {
       setFiledInvalidMessage(errorMessage as RegisterInputErrorMessage);
       return;
     }
+
     signUp(
       {
         email: data.email,
         password: data.password,
-        person: removeKeys<Omit<RegisterInput, 'password' | 'email'>>(data, [
-          'email',
-          'password',
-        ]),
+        person: removeKeys<Omit<RegisterInput, 'password' | 'email'>>(
+          { ...data, imageUrl: urlImage },
+          ['email', 'password'],
+        ),
       },
       {
         // After success the registering we will login as soon
@@ -53,11 +60,31 @@ export default function RegisterForm() {
     );
   };
 
+  const handlePhotoUpload = async (event: Event) => {
+    const file = (event.target as HTMLInputElement).files?.[0];
+
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file); // 'file' matches the API parameter name
+      setIsLoadding(true);
+      try {
+        const url = await api.post('/Photo', formData);
+        setUrlImage(`${url}`);
+        setIsLoadding(false);
+      } catch (err) {
+        setIsLoadding(false);
+      }
+    }
+  };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="pt-10 pb-5 w-[90vw] md:w-[60vw] lg:w-full px-2 lg:px-7 md:pr-15 z-50 flex flex-col justify-between space-y-4"
     >
+      {isLoadding && (
+        <Loader variant="bars" className="text-primary" size={80} />
+      )}
       <AnimateParentLeftEffect className="space-y-2">
         <FormTitle title="Create Your Account" text="Tell us about yourself" />
         <div className="space-y-2">
@@ -104,10 +131,16 @@ export default function RegisterForm() {
                 placeHolder="Your birth day ..."
                 {...register('birthDate')}
               />
-              {/* <DatePicker {...register('birthDate')}  dateFormat="dd/MM/yyyy" /> */}
+
               <ZodErrors error={filedInvalidMessage?.birthDate} />
             </div>
           </AnimateChildLeftEffect>
+          <MainInput
+            onChange={handlePhotoUpload}
+            type="file"
+            lable="Birth day :"
+            placeHolder="Your birth day ..."
+          />
           <AnimateChildLeftEffect
             duration={1}
             className="flex gap-2 flex-col md:flex-row "

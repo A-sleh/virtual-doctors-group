@@ -6,10 +6,14 @@ enum deleteConsultaionControler {
 }
 
 async function deleteConsultaionAPI(consultaionId: number) {
-  const response = await api.delete(
-    `${deleteConsultaionControler.BASE}/${consultaionId}`,
-  );
-  return response;
+  try {
+    const response = await api.delete(
+      `${deleteConsultaionControler.BASE}/${consultaionId}`,
+    );
+    return response;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
 }
 
 function useDeleteConsultaion() {
@@ -18,8 +22,8 @@ function useDeleteConsultaion() {
     onSuccess: () => {
       successToast('Consultaion was deleted');
     },
-    onError: () => {
-      errorToast('Consultaion was not deleted, please try again');
+    onError: (err) => {
+      errorToast(err.message);
     },
   });
 

@@ -30,6 +30,7 @@ export default function Profile() {
                 name={`${doctorInfo?.firstName} ${doctorInfo?.lastName}`}
                 specility={doctorInfo?.speciality}
                 imageSize={'h-40 w-40'}
+                imgSrc={doctorInfo?.imageUrl}
                 fontSize="text-3xl"
                 withAnimation={true}
               >
@@ -42,7 +43,7 @@ export default function Profile() {
               />
             </div>
             {doctorInfo?.ticketOption.toLocaleLowerCase() != 'none' && (
-              <HasPermission allowedTo={['patient']}>
+              <HasPermission allowedTo={['patient']} userIdOut={doctorInfo?.doctorId}>
                 <div className="">
                   <span className="font-light px-2 h-fit bg-danger text-white rounded-tl-sm rounded-br-sm text-nowrap w-full ">
                     {doctorInfo?.ticketCost === 0
@@ -62,7 +63,7 @@ export default function Profile() {
               </HasPermission>
             )}
 
-            <HasPermission allowedTo={['doctor']}>
+            <HasPermission allowedTo={['doctor']} userIdOut={doctorInfo?.doctorId}>
               <UpdateTitcketCost
                 ticketCost={doctorInfo?.ticketCost}
                 ticketOption={doctorInfo?.ticketOption}

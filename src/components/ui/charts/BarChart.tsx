@@ -1,6 +1,5 @@
-
-import { TrendingUp } from "lucide-react"
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
+import { TrendingUp } from 'lucide-react';
+import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
 
 import {
   Card,
@@ -9,49 +8,69 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from '@/components/ui/card';
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
+} from '@/components/ui/chart';
+import { useQuery } from '@tanstack/react-query';
+import { api } from '@/lib/api-client';
+import { useCurrentClinic } from '@/context/doctor/CurrentClinicProvider';
 
-export const description = "A multiple bar chart"
+export const description = 'A multiple bar chart';
 
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-]
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+  openTickets: {
+    label: "openTickets",
     color: "var(--chart-1)",
   },
-  mobile: {
-    label: "Mobile",
+  closedTickets: {
+    label: "closedTickets",
+    color: "var(--chart-2)",
+  },
+  pendingTickets: {
+    label: "pendingTickets",
     color: "var(--chart-2)",
   },
 } satisfies ChartConfig
 
+
+
+async function getReservationStat() {
+  const res = await api.get(
+    `/Ticket/GetTicketStatistics`,
+  );
+  return res;
+}
+
 export function ChartBarMultiple() {
+  const { clinic } = useCurrentClinic();
+
+  const { data, isPending } = useQuery({
+    queryKey: ['ticket-sta'],
+    queryFn: async () => getReservationStat(),
+  });
+
+  // if (isPending) {
+  //   return null;
+  // }
+
+  
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Bar Chart - Multiple</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Servied appoitment this month</CardTitle>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
-          <BarChart accessibilityLayer data={chartData}>
+          <BarChart accessibilityLayer data={data}>
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="month"
+              dataKey="date"
               tickLine={false}
               tickMargin={10}
               axisLine={false}
@@ -61,19 +80,21 @@ export function ChartBarMultiple() {
               cursor={false}
               content={<ChartTooltipContent indicator="dashed" />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-            <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+            <Bar dataKey="openTickets" fill="red" radius={4} />
+            <Bar dataKey="closedTickets" fill="green" radius={4} />
+            <Bar dataKey="pendingTickets" fill="yellow  " radius={4} />
+            
           </BarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
+      {/* <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 leading-none font-medium">
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div>
         <div className="text-muted-foreground leading-none">
           Showing total visitors for the last 6 months
         </div>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
-  )
+  );
 }

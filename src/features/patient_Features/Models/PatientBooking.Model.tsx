@@ -100,7 +100,6 @@ export default function PatientBooking({
       setFiledInvalidMessage({});
       return;
     }
-    console.log(getValues());
     if (
       (paymentError = paymentFormIsNotValid(getValues())) &&
       reservationCots != 0
@@ -171,9 +170,9 @@ export default function PatientBooking({
   return (
     <Model>
       <Model.Open opens={openKey}>
-        <AnimateButton className="btn-rounded w-full mt-auto  bg-primary text-white border border-primary">
+        <span className="btn-rounded w-full mt-auto  bg-primary text-white border border-primary">
           {openKey}
-        </AnimateButton>
+        </span>
       </Model.Open>
 
       <Model.Window
@@ -236,22 +235,22 @@ export default function PatientBooking({
 
           {/* Button */}
           <div className="flex gap-2 absolute bottom-0 right-0">
-            <AnimateButton
+            <span
               onClick={onReSecheduleReservation}
               withInitialScale={true}
               className="px-4 py-1 bg-primary text-white rounded-md cursor-pointer w-full "
             >
               {!nextStep ? 'Next' : 'Send'}
-            </AnimateButton>
+            </span>
             {nextStep && (
-              <AnimateButton
+              <span
                 onClick={() => setNextStep(false)}
                 disabled={!nextStep}
                 withInitialScale={true}
                 className="px-4 py-1 bg-primary text-white rounded-md  cursor-pointer w-full "
               >
                 last
-              </AnimateButton>
+              </span>
             )}
           </div>
         </div>

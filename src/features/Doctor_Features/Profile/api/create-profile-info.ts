@@ -6,7 +6,7 @@ import z from 'zod';
 
 enum profileController {
   CLINIC_BASE = '/Clinic',
-  REATE = '/Rating/Rate'
+  REATE = '/Rating/Rate',
 }
 
 const clinicSchema = z.object({
@@ -53,30 +53,38 @@ export type WroktimeBodyReq = {
   clinicId: number;
   startWorkHours: string;
   endWorkHours: string;
-  day:string;
+  day: string;
   id: number;
 };
 
 async function addNewWrokHoursApi(data: WroktimeBodyReq) {
-  const response = await api.post(
-    `${profileController.CLINIC_BASE}/Worktime`,
-    data,
-  );
-  return response;
+  try {
+    const response = await api.post(
+      `${profileController.CLINIC_BASE}/Worktime`,
+      data,
+    );
+    return response;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
 }
 
-
 async function rateDoctorApi(data: WroktimeBodyReq) {
-  const response = await api.post(
-    `${profileController.REATE}`,
-    data,
-  );
-  return response;
+  try {
+    const response = await api.post(`${profileController.REATE}`, data);
+    return response;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
 }
 
 async function createNewClinicApi(data: clinicFormReques) {
-  const response = await api.post(`${profileController.CLINIC_BASE}`, data);
-  return response;
+  try {
+    const response = await api.post(`${profileController.CLINIC_BASE}`, data);
+    return response;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
 }
 
 function useRateDoctor() {
@@ -85,8 +93,8 @@ function useRateDoctor() {
     onSuccess: () => {
       successToast('Your review was send');
     },
-    onError: () => {
-      errorToast('Some thing went wron, Please try again');
+    onError: (err) => {
+      errorToast(err.message);
     },
   });
   return { rateDoctor, isPending };
@@ -98,8 +106,8 @@ function useCreateNewClinic() {
     onSuccess: () => {
       successToast('The clinic was created');
     },
-    onError: () => {
-      errorToast('Some thing went wron, Please try again');
+    onError: (err) => {
+      errorToast(err.message);
     },
   });
   return { createNewClinic, isPaused };
@@ -111,11 +119,11 @@ function useAddNewWorkHours() {
     onSuccess: () => {
       successToast('The work time was added');
     },
-    onError: () => {
-      errorToast('Some thing went wron, Please try again');
+    onError: (err) => {
+      errorToast(err.message);
     },
   });
   return { addNewWorkHours, isPaused };
 }
 
-export { useAddNewWorkHours, useCreateNewClinic , useRateDoctor};
+export { useAddNewWorkHours, useCreateNewClinic, useRateDoctor };

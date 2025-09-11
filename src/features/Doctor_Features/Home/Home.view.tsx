@@ -12,13 +12,13 @@ export default function Home() {
     <section className="space-y-2">
       <div className="sm:flex gap-2">
         <div className="flex-2 space-y-3 mb-3">
-          <StatisticsContainer />
+          {/* <StatisticsContainer /> */}
           <FastLinks />
           <div className="sm:flex gap-2 space-y-2">
             <ChartBarMultiple />
-            <ChartPieDonutActive />
+
+            <ChartLineLabel />
           </div>
-          <ChartLineLabel />
         </div>
         <div className="flex-1 ">
           <UpConmingConsultation />

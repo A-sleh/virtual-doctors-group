@@ -34,11 +34,15 @@ export function loginFormIsNotValid(data: LoginInput) {
 }
 
 async function loginApi(loginData: LoginInput): Promise<IUserResponse> {
-  const response = await api.post<LoginInput, IUserResponse>(
-    loginControler.BASE,
-    loginData,
-  );
-  return response;
+  try {
+    const response = await api.post<LoginInput, IUserResponse>(
+      loginControler.BASE,
+      loginData,
+    );
+    return response;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
 }
 
 export function useLogin() {

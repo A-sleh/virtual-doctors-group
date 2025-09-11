@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { articleController, articleInput } from './create-article';
 
 async function updateArticleApi(data: articleInput) {
-  const response = await api.put(`${articleController.BASE}`, data);
+  const response = await api.put(`${articleController.BASE}/UpdatePost`, data);
   return response;
 }
 

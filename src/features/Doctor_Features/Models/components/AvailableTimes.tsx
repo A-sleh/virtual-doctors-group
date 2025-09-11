@@ -27,7 +27,6 @@ export default function AvailableTimes({ clinicId }: { clinicId: number }) {
 
   useEffect(() => {
     return () => {
-      alert('reser time')
       setSelectedTime(intialTime);
     };
   }, []);

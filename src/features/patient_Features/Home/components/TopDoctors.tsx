@@ -12,6 +12,7 @@ import TopDoctorsSkeleton from '@/components/skeleton/doctor/TopDoctorsSkeleton'
 export default function TopDoctors({ limitNumber = 2 }: limitProps) {
   const { isPending, topDoctors } = useGetDoctors();
 
+  console.log(topDoctors)
   
   if(isPending) {
     return <TopDoctorsSkeleton />

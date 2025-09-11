@@ -3,7 +3,7 @@ import { DoctorBoxProps } from '../types/consultaion';
 import ConsultStatus from './ConsultStatus';
 
 export default function DoctorBox({ doctor, children }: DoctorBoxProps) {
-  const { name, specility, description = null, date, status, time ,doctorId} = doctor;
+  const { name, specility, description = null, date, status, time ,doctorId, imageUrl} = doctor;
 
   return (
     <div className={`rounded-box flex flex-col space-y-3 ${status == "Rejected" && 'border-2  border-danger'}`}>
@@ -12,7 +12,7 @@ export default function DoctorBox({ doctor, children }: DoctorBoxProps) {
           description == null ? 'flex-col' : 'flex-row'
         }`}
       >
-        <DoctorVectorInfo doctorId={doctorId} name={name} specility={specility} />
+        <DoctorVectorInfo doctorId={doctorId} name={name} specility={specility} imgSrc={imageUrl} />
         <ConsultStatus date={date} status={status} time={time} />
       </section>
       <div

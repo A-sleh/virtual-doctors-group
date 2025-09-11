@@ -1,13 +1,12 @@
 import { paths } from '@/config/paths';
 import { useAuth } from '@/context/auth/AuthProvider';
+import HasPermission from '@/context/auth/HasPermission';
 import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
 import { isPatient } from '@/lib/auth';
 import { NavLink } from 'react-router';
 
 export default function SettingHeader() {
-
-
-  const { ROLE ,userId } = useAuth();
+  const { ROLE, userId } = useAuth();
   return (
     <AnimateDownEffect className="sub-header space-x-4">
       <NavLink
@@ -21,17 +20,19 @@ export default function SettingHeader() {
       >
         Account
       </NavLink>
-      <NavLink
-        to={paths.app.setting.subscribAsDoctor.getHref(userId)}
-        end
-        className={({ isActive }) =>
-          isActive
-            ? 'text-primary'
-            : 'text-black ' + 'transition-all duration-300'
-        }
-      >
-        {isPatient(ROLE) ? 'Subscrib as a doctor' : 'My personal info'}
-      </NavLink>
+      <HasPermission allowedTo={['patient']}>
+        <NavLink
+          to={paths.app.setting.subscribAsDoctor.getHref(userId)}
+          end
+          className={({ isActive }) =>
+            isActive
+              ? 'text-primary'
+              : 'text-black ' + 'transition-all duration-300'
+          }
+        >
+          {isPatient(ROLE) ? 'Subscrib as a doctor' : 'My personal info'}
+        </NavLink>
+      </HasPermission>
     </AnimateDownEffect>
   );
 }

@@ -2,7 +2,7 @@ import { Skeleton } from '../ui/skeleton';
 
 export default function DoctorBoxSkeleton({ repeat }: { repeat: number }) {
   const skeletonList = Array.from({ length: repeat }, (_) => <SkeletonBox />);
-  return <div className="space-y-3">{skeletonList}</div>;
+  return <>{skeletonList}</>;
 }
 
 function SkeletonBox() {

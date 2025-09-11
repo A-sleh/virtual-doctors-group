@@ -10,36 +10,44 @@ import UpdateArticle from '@/features/Doctor_Features/Models/UpdateArticle.Model
 import imgTemp from '@/assets/images/Hospital-HITN.webp';
 import ConfirmModel from '@/components/models/ConfirmModel';
 import { useDeleteArticle } from '../api/delete-article';
+import Loader from '@/components/ui/loader/Loader';
+import { SERVER_URL } from '@/config/app.config';
 
 export default function Article({
+  id,
   doctor,
   title,
+  imageUrl,
   description,
   articleImage,
   showOwner = true,
 }: articleProps) {
   const { deleteArticle, isPending } = useDeleteArticle();
 
+  if(isPending) {
+    return <Loader variant="bars" className="text-primary" size={80} />
+  }
+
   return (
     <AnimateUpInView offsetValue={60} className="rounded-box relative ">
       <img
-        src={articleImage || imgTemp}
+        src={`${SERVER_URL}/${articleImage}` || imgTemp}
         className="w-full h-70 rounded-lg bg-amber-300 mb-4 mr-4 float-start md:float-left md:w-[50vw] lg:w-1/3 "
       />
       {showOwner && (
         <div className="absolute top-5 left-5 md:top-0 md:left-0 md:relative">
-          <DoctorVectorInfo name={doctor?.name} specility={doctor?.specility} />
+          <DoctorVectorInfo name={doctor?.name} specility={doctor?.specility} imageSize={imageUrl} />
         </div>
       )}
       <h4 className="my-4 font-medium uppercase flex items-baseline justify-between">
         {title}
-        <HasPermission allowedTo={['doctor']}>
+        <HasPermission allowedTo={['doctor']} userIdOut={doctor.doctorId}>
           <div className="flex gap-2">
             <UpdateArticle
               initalArticleInfo={{ title, description, articleImage }}
             />
             <ConfirmModel
-              onConfirmClick={() => deleteArticle(1)}
+              onConfirmClick={() => deleteArticle(id)}
               description="Are you sure you want to delete your article, If not you cant click on cancle button below"
               openKey="delete-article"
             >

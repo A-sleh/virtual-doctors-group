@@ -9,22 +9,32 @@ export type conslutaionType = {
 };
 
 async function updateDoctorConsultaion(body: conslutaionType) {
-  const response = await api.put(
-    `${ProfileControler.CLINIC_SETTING}`,body
-  );
-  return response;
+  try {
+    const response = await api.put(`${ProfileControler.CLINIC_SETTING}`, body);
+    return response;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
 }
 
 async function updateDoctorDescriptionApi(newDescription: string) {
-  const response = await api.put(
-    `${ProfileControler.BASE}?description=${newDescription}`,
-  );
-  return response;
+  try {
+    const response = await api.put(
+      `${ProfileControler.BASE}?description=${newDescription}`,
+    );
+    return response;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
 }
 
 async function updateClinicInfoApi(body: IClinicDetailsResponse) {
-  const response = await api.put(`${ProfileControler.CLINIC_BASE}`, body);
-  return response;
+  try {
+    const response = await api.put(`${ProfileControler.CLINIC_BASE}`, body);
+    return response;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
 }
 
 function useUpdateClinicInfo() {
@@ -41,7 +51,11 @@ function useUpdateClinicInfo() {
 }
 
 function useUpdateDoctorConsultaion() {
-  const { mutate: updateConsultaionStatus, isPending ,isSuccess} = useMutation({
+  const {
+    mutate: updateConsultaionStatus,
+    isPending,
+    isSuccess,
+  } = useMutation({
     mutationFn: updateDoctorConsultaion,
     onSuccess: () => {
       successToast('Consultaion inforamtion was updated');
@@ -50,7 +64,7 @@ function useUpdateDoctorConsultaion() {
       errorToast(`Some thing went wrong, Please try again, ${err.message}`);
     },
   });
-  return { updateConsultaionStatus, isPending,isSuccess };
+  return { updateConsultaionStatus, isPending, isSuccess };
 }
 
 function useUpdateDoctorDescription() {
@@ -59,11 +73,15 @@ function useUpdateDoctorDescription() {
     onSuccess: () => {
       successToast('Your description was updated');
     },
-    onError: () => {
-      successToast('Some thing went wrong, Please try again ');
+    onError: (err) => {
+      successToast(`Some thing went wrong, Please try again, ${err.message}`);
     },
   });
   return { updateDoctorDescription, isPending };
 }
 
-export { useUpdateDoctorDescription, useUpdateClinicInfo,useUpdateDoctorConsultaion };
+export {
+  useUpdateDoctorDescription,
+  useUpdateClinicInfo,
+  useUpdateDoctorConsultaion,
+};

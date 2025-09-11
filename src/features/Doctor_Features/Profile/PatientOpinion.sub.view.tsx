@@ -1,6 +1,6 @@
 import { AnimateFromToRightInView } from '@/lib/Animation/AnimateFromLeftToRight';
 import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
-import { patientOpinion } from './api/data';
+
 import PatientRating from './components/PatientRating';
 import { useParams } from 'react-router';
 import { useGetDcotorRating } from './api/get-profile-info';

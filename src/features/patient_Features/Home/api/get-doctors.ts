@@ -3,7 +3,7 @@ import { QYERY_KEYS } from '@/lib/query-key';
 import { useQuery } from '@tanstack/react-query';
 
 export enum topDoctorsController {
-  BASE = '/Doctor/GetAll'
+  BASE = '/Doctor/GetTopDoctor'
 }
 
 export interface IAllDoctorInfo {
