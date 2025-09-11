@@ -39,7 +39,7 @@ export default function Profile() {
                 </div>
               </DoctorVectorInfo>
               <DoctorStarsRating
-                starsNumber={Number(doctorInfo?.doctorId) % 6}
+                starsNumber={Number(doctorInfo?.rating) || 0}
               />
             </div>
             {doctorInfo?.ticketOption.toLocaleLowerCase() != 'none' && (

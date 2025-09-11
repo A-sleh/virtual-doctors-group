@@ -15,7 +15,7 @@ async function getConsultaionMessagesApi(consultaionId: number | string) {
 
 function useGetConsultaionMessage(consultaionId: number | string) {
   const { data: consultaionMessages, isPending } = useQuery({
-    queryKey: [QYERY_KEYS.consultaionMessages],
+    queryKey: [QYERY_KEYS.consultaionMessages,consultaionId],
     queryFn: async () => getConsultaionMessagesApi(consultaionId),
     refetchInterval: 2000,
   });

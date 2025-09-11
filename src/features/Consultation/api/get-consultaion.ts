@@ -28,7 +28,7 @@ async function getConsultaionsApi(
 
 function useGetConsultaions(userId: number, userPermission: 'Doctor' | 'User') {
   const { data: consultaions, isLoading } = useQuery({
-    queryKey: [QYERY_KEYS.consultaions],
+    queryKey: [QYERY_KEYS.consultaions,userId,userPermission],
     queryFn: async () => getConsultaionsApi(userId, userPermission),
   });
 

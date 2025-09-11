@@ -106,7 +106,7 @@ function useGetDoctorClinics(doctorId: number) {
     IDoctorClinicsResponse[]
   >({
     queryFn: async () => getDoctorClinicsApi(doctorId),
-    queryKey: [QYERY_KEYS.doctor.clinics],
+    queryKey: [QYERY_KEYS.doctor.clinics,doctorId],
   });
   return { doctorClinics, isPending };
 }
@@ -118,7 +118,7 @@ function useGetDoctorInfo(doctorId: number) {
     IDoctorInfoResponse
   >({
     queryFn: async () => getDoctorInfoApi(doctorId),
-    queryKey: [QYERY_KEYS.doctor.info],
+    queryKey: [QYERY_KEYS.doctor.info,doctorId],
   });
   return { doctorInfo, isPending };
 }

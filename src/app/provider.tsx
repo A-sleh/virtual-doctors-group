@@ -22,21 +22,7 @@ export default function AppProvider() {
         <CurrentClinicProvider>
           <RouterProvider router={router} />
           <Toaster />
-          <a
-            href="http://vdg.runasp.net/swagger/index.html"
-            target="_blank"
-            style={{
-              position: 'fixed',
-              right: '200px',
-              bottom: '10px',
-              zIndex: '400',
-              backgroundColor: 'green',
-              color: 'white',
-              fontWeight: 'bold',
-            }}
-          >
-            Open swagger
-          </a>
+
         </CurrentClinicProvider>
       </AuthProvider>
     </QueryClientProvider>

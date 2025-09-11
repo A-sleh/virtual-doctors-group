@@ -42,6 +42,9 @@ export default function ReservatDayCard({
         queryClient.invalidateQueries({
           queryKey: [QYERY_KEYS.doctor.Reservations],
         });
+        queryClient.invalidateQueries({
+          queryKey: [QYERY_KEYS.doctor.calendarDays],
+        });
       },
     });
   }

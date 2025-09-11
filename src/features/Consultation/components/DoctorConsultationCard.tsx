@@ -26,6 +26,8 @@ export default function DoctorConsultationCard({
     doctorSpeciality,
   } = consultaion;
 
+  console.log(consultaion)
+
   const doctor: consultaionContent = {
     doctorId: doctorId,
     name: userName || doctorName,
@@ -36,13 +38,13 @@ export default function DoctorConsultationCard({
   };
 
   function renderOpenChatButton(status: string): boolean {
-    return status !== 'Pending';
+    return status !== 'Pending'  && status !== 'Close';
   }
 
   return (
     <DoctorBox doctor={doctor}>
       <div className="flex gap-2.5">
-        {renderOpenChatButton(status || '') && status != 'Rejected' && (
+        {renderOpenChatButton(status || '') && status != 'Rejected'  && (
           <AnimateButton
             scale={0.7}
             className="btn-rounded bg-primary hover:bg-primary-hover text-white transition-all duration-100 "

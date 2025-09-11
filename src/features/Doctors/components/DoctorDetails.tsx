@@ -44,7 +44,7 @@ export default function DoctorDetails({ doctor }: { doctor: IDoctorInfo }) {
                 </span>
               </h3>
               <DoctorStatistics
-                rating={rating}
+                rating={Math.floor(rating)}
                 location={shortestDistanceLocation}
               />
             </>

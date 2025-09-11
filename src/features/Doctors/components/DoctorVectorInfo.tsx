@@ -4,6 +4,7 @@ import { DoctorVectorInfoProps } from '../types/doctor';
 import { Link, useLocation } from 'react-router';
 import { paths } from '@/config/paths';
 import fofImg from '@/assets/images/pexels-jrfotosgrand-fotografia-12660379.jpg';
+import { SERVER_URL } from '@/config/app.config';
 
 export default function DoctorVectorInfo({
   name,
@@ -22,7 +23,7 @@ export default function DoctorVectorInfo({
     <div className="flex gap-3">
       <AnimateScale run={withAnimation}>
         <img
-          src={imgSrc || fofImg}
+          src={imgSrc ? `${SERVER_URL}/${imgSrc}` : fofImg}
           alt="doctor image"
           className={`rounded-full ${imageSize}`}
         />

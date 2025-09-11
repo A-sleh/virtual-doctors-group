@@ -138,8 +138,8 @@ export default function RegisterForm() {
           <MainInput
             onChange={handlePhotoUpload}
             type="file"
-            lable="Birth day :"
-            placeHolder="Your birth day ..."
+            lable="Profile image :"
+            placeHolder=""
           />
           <AnimateChildLeftEffect
             duration={1}
