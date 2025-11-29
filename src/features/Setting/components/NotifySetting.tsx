@@ -1,7 +1,9 @@
-import Selector from '@/components/ui/inputs/Selector';
 import { useState } from 'react';
 
+import Selector from '@/components/ui/inputs/Selector';
+
 export default function NotifySetting({ ...props }) {
+  
   const [isChecked, setIsChecked] = useState(false);
 
   return (

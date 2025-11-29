@@ -6,6 +6,7 @@ export default function AnimateButton({
   children,
   scale = 0.9,
   withInitialScale = false,
+  enabled = false,
   ...props
 }: standarAnimationProps) {
   if (withInitialScale)
@@ -14,6 +15,7 @@ export default function AnimateButton({
         <motion.button
           whileTap={{ scale }}
           exit={{ opacity: 0, y: 40 }}
+          disabled={enabled}
           {...props}
         >
           {children}
@@ -21,7 +23,7 @@ export default function AnimateButton({
       </AnimateScale>
     );
   return (
-    <motion.button whileTap={{ scale }} {...props}>
+    <motion.button whileTap={{ scale }} {...props} disabled={enabled}>
       {children}
     </motion.button>
   );

@@ -1,12 +1,16 @@
-import { paths } from '@/config/paths';
+import { NavLink } from 'react-router';
 import { useAuth } from '@/context/auth/AuthProvider';
+
 import HasPermission from '@/context/auth/HasPermission';
 import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
 import { isPatient } from '@/lib/auth';
-import { NavLink } from 'react-router';
+
+import { paths } from '@/config/paths';
 
 export default function SettingHeader() {
+  
   const { ROLE, userId } = useAuth();
+
   return (
     <AnimateDownEffect className="sub-header space-x-4">
       <NavLink

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import {
   accountInputs,
@@ -10,21 +11,22 @@ import Selector from '@/components/ui/inputs/Selector';
 import SettingInput from '@/components/ui/inputs/SettingInput';
 import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
 import AnimateButton from '@/lib/Animation/AnimateButton';
-import { useEffect, useState } from 'react';
+
 import ZodErrors from '@/components/custom/ZodErrors.tsx';
-import { useUserProfile } from '../auth/api/useUser.tsx';
 import Loader from '@/components/ui/loader/Loader.tsx';
+import { useUserProfile } from '../auth/api/useUser.tsx';
 import { removeKeys } from '@/utils/index.ts';
 import { useQueryClient } from '@tanstack/react-query';
 import { QYERY_KEYS } from '@/lib/query-key.ts';
 
 export default function Account() {
+
   const queryClient = useQueryClient()
+  const [filedInvalidMessage, setFiledInvalidMessage] = useState<accountInputsErrorMessages>();
+
+  const { register, handleSubmit, reset } = useForm<accountInputs>();
   const { userProfile, isPending: isFetchUserInfo } = useUserProfile();
   const { updateAccountSetting, isPending } = useUpdateAccountSetting();
-  const [filedInvalidMessage, setFiledInvalidMessage] =
-    useState<accountInputsErrorMessages>();
-  const { register, handleSubmit, reset } = useForm<accountInputs>();
 
   const onSubmit: SubmitHandler<accountInputs> = (data) => {
     let errorMessage;
@@ -71,7 +73,7 @@ export default function Account() {
                 {...register('firstName')}
                 lable="Name"
                 type="text"
-                placeHolder="Abdulfatah"
+                placeHolder="first name"
               />
               <ZodErrors error={filedInvalidMessage?.firstName} />
             </div>
@@ -80,7 +82,7 @@ export default function Account() {
                 {...register('lastName')}
                 lable="Last name"
                 type="text"
-                placeHolder="Abdulfatah"
+                placeHolder="last name"
               />
               <ZodErrors error={filedInvalidMessage?.lastName} />
             </div>
@@ -102,7 +104,7 @@ export default function Account() {
                 {...register('birthDate')}
                 lable="birthdate"
                 type="date"
-                placeHolder="Abdulfatah"
+                placeHolder="date"
               />
               <ZodErrors error={filedInvalidMessage?.birthDate} />
             </div>
@@ -126,7 +128,7 @@ export default function Account() {
           <NotifySetting {...register('notificationMe')} />
           <ZodErrors error={filedInvalidMessage?.notificationMe} />
         </HasPermission> */}
-          <AnimateButton className="btn-rounded bg-primary text-white ">
+          <AnimateButton className="btn-rounded bg-primary text-white" enabled={isPending}>
             Apply
           </AnimateButton>
         </form>
