@@ -1,8 +1,8 @@
-import { errorToast, successToast } from '@/components/custom/toast';
+import { z } from 'zod';
 import { api } from '@/lib/api-client';
 import { formIsNotValid } from '@/utils';
 import { useMutation } from '@tanstack/react-query';
-import { z } from 'zod';
+import { errorToast, successToast } from '@/components/custom/toast';
 
 enum supportControler {
   BASE = '/Support/AddSupportMessage',
@@ -24,7 +24,9 @@ export function supportFormIsNotValid(data: supportInput) {
 }
 
 async function createNewSupportMessageApi(data) {
-  const reposnse = await api.post(`${supportControler.BASE}?message=${data.message}`);
+  const reposnse = await api.post(
+    `${supportControler.BASE}?message=${data.message}`,
+  );
   return reposnse;
 }
 

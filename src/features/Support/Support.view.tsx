@@ -1,23 +1,24 @@
+import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
-import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
 import {
   supportFormIsNotValid,
   supportInput,
   supportInputErrorMessages,
   useNewSupportMessage,
 } from './api/create-support-message.ts';
-import { useState } from 'react';
+import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
+import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight';
 import ZodErrors from '@/components/custom/ZodErrors.tsx';
 import Loader from '@/components/ui/loader/Loader.tsx';
 
 export default function Support() {
-  const { isPending, sendSupportMessage } = useNewSupportMessage();
-  const { register, handleSubmit, reset } = useForm<supportInput>();
-  const [filedInvalidMessage, setFiledInvalidMessage] =
-    useState<supportInputErrorMessages>();
 
+  const [filedInvalidMessage, setFiledInvalidMessage] = useState<supportInputErrorMessages>();
+
+  const { register, handleSubmit, reset } = useForm<supportInput>();
+  const { isPending, sendSupportMessage } = useNewSupportMessage();
+  
   const onSubmit: SubmitHandler<supportInput> = (data) => {
     let errorMessage;
     if ((errorMessage = supportFormIsNotValid(data))) {
@@ -56,6 +57,7 @@ export default function Support() {
             <input
               type="submit"
               value="Submit"
+              disabled={isPending}
               className="btn-rounded bg-primary hover:bg-[#157ae59a] text-white transition-all duration-300 border border-primary"
             />
           </div>
