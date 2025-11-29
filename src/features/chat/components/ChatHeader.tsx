@@ -1,13 +1,16 @@
-import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
-
-import { IoArrowBackCircleOutline } from 'react-icons/io5';
 import { useNavigate, useSearchParams } from 'react-router';
 
+import { IoArrowBackCircleOutline } from 'react-icons/io5';
+import AnimateDownEffect from '@/lib/Animation/AnimateDownEffect';
+
 export default function ChatHeader() {
+
   const goto = useNavigate();
   const [params, _] = useSearchParams();
   const userName = params.get('userName');
   const isDoctor = params.get('isDoctor');
+
+  //! Todo: The image should cames when the user click on any doctor to talk with him 
 
   return (
     <AnimateDownEffect className="sub-header flex justify-between">

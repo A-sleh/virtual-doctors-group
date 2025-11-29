@@ -1,37 +1,31 @@
-import * as signalR from '@microsoft/signalr';
+
+import { useState } from 'react';
+import { useParams } from 'react-router';
+import { IoSendSharp } from 'react-icons/io5';
+import { useQueryClient } from '@tanstack/react-query';
 
 import AnimateUpEffect from '@/lib/Animation/AnimateUpEffect';
-import { IoSendSharp } from 'react-icons/io5';
-
 import Messages from './RenderMessages';
-import { useEffect, useState } from 'react';
-import { useCreateNewMessage } from '../api/create-message';
+
 import { useAuth } from '@/context/auth/AuthProvider';
-import { useParams } from 'react-router';
-import { useGetConsultaionMessage } from '../api/get-messages';
-import { useQueryClient } from '@tanstack/react-query';
 import { QYERY_KEYS } from '@/lib/query-key';
+import { useGetConsultaionMessage } from '../api/get-messages';
+import { useCreateNewMessage } from '../api/create-message';
 import { formatDateMonthYearDay } from '@/utils';
 
 export default function ChatBody() {
-  // For real time messages
-  const [connection, setConnection] = useState<signalR.HubConnection | null>(
-    null,
-  );
-
+  
   const { userId } = useAuth();
-
   const { id: chatId } = useParams();
   const queryClient = useQueryClient();
   const [message, setMessage] = useState<string>('');
 
   const { sendMessage, isPending } = useCreateNewMessage();
-  const { consultaionMessages, isPending: fetchMessages } =
-    useGetConsultaionMessage(chatId || 0);
+  const { consultaionMessages, isPending: fetchMessages } = useGetConsultaionMessage(chatId || 0);
 
   function handleSendMessageClicked(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!message) return;
+    if (!message || isPending) return;
 
     sendMessage(
       {

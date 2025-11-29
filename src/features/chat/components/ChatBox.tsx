@@ -1,5 +1,5 @@
-import { AnimateUpInView } from '@/lib/Animation/AnimateUpEffect';
 import { message } from '../types/chat';
+import { AnimateUpInView } from '@/lib/Animation/AnimateUpEffect';
 
 // temp image 
 import imgTemp from "@/assets/images/pexels-jrfotosgrand-fotografia-12660379.jpg"

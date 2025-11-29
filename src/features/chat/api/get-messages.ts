@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+
 import { QYERY_KEYS } from '@/lib/query-key';
 import { api } from '@/lib/api-client';
 
@@ -19,6 +20,7 @@ function useGetConsultaionMessage(consultaionId: number | string) {
     queryFn: async () => getConsultaionMessagesApi(consultaionId),
     refetchInterval: 2000,
   });
+  
   return { consultaionMessages, isPending };
 }
 

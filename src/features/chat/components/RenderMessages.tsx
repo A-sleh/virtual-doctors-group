@@ -17,5 +17,6 @@ export default function Messages({
       owner={userId === message.ownerId}
     />
   ));
+
   return messageList;
 }
