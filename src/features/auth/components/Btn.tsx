@@ -1,4 +1,4 @@
-import AnimateButton from '@/lib/Animation/AnimateButton';
+// import AnimateButton from '@/lib/Animation/AnimateButton';
 
 export default function Btn({
   name,
@@ -12,11 +12,11 @@ export default function Btn({
   stopEvent: boolean;
 }) {
   return (
-    <AnimateButton
+    <button
       className={`${color} ${backgroundColor} rounded-xl  cursor-pointer py-0.5 w-full font-normal`}
       disabled={stopEvent}
     >
       {name}
-    </AnimateButton>
+    </button>
   );
 }

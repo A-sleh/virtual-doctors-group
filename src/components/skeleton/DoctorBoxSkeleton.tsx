@@ -7,7 +7,7 @@ export default function DoctorBoxSkeleton({ repeat }: { repeat: number }) {
 
 function SkeletonBox() {
   return (
-    <div className="rounded-box space-y-4">
+    <div className="rounded-box space-y-4 mb-2">
       <div className="flex justify-between">
         <div className="flex gap-2">
           <Skeleton className="w-14 h-14 rounded-full"></Skeleton>

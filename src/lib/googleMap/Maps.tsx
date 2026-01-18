@@ -12,6 +12,7 @@ import {
 // for painte the sortest path
 import L from 'leaflet';
 import 'leaflet-routing-machine';
+import './map.css'
 
 import { useUrlPosition } from '@/hooks/useUrlPosition.tsx';
 import { useGeolocation } from '@/hooks/useGeolocation';

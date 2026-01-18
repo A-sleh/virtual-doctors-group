@@ -15,9 +15,7 @@ export default function Pictur({
   return (
     <div className="pictur md:rounded-tl-[130px] lg:rounded-tl-[160px]  gap-10 md:before:content-[''] ">
       <AnimateParentLeftEffect className="flex-col items-center mx-3 hidden md:flex">
-        <AnimateScale>
-          <img className="rounded-full w-60 lg:w-80 " src={img} />
-        </AnimateScale>
+        <img className="rounded-full" width='320px' height='320px'  src={img} fetchPriority='high' />
         <AnimateChildLeftEffect
           duration={0.3}
           className="text-white font-medium text-lg lg:text-xl mt-5 "

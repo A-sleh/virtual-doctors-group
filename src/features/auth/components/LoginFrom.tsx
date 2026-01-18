@@ -1,15 +1,15 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Link } from 'react-router';
+// import { Link } from 'react-router';s
 import { useState } from 'react';
 
-import AnimateParentLeftEffect, {
-  AnimateChildLeftEffect,
-} from '@/lib/Animation/AnimateParentLeftEffect';
+// import AnimateParentLeftEffect, {
+//   AnimateChildLeftEffect,
+// } from '@/lib/Animation/AnimateParentLeftEffect';
 
 import MainInput from '@/components/ui/inputs/MainInput';
 import ZodErrors from '@/components/custom/ZodErrors';
 
-import { paths } from '@/config/paths';
+// import { paths } from '@/config/paths';
 
 import FormTitle from './FomTitle';
 import Btn from './Btn';
@@ -41,12 +41,12 @@ export default function LoginFrom() {
       onSubmit={handleSubmit(onSubmit)}
       className="pt-10 pb-5 w-[90vw] sm:w-full px-2 sm:px-7 md:pr-15  z-50 flex flex-col justify-between space-y-4"
     >
-      <AnimateParentLeftEffect className="space-y-2">
+      <div className="space-y-2">
         <FormTitle
           title="Welcom Back!"
           text="Provide your personal detatails"
         />
-        <AnimateChildLeftEffect duration={0.3}>
+        <div >
           <MainInput
             type="email"
             lable="Your email :"
@@ -54,8 +54,8 @@ export default function LoginFrom() {
             {...register('email')}
           />
           <ZodErrors error={filedInvalidMessage?.email} />
-        </AnimateChildLeftEffect>
-        <AnimateChildLeftEffect duration={0.6}>
+        </div>
+        <div >
           <MainInput
             type="password"
             lable="Your password :"
@@ -63,7 +63,7 @@ export default function LoginFrom() {
             {...register('password')}
           />
           <ZodErrors error={filedInvalidMessage?.password} />
-        </AnimateChildLeftEffect>
+        </div>
         <div className="flex justify-between text-sm ">
           <span>
             <input className="cursor-pointer" type="checkbox" id="remember" />
@@ -75,7 +75,7 @@ export default function LoginFrom() {
             <Link to={paths.auth.login.getHref()}> Forgot password?</Link>
           </span> */}
         </div>
-      </AnimateParentLeftEffect>
+      </div>
       <Btn
         name={'Login'}
         color="text-white"
