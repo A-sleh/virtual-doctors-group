@@ -311,7 +311,9 @@
   }
 }
 
-
+body {
+  interpolate-size: allow-keywords;
+}
 .pictur::before {
   position: absolute;
   bottom: 0;
